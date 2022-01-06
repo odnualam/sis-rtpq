@@ -2,76 +2,54 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Auth\AuthenticationException;
+use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Session\TokenMismatchException;
 
 class Handler extends ExceptionHandler
 {
-    protected function unauthenticated(
-        $request,
-        AuthenticationException $exception
-    ) {
-        return $request->expectsJson()
-            ? response()->json(['message' => $exception->getMessage()], 401)
-            : redirect()
-                ->guest($exception->redirectTo() ?? route('auth::login.show'))
-                ->with('warning', __('Silakan login terlebih dahulu') ?? '');
-    }
+    /**
+     * A list of the exception types that are not reported.
+     *
+     * @var array
+     */
+    protected $dontReport = [
+        //
+    ];
+
+    /**
+     * A list of the inputs that are never flashed for validation exceptions.
+     *
+     * @var array
+     */
+    protected $dontFlash = [
+        'password',
+        'password_confirmation',
+    ];
 
     /**
      * Report or log an exception.
      *
-     * @param \Throwable $e
-     *
-     * @throws \Throwable
-     *
+     * @param  \Exception  $exception
      * @return void
+     *
+     * @throws \Exception
      */
-    public function report(\Throwable $e)
+    public function report(Exception $exception)
     {
-        if ($this->shouldReport($e) && app()->bound('sentry')) {
-            app('sentry')->captureException($e);
-        }
-
-        parent::report($e);
+        parent::report($exception);
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Throwable               $e
-     *
-     * @throws \Throwable
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Exception  $exception
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Exception
      */
-    public function render($request, \Throwable $e)
+    public function render($request, Exception $exception)
     {
-        if ($e instanceof TokenMismatchException) {
-            return back()->with(
-                'error',
-                __('Kami mendeteksi tidak ada aktivitas cukup lama, silakan kirim ulang form.')
-            );
-        }
-
-        if ($e instanceof AuthorizationException) {
-            if ($request->wantsJson()) {
-                return response()->json(['message' => $e->getMessage()], 403);
-            }
-
-            if ($request->is('livewire/*')) {
-                return abort(403);
-            }
-
-            return redirect()
-                ->back(302, [], route('home'))
-                ->withInput()
-                ->with('error', $e->getMessage());
-        }
-
-        return parent::render($request, $e);
+        return parent::render($request, $exception);
     }
 }
