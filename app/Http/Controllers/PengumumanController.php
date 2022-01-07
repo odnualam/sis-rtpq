@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Pengumuman;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PengumumanController extends Controller
 {

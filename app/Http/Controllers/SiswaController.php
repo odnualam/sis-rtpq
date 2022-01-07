@@ -15,33 +15,12 @@ use Illuminate\Support\Facades\Crypt;
 
 class SiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         return view('admin.siswa.index', compact('kelas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -79,12 +58,6 @@ class SiswaController extends Controller
         return redirect()->back()->with('success', 'Berhasil menambahkan data siswa baru!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $id = Crypt::decrypt($id);
@@ -92,12 +65,6 @@ class SiswaController extends Controller
         return view('admin.siswa.details', compact('siswa'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
@@ -106,13 +73,6 @@ class SiswaController extends Controller
         return view('admin.siswa.edit', compact('siswa', 'kelas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -144,12 +104,6 @@ class SiswaController extends Controller
         return redirect()->route('siswa.index')->with('success', 'Data siswa berhasil diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $siswa = Siswa::findorfail($id);
@@ -162,43 +116,6 @@ class SiswaController extends Controller
         } else {
             $siswa->delete();
             return redirect()->back()->with('warning', 'Data siswa berhasil dihapus! (Silahkan cek trash data siswa)');
-        }
-    }
-
-    public function trash()
-    {
-        $siswa = Siswa::onlyTrashed()->get();
-        return view('admin.siswa.trash', compact('siswa'));
-    }
-
-    public function restore($id)
-    {
-        $id = Crypt::decrypt($id);
-        $siswa = Siswa::withTrashed()->findorfail($id);
-        $countUser = User::withTrashed()->where('no_induk', $siswa->no_induk)->count();
-        if ($countUser >= 1) {
-            $user = User::withTrashed()->where('no_induk', $siswa->no_induk)->first();
-            $siswa->restore();
-            $user->restore();
-            return redirect()->back()->with('info', 'Data siswa berhasil direstore! (Silahkan cek data siswa)');
-        } else {
-            $siswa->restore();
-            return redirect()->back()->with('info', 'Data siswa berhasil direstore! (Silahkan cek data siswa)');
-        }
-    }
-
-    public function kill($id)
-    {
-        $siswa = Siswa::withTrashed()->findorfail($id);
-        $countUser = User::withTrashed()->where('no_induk', $siswa->no_induk)->count();
-        if ($countUser >= 1) {
-            $user = User::withTrashed()->where('no_induk', $siswa->no_induk)->first();
-            $siswa->forceDelete();
-            $user->forceDelete();
-            return redirect()->back()->with('success', 'Data siswa berhasil dihapus secara permanent');
-        } else {
-            $siswa->forceDelete();
-            return redirect()->back()->with('success', 'Data siswa berhasil dihapus secara permanent');
         }
     }
 

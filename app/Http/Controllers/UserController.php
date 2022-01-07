@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Guru;
 use App\Siswa;
@@ -11,15 +11,9 @@ use App\Kelas;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = User::all();
@@ -27,22 +21,6 @@ class UserController extends Controller
         return view('admin.user.index', compact('user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -98,12 +76,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $id = Crypt::decrypt($id);
@@ -116,35 +88,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        // 
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        // 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $user = User::findorfail($id);
@@ -166,27 +109,6 @@ class UserController extends Controller
             $user->delete();
             return redirect()->back()->with('warning', 'Data user berhasil dihapus! (Silahkan cek trash data user)');
         }
-    }
-
-    public function trash()
-    {
-        $user = User::onlyTrashed()->paginate(10);
-        return view('admin.user.trash', compact('user'));
-    }
-
-    public function restore($id)
-    {
-        $id = Crypt::decrypt($id);
-        $user = User::withTrashed()->findorfail($id);
-        $user->restore();
-        return redirect()->back()->with('info', 'Data user berhasil direstore! (Silahkan cek data user)');
-    }
-
-    public function kill($id)
-    {
-        $user = User::withTrashed()->findorfail($id);
-        $user->forceDelete();
-        return redirect()->back()->with('success', 'Data user berhasil dihapus secara permanent');
     }
 
     public function email(Request $request)

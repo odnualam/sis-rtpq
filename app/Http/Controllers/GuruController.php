@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Guru;
 use App\Mapel;
@@ -11,7 +11,6 @@ use App\Absen;
 use App\Kehadiran;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Exports\GuruExport;
 use App\Imports\GuruImport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -20,11 +19,6 @@ use App\Nilai;
 
 class GuruController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $mapel = Mapel::orderBy('nama_mapel')->get();
@@ -32,22 +26,6 @@ class GuruController extends Controller
         return view('admin.guru.index', compact('mapel', 'max'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -91,12 +69,6 @@ class GuruController extends Controller
         return redirect()->back()->with('success', 'Berhasil menambahkan data guru baru!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $id = Crypt::decrypt($id);
@@ -104,12 +76,6 @@ class GuruController extends Controller
         return view('admin.guru.details', compact('guru'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
@@ -118,13 +84,6 @@ class GuruController extends Controller
         return view('admin.guru.edit', compact('guru', 'mapel'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -155,12 +114,6 @@ class GuruController extends Controller
         return redirect()->route('guru.index')->with('success', 'Data guru berhasil diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $guru = Guru::findorfail($id);
@@ -176,47 +129,6 @@ class GuruController extends Controller
         }
         $guru->delete();
         return redirect()->route('guru.index')->with('warning', 'Data guru berhasil dihapus! (Silahkan cek trash data guru)');
-    }
-
-    public function trash()
-    {
-        $guru = Guru::onlyTrashed()->get();
-        return view('admin.guru.trash', compact('guru'));
-    }
-
-    public function restore($id)
-    {
-        $id = Crypt::decrypt($id);
-        $guru = Guru::withTrashed()->findorfail($id);
-        $countJadwal = Jadwal::withTrashed()->where('guru_id', $guru->id)->count();
-        if ($countJadwal >= 1) {
-            $jadwal = Jadwal::withTrashed()->where('guru_id', $guru->id)->restore();
-        } else {
-        }
-        $countUser = User::withTrashed()->where('id_card', $guru->id_card)->count();
-        if ($countUser >= 1) {
-            $user = User::withTrashed()->where('id_card', $guru->id_card)->restore();
-        } else {
-        }
-        $guru->restore();
-        return redirect()->back()->with('info', 'Data guru berhasil direstore! (Silahkan cek data guru)');
-    }
-
-    public function kill($id)
-    {
-        $guru = Guru::withTrashed()->findorfail($id);
-        $countJadwal = Jadwal::withTrashed()->where('guru_id', $guru->id)->count();
-        if ($countJadwal >= 1) {
-            $jadwal = Jadwal::withTrashed()->where('guru_id', $guru->id)->forceDelete();
-        } else {
-        }
-        $countUser = User::withTrashed()->where('id_card', $guru->id_card)->count();
-        if ($countUser >= 1) {
-            $user = User::withTrashed()->where('id_card', $guru->id_card)->forceDelete();
-        } else {
-        }
-        $guru->forceDelete();
-        return redirect()->back()->with('success', 'Data guru berhasil dihapus secara permanent');
     }
 
     public function ubah_foto($id)

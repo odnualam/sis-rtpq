@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Jadwal;
 use App\Hari;
 use App\Kelas;
@@ -11,20 +11,14 @@ use App\Siswa;
 use App\Ruang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Str;
-use PDF;
 use App\Exports\JadwalExport;
 use App\Imports\JadwalImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class JadwalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $hari = Hari::all();
@@ -34,22 +28,6 @@ class JadwalController extends Controller
         return view('admin.jadwal.index', compact('hari', 'kelas', 'guru', 'ruang'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // 
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -80,12 +58,6 @@ class JadwalController extends Controller
         return redirect()->back()->with('success', 'Data jadwal berhasil diperbarui!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $id = Crypt::decrypt($id);
@@ -94,12 +66,6 @@ class JadwalController extends Controller
         return view('admin.jadwal.show', compact('jadwal', 'kelas'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
@@ -111,51 +77,12 @@ class JadwalController extends Controller
         return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru', 'ruang'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        // 
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $jadwal = Jadwal::findorfail($id);
         $jadwal->delete();
 
         return redirect()->back()->with('warning', 'Data jadwal berhasil dihapus! (Silahkan cek trash data jadwal)');
-    }
-
-    public function trash()
-    {
-        $jadwal = Jadwal::onlyTrashed()->get();
-        return view('admin.jadwal.trash', compact('jadwal'));
-    }
-
-    public function restore($id)
-    {
-        $id = Crypt::decrypt($id);
-        $jadwal = Jadwal::withTrashed()->findorfail($id);
-        $jadwal->restore();
-        return redirect()->back()->with('info', 'Data jadwal berhasil direstore! (Silahkan cek data jadwal)');
-    }
-
-    public function kill($id)
-    {
-        $jadwal = Jadwal::withTrashed()->findorfail($id);
-        $jadwal->forceDelete();
-        return redirect()->back()->with('success', 'Data jadwal berhasil dihapus secara permanent');
     }
 
     public function view(Request $request)
