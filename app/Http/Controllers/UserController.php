@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\User;
-use App\Guru;
-use App\Siswa;
-use App\Mapel;
-use App\Kelas;
+use App\Models\Guru;
+use App\Models\Siswa;
+use App\Models\Mapel;
+use App\Models\Kelas;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;

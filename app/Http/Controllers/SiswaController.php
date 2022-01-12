@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use PDF;
-use App\User;
-use App\Kelas;
-use App\Siswa;
+use App\Models\User;
+use App\Models\Kelas;
+use App\Models\Siswa;
 use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
 use Illuminate\Http\Request;

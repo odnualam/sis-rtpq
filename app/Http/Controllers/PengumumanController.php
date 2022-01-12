@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Pengumuman;
+use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 
 class PengumumanController extends Controller

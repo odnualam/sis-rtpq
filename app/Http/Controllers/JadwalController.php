@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Jadwal;
-use App\Hari;
-use App\Kelas;
-use App\Guru;
-use App\Siswa;
-use App\Ruang;
+use App\Models\Jadwal;
+use App\Models\Hari;
+use App\Models\Kelas;
+use App\Models\Guru;
+use App\Models\Siswa;
+use App\Models\Ruang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use App\Exports\JadwalExport;
