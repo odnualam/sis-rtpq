@@ -3,7 +3,7 @@
 /**
  * Combine those first letters together.
  */
-if (!function_exists('getInitials')) {
+if (! function_exists('getInitials')) {
     function getInitials($string = null) {
         return array_reduce(
             explode(' ', $string),
