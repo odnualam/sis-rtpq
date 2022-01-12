@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Guru;
 use App\Models\Mapel;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -9,22 +10,21 @@ use Maatwebsite\Excel\Concerns\ToModel;
 class GuruImport implements ToModel
 {
     /**
-     * @param array $row
      *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return Model|null
      */
     public function model(array $row)
     {
         $max = Guru::max('id_card');
         $kode = $max + 1;
         if (strlen($kode) == 1) {
-            $id_card = "0000" . $kode;
-        } else if (strlen($kode) == 2) {
-            $id_card = "000" . $kode;
-        } else if (strlen($kode) == 3) {
-            $id_card = "00" . $kode;
-        } else if (strlen($kode) == 4) {
-            $id_card = "0" . $kode;
+            $id_card = '0000'.$kode;
+        } elseif (strlen($kode) == 2) {
+            $id_card = '000'.$kode;
+        } elseif (strlen($kode) == 3) {
+            $id_card = '00'.$kode;
+        } elseif (strlen($kode) == 4) {
+            $id_card = '0'.$kode;
         } else {
             $id_card = $kode;
         }

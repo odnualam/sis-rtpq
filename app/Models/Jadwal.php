@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Jadwal extends Model
 {
@@ -14,38 +14,40 @@ class Jadwal extends Model
 
   public function hari()
   {
-    return $this->belongsTo('App\Hari')->withDefault();
+    return $this->belongsTo('App\Models\Hari')->withDefault();
   }
 
   public function kelas()
   {
-    return $this->belongsTo('App\Kelas')->withDefault();
+    return $this->belongsTo('App\Models\Kelas')->withDefault();
   }
 
   public function mapel()
   {
-    return $this->belongsTo('App\Mapel')->withDefault();
+    return $this->belongsTo('App\Models\Mapel')->withDefault();
   }
 
   public function guru()
   {
-    return $this->belongsTo('App\Guru')->withDefault();
+    return $this->belongsTo('App\Models\Guru')->withDefault();
   }
 
   public function ruang()
   {
-    return $this->belongsTo('App\Ruang')->withDefault();
+    return $this->belongsTo('App\Models\Ruang')->withDefault();
   }
 
   public function rapot($id)
   {
     $kelas = Kelas::where('id', $id)->first();
+
     return $kelas;
   }
 
   public function pengajar($id)
   {
     $guru = Guru::where('id', $id)->first();
+
     return $guru;
   }
 
@@ -53,6 +55,7 @@ class Jadwal extends Model
   {
     $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
     $nilai = Ulangan::where('siswa_id', $siswa->id)->where('mapel_id', $id)->first();
+
     return $nilai;
   }
 
@@ -60,12 +63,14 @@ class Jadwal extends Model
   {
     $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
     $nilai = Rapot::where('siswa_id', $siswa->id)->where('mapel_id', $id)->first();
+
     return $nilai;
   }
 
   public function kkm($id)
   {
     $kkm = Nilai::where('guru_id', $id)->first();
+
     return $kkm['kkm'];
   }
 
@@ -73,6 +78,7 @@ class Jadwal extends Model
   {
     $absen = Absen::where('tanggal', date('Y-m-d'))->where('guru_id', $id)->first();
     $ket = Kehadiran::where('id', $absen['kehadiran_id'])->first();
+
     return $ket['color'];
   }
 
@@ -80,6 +86,7 @@ class Jadwal extends Model
   {
     $data = json_decode($id, true);
     $ulangan = Ulangan::where('siswa_id', $data['siswa'])->where('mapel_id', $data['mapel'])->first();
+
     return $ulangan;
   }
 
@@ -87,6 +94,7 @@ class Jadwal extends Model
   {
     $data = json_decode($id, true);
     $rapot = Rapot::where('siswa_id', $data['siswa'])->where('mapel_id', $data['mapel'])->first();
+
     return $rapot;
   }
 

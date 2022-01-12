@@ -13,12 +13,13 @@ class Guru extends Model
 
     public function mapel()
     {
-        return $this->belongsTo('App\Mapel')->withDefault();
+        return $this->belongsTo('App\Models\Mapel')->withDefault();
     }
 
     public function dsk($id)
     {
         $dsk = Nilai::where('guru_id', $id)->first();
+
         return $dsk;
     }
 

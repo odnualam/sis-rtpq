@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request;
 use Closure;
 
 class Siswa
@@ -9,8 +10,7 @@ class Siswa
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -18,6 +18,7 @@ class Siswa
         if ($request->user()->role != 'Siswa') {
             return redirect('home');
         }
+
         return $next($request);
     }
 }

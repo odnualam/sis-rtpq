@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
-use App\Models\User;
-use App\Models\Kelas;
-use App\Models\Siswa;
 use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
+use App\Models\Kelas;
+use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Crypt;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class SiswaController extends Controller
 {
     public function index()
     {
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
+
         return view('admin.siswa.index', compact('kelas'));
     }
 
@@ -27,14 +27,14 @@ class SiswaController extends Controller
             'no_induk' => 'required|string|unique:siswa',
             'nama_siswa' => 'required',
             'jk' => 'required',
-            'kelas_id' => 'required'
+            'kelas_id' => 'required',
         ]);
 
         if ($request->foto) {
             $foto = $request->foto;
-            $new_foto = date('siHdmY') . "_" . $foto->getClientOriginalName();
+            $new_foto = date('siHdmY').'_'.$foto->getClientOriginalName();
             $foto->move('uploads/siswa/', $new_foto);
-            $nameFoto = 'uploads/siswa/' . $new_foto;
+            $nameFoto = 'uploads/siswa/'.$new_foto;
         } else {
             if ($request->jk == 'L') {
                 $nameFoto = 'uploads/siswa/52471919042020_male.jpg';
@@ -52,7 +52,7 @@ class SiswaController extends Controller
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
-            'foto' => $nameFoto
+            'foto' => $nameFoto,
         ]);
 
         return redirect()->back()->with('success', 'Berhasil menambahkan data siswa baru!');
@@ -62,6 +62,7 @@ class SiswaController extends Controller
     {
         $id = Crypt::decrypt($id);
         $siswa = Siswa::findorfail($id);
+
         return view('admin.siswa.details', compact('siswa'));
     }
 
@@ -70,6 +71,7 @@ class SiswaController extends Controller
         $id = Crypt::decrypt($id);
         $siswa = Siswa::findorfail($id);
         $kelas = Kelas::all();
+
         return view('admin.siswa.edit', compact('siswa', 'kelas'));
     }
 
@@ -78,14 +80,14 @@ class SiswaController extends Controller
         $this->validate($request, [
             'nama_siswa' => 'required',
             'jk' => 'required',
-            'kelas_id' => 'required'
+            'kelas_id' => 'required',
         ]);
 
         $siswa = Siswa::findorfail($id);
         $user = User::where('no_induk', $siswa->no_induk)->first();
         if ($user) {
             $user_data = [
-                'name' => $request->nama_siswa
+                'name' => $request->nama_siswa,
             ];
             $user->update($user_data);
         } else {
@@ -112,9 +114,11 @@ class SiswaController extends Controller
             $user = User::where('no_induk', $siswa->no_induk)->first();
             $siswa->delete();
             $user->delete();
+
             return redirect()->back()->with('warning', 'Data siswa berhasil dihapus! (Silahkan cek trash data siswa)');
         } else {
             $siswa->delete();
+
             return redirect()->back()->with('warning', 'Data siswa berhasil dihapus! (Silahkan cek trash data siswa)');
         }
     }
@@ -123,20 +127,21 @@ class SiswaController extends Controller
     {
         $id = Crypt::decrypt($id);
         $siswa = Siswa::findorfail($id);
+
         return view('admin.siswa.ubah-foto', compact('siswa'));
     }
 
     public function update_foto(Request $request, $id)
     {
         $this->validate($request, [
-            'foto' => 'required'
+            'foto' => 'required',
         ]);
 
         $siswa = Siswa::findorfail($id);
         $foto = $request->foto;
-        $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
+        $new_foto = date('s'.'i'.'H'.'d'.'m'.'Y').'_'.$foto->getClientOriginalName();
         $siswa_data = [
-            'foto' => 'uploads/siswa/' . $new_foto,
+            'foto' => 'uploads/siswa/'.$new_foto,
         ];
         $foto->move('uploads/siswa/', $new_foto);
         $siswa->update($siswa_data);
@@ -149,13 +154,13 @@ class SiswaController extends Controller
         $siswa = Siswa::OrderBy('nama_siswa', 'asc')->where('kelas_id', $request->id)->get();
 
         foreach ($siswa as $val) {
-            $newForm[] = array(
+            $newForm[] = [
                 'kelas' => $val->kelas->nama_kelas,
                 'no_induk' => $val->no_induk,
                 'nama_siswa' => $val->nama_siswa,
                 'jk' => $val->jk,
-                'foto' => $val->foto
-            );
+                'foto' => $val->foto,
+            ];
         }
 
         return response()->json($newForm);
@@ -167,6 +172,7 @@ class SiswaController extends Controller
         $kelas = Kelas::findorfail($request->id);
 
         $pdf = PDF::loadView('siswa-pdf', ['siswa' => $siswa, 'kelas' => $kelas]);
+
         return $pdf->stream();
         // return $pdf->stream('jadwal-pdf.pdf');
     }
@@ -176,6 +182,7 @@ class SiswaController extends Controller
         $id = Crypt::decrypt($id);
         $siswa = Siswa::where('kelas_id', $id)->OrderBy('nama_siswa', 'asc')->get();
         $kelas = Kelas::findorfail($id);
+
         return view('admin.siswa.show', compact('siswa', 'kelas'));
     }
 
@@ -187,12 +194,13 @@ class SiswaController extends Controller
     public function import_excel(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
+            'file' => 'required|mimes:csv,xls,xlsx',
         ]);
         $file = $request->file('file');
-        $nama_file = rand() . $file->getClientOriginalName();
+        $nama_file = rand().$file->getClientOriginalName();
         $file->move('file_siswa', $nama_file);
-        Excel::import(new SiswaImport, public_path('/file_siswa/' . $nama_file));
+        Excel::import(new SiswaImport, public_path('/file_siswa/'.$nama_file));
+
         return redirect()->back()->with('success', 'Data Siswa Berhasil Diimport!');
     }
 
@@ -202,6 +210,7 @@ class SiswaController extends Controller
         if ($siswa->count() >= 1) {
             Siswa::whereNotNull('id')->delete();
             Siswa::withTrashed()->whereNotNull('id')->forceDelete();
+
             return redirect()->back()->with('success', 'Data table siswa berhasil dihapus!');
         } else {
             return redirect()->back()->with('warning', 'Data table siswa kosong!');

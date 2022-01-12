@@ -10,7 +10,7 @@ class Nilai extends Model
 
     public function guru()
     {
-        return $this->belongsTo('App\Guru')->withDefault();
+        return $this->belongsTo('App\Models\Guru')->withDefault();
     }
 
     protected $table = 'nilai';

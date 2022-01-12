@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Guru;
-use App\Models\Siswa;
-use App\Models\Kelas;
 use App\Models\Jadwal;
+use App\Models\Kelas;
 use App\Models\Nilai;
-use App\Models\Ulangan;
 use App\Models\Rapot;
+use App\Models\Siswa;
+use App\Models\Ulangan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class UlanganController extends Controller
@@ -20,12 +20,14 @@ class UlanganController extends Controller
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $jadwal = Jadwal::where('guru_id', $guru->id)->orderBy('kelas_id')->get();
         $kelas = $jadwal->groupBy('kelas_id');
+
         return view('guru.ulangan.kelas', compact('kelas', 'guru'));
     }
 
     public function create()
     {
         $kelas = Kelas::orderBy('nama_kelas')->get();
+
         return view('admin.ulangan.home', compact('kelas'));
     }
 
@@ -51,7 +53,7 @@ class UlanganController extends Controller
                             'p_predikat' => 'A',
                             'p_deskripsi' => $deskripsi->deskripsi_a,
                         ]);
-                    } else if ($nilai > 80) {
+                    } elseif ($nilai > 80) {
                         Rapot::create([
                             'siswa_id' => $request->siswa_id,
                             'kelas_id' => $request->kelas_id,
@@ -61,7 +63,7 @@ class UlanganController extends Controller
                             'p_predikat' => 'B',
                             'p_deskripsi' => $deskripsi->deskripsi_b,
                         ]);
-                    } else if ($nilai > 70) {
+                    } elseif ($nilai > 70) {
                         Rapot::create([
                             'siswa_id' => $request->siswa_id,
                             'kelas_id' => $request->kelas_id,
@@ -89,7 +91,7 @@ class UlanganController extends Controller
             }
             Ulangan::updateOrCreate(
                 [
-                    'id' => $request->id
+                    'id' => $request->id,
                 ],
                 [
                     'siswa_id' => $request->siswa_id,
@@ -103,6 +105,7 @@ class UlanganController extends Controller
                     'uas' => $request->uas,
                 ]
             );
+
             return response()->json(['success' => 'Nilai ulangan siswa berhasil ditambahkan!']);
         } else {
             return response()->json(['error' => 'Maaf guru ini tidak mengajar kelas ini!']);
@@ -115,6 +118,7 @@ class UlanganController extends Controller
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
         $siswa = Siswa::where('kelas_id', $id)->get();
+
         return view('guru.ulangan.nilai', compact('guru', 'kelas', 'siswa'));
     }
 
@@ -123,6 +127,7 @@ class UlanganController extends Controller
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
         $siswa = Siswa::orderBy('nama_siswa')->where('kelas_id', $id)->get();
+
         return view('admin.ulangan.index', compact('kelas', 'siswa'));
     }
 
@@ -133,6 +138,7 @@ class UlanganController extends Controller
         $kelas = Kelas::findorfail($siswa->kelas_id);
         $jadwal = Jadwal::orderBy('mapel_id')->where('kelas_id', $kelas->id)->get();
         $mapel = $jadwal->groupBy('mapel_id');
+
         return view('admin.ulangan.show', compact('mapel', 'siswa', 'kelas'));
     }
 
@@ -142,6 +148,7 @@ class UlanganController extends Controller
         $kelas = Kelas::findorfail($siswa->kelas_id);
         $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
         $mapel = $jadwal->groupBy('mapel_id');
+
         return view('siswa.ulangan', compact('siswa', 'kelas', 'mapel'));
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Siswa extends Model
 {
@@ -14,13 +14,14 @@ class Siswa extends Model
 
     public function kelas()
     {
-        return $this->belongsTo('App\Kelas')->withDefault();
+        return $this->belongsTo('App\Models\Kelas')->withDefault();
     }
 
     public function ulangan($id)
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $nilai = Ulangan::where('siswa_id', $id)->where('guru_id', $guru->id)->first();
+
         return $nilai;
     }
 
@@ -28,6 +29,7 @@ class Siswa extends Model
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $nilai = Sikap::where('siswa_id', $id)->where('guru_id', $guru->id)->first();
+
         return $nilai;
     }
 
@@ -35,6 +37,7 @@ class Siswa extends Model
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $nilai = Rapot::where('siswa_id', $id)->where('guru_id', $guru->id)->first();
+
         return $nilai;
     }
 

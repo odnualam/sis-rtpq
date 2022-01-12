@@ -13,12 +13,12 @@ class Kelas extends Model
 
     public function guru()
     {
-        return $this->belongsTo('App\Guru')->withDefault();
+        return $this->belongsTo('App\Models\Guru')->withDefault();
     }
 
     public function paket()
     {
-        return $this->belongsTo('App\Paket')->withDefault();
+        return $this->belongsTo('App\Models\Paket')->withDefault();
     }
 
     protected $table = 'kelas';

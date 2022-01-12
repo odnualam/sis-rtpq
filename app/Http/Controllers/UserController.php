@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
 use App\Models\Guru;
-use App\Models\Siswa;
-use App\Models\Mapel;
 use App\Models\Kelas;
+use App\Models\Mapel;
+use App\Models\Siswa;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -18,6 +18,7 @@ class UserController extends Controller
     {
         $user = User::all();
         $user = $user->groupBy('role');
+
         return view('admin.user.index', compact('user'));
     }
 
@@ -43,6 +44,7 @@ class UserController extends Controller
                     'role' => $request->role,
                     'id_card' => $request->nomer,
                 ]);
+
                 return redirect()->back()->with('success', 'Berhasil menambahkan user Guru baru!');
             } else {
                 return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai guru!');
@@ -61,6 +63,7 @@ class UserController extends Controller
                     'role' => $request->role,
                     'no_induk' => $request->nomer,
                 ]);
+
                 return redirect()->back()->with('success', 'Berhasil menambahkan user Siswa baru!');
             } else {
                 return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai siswa!');
@@ -72,6 +75,7 @@ class UserController extends Controller
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
             ]);
+
             return redirect()->back()->with('success', 'Berhasil menambahkan user Admin baru!');
         }
     }
@@ -79,11 +83,12 @@ class UserController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        if ($id == "Admin" && Auth::user()->role == "Operator") {
+        if ($id == 'Admin' && Auth::user()->role == 'Operator') {
             return redirect()->back()->with('warning', 'Maaf halaman ini hanya bisa di akses oleh Admin!');
         } else {
             $user = User::where('role', $id)->get();
             $role = $user->groupBy('role');
+
             return view('admin.user.show', compact('user', 'role'));
         }
     }
@@ -94,6 +99,7 @@ class UserController extends Controller
         if ($user->role == 'Admin') {
             if ($user->id == Auth::user()->id) {
                 $user->delete();
+
                 return redirect()->back()->with('warning', 'Data user berhasil dihapus! (Silahkan cek trash data user)');
             } else {
                 return redirect()->back()->with('error', 'Maaf user ini bukan milik anda!');
@@ -101,12 +107,14 @@ class UserController extends Controller
         } elseif ($user->role == 'Operator') {
             if ($user->id == Auth::user()->id || Auth::user()->role == 'Admin') {
                 $user->delete();
+
                 return redirect()->back()->with('warning', 'Data user berhasil dihapus! (Silahkan cek trash data user)');
             } else {
                 return redirect()->back()->with('error', 'Maaf user ini bukan milik anda!');
             }
         } else {
             $user->delete();
+
             return redirect()->back()->with('warning', 'Data user berhasil dihapus! (Silahkan cek trash data user)');
         }
     }
@@ -126,19 +134,21 @@ class UserController extends Controller
     {
         $id = Crypt::decrypt($id);
         $user = User::findorfail($id);
+
         return view('auth.passwords.reset', compact('user'));
     }
 
     public function update_password(Request $request, $id)
     {
         $this->validate($request, [
-            'password' => 'required|string|min:8|confirmed'
+            'password' => 'required|string|min:8|confirmed',
         ]);
         $user = User::findorfail($id);
         $user_data = [
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
         ];
         $user->update($user_data);
+
         return redirect()->route('login')->with('success', 'User berhasil diperbarui!');
     }
 
@@ -151,6 +161,7 @@ class UserController extends Controller
     {
         $mapel = Mapel::all();
         $kelas = Kelas::all();
+
         return view('user.profile', compact('mapel', 'kelas'));
     }
 
@@ -167,7 +178,7 @@ class UserController extends Controller
             dd($user);
             if ($user) {
                 $user_data = [
-                    'name' => $request->name
+                    'name' => $request->name,
                 ];
                 $user->update($user_data);
             } else {
@@ -178,21 +189,22 @@ class UserController extends Controller
                 'jk' => $request->jk,
                 'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
-                'tgl_lahir' => $request->tgl_lahir
+                'tgl_lahir' => $request->tgl_lahir,
             ];
             $guru->update($guru_data);
+
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
         } elseif ($request->role == 'Siswa') {
             $this->validate($request, [
                 'nama_siswa' => 'required',
                 'jk' => 'required',
-                'kelas_id' => 'required'
+                'kelas_id' => 'required',
             ]);
             $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
             $user = User::where('no_induk', Auth::user()->no_induk)->first();
             if ($user) {
                 $user_data = [
-                    'name' => $request->name
+                    'name' => $request->name,
                 ];
                 $user->update($user_data);
             } else {
@@ -207,6 +219,7 @@ class UserController extends Controller
                 'tgl_lahir' => $request->tgl_lahir,
             ];
             $siswa->update($siswa_data);
+
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
         } else {
             $user = User::findorfail(Auth::user()->id);
@@ -214,6 +227,7 @@ class UserController extends Controller
                 'name' => $request->name,
             ];
             $user->update($data_user);
+
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
         }
     }
@@ -231,29 +245,31 @@ class UserController extends Controller
     {
         if ($request->role == 'Guru') {
             $this->validate($request, [
-                'foto' => 'required'
+                'foto' => 'required',
             ]);
             $guru = Guru::where('id_card', Auth::user()->id_card)->first();
             $foto = $request->foto;
-            $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
+            $new_foto = date('s'.'i'.'H'.'d'.'m'.'Y').'_'.$foto->getClientOriginalName();
             $guru_data = [
-                'foto' => 'uploads/guru/' . $new_foto,
+                'foto' => 'uploads/guru/'.$new_foto,
             ];
             $foto->move('uploads/guru/', $new_foto);
             $guru->update($guru_data);
+
             return redirect()->route('profile')->with('success', 'Foto Profile anda berhasil diperbarui!');
         } else {
             $this->validate($request, [
-                'foto' => 'required'
+                'foto' => 'required',
             ]);
             $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
             $foto = $request->foto;
-            $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
+            $new_foto = date('s'.'i'.'H'.'d'.'m'.'Y').'_'.$foto->getClientOriginalName();
             $siswa_data = [
-                'foto' => 'uploads/siswa/' . $new_foto,
+                'foto' => 'uploads/siswa/'.$new_foto,
             ];
             $foto->move('uploads/siswa/', $new_foto);
             $siswa->update($siswa_data);
+
             return redirect()->route('profile')->with('success', 'Foto Profile anda berhasil diperbarui!!');
         }
     }
@@ -266,7 +282,7 @@ class UserController extends Controller
     public function ubah_email(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|string|email'
+            'email' => 'required|string|email',
         ]);
         $user = User::findorfail(Auth::user()->id);
         $cekUser = User::where('email', $request->email)->count();
@@ -277,6 +293,7 @@ class UserController extends Controller
                 'email' => $request->email,
             ];
             $user->update($user_email);
+
             return redirect()->back()->with('success', 'Email anda berhasil diperbarui!');
         }
     }
@@ -289,7 +306,7 @@ class UserController extends Controller
     public function ubah_password(Request $request)
     {
         $this->validate($request, [
-            'password' => 'required|string|min:8|confirmed'
+            'password' => 'required|string|min:8|confirmed',
         ]);
         $user = User::findorfail(Auth::user()->id);
         if ($request->password_lama) {
@@ -301,6 +318,7 @@ class UserController extends Controller
                         'password' => Hash::make($request->password),
                     ];
                     $user->update($user_password);
+
                     return redirect()->back()->with('success', 'Password anda berhasil diperbarui!');
                 }
             } else {

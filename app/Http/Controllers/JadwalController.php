@@ -2,19 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Models\Jadwal;
-use App\Models\Hari;
-use App\Models\Kelas;
-use App\Models\Guru;
-use App\Models\Siswa;
-use App\Models\Ruang;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 use App\Exports\JadwalExport;
 use App\Imports\JadwalImport;
+use App\Models\Guru;
+use App\Models\Hari;
+use App\Models\Jadwal;
+use App\Models\Kelas;
+use App\Models\Ruang;
+use App\Models\Siswa;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
 use PDF;
 
 class JadwalController extends Controller
@@ -25,6 +24,7 @@ class JadwalController extends Controller
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $ruang = Ruang::all();
         $guru = Guru::OrderBy('kode', 'asc')->get();
+
         return view('admin.jadwal.index', compact('hari', 'kelas', 'guru', 'ruang'));
     }
 
@@ -42,7 +42,7 @@ class JadwalController extends Controller
         $guru = Guru::findorfail($request->guru_id);
         Jadwal::updateOrCreate(
             [
-                'id' => $request->jadwal_id
+                'id' => $request->jadwal_id,
             ],
             [
                 'hari_id' => $request->hari_id,
@@ -63,6 +63,7 @@ class JadwalController extends Controller
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
         $jadwal = Jadwal::OrderBy('hari_id', 'asc')->OrderBy('jam_mulai', 'asc')->where('kelas_id', $id)->get();
+
         return view('admin.jadwal.show', compact('jadwal', 'kelas'));
     }
 
@@ -74,6 +75,7 @@ class JadwalController extends Controller
         $kelas = Kelas::all();
         $ruang = Ruang::all();
         $guru = Guru::OrderBy('kode', 'asc')->get();
+
         return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru', 'ruang'));
     }
 
@@ -89,7 +91,7 @@ class JadwalController extends Controller
     {
         $jadwal = Jadwal::OrderBy('hari_id', 'asc')->OrderBy('jam_mulai', 'asc')->where('kelas_id', $request->id)->get();
         foreach ($jadwal as $val) {
-            $newForm[] = array(
+            $newForm[] = [
                 'hari' => $val->hari->nama_hari,
                 'mapel' => $val->mapel->nama_mapel,
                 'kelas' => $val->kelas->nama_kelas,
@@ -97,8 +99,9 @@ class JadwalController extends Controller
                 'jam_mulai' => $val->jam_mulai,
                 'jam_selesai' => $val->jam_selesai,
                 'ruang' => $val->ruang->nama_ruang,
-            );
+            ];
         }
+
         return response()->json($newForm);
     }
 
@@ -106,7 +109,7 @@ class JadwalController extends Controller
     {
         $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $request->hari)->where('jam_mulai', '<=', $request->jam)->where('jam_selesai', '>=', $request->jam)->get();
         foreach ($jadwal as $val) {
-            $newForm[] = array(
+            $newForm[] = [
                 'mapel' => $val->mapel->nama_mapel,
                 'kelas' => $val->kelas->nama_kelas,
                 'guru' => $val->guru->nama_guru,
@@ -114,8 +117,9 @@ class JadwalController extends Controller
                 'jam_selesai' => $val->jam_selesai,
                 'ruang' => $val->ruang->nama_ruang,
                 'ket' => $val->absen($val->guru_id),
-            );
+            ];
         }
+
         return response()->json($newForm);
     }
 
@@ -124,6 +128,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::OrderBy('hari_id', 'asc')->OrderBy('jam_mulai', 'asc')->where('kelas_id', $request->id)->get();
         $kelas = Kelas::findorfail($request->id);
         $pdf = PDF::loadView('jadwal-pdf', ['jadwal' => $jadwal, 'kelas' => $kelas]);
+
         return $pdf->stream();
         // return $pdf->stream('jadwal-pdf.pdf');
     }
@@ -132,6 +137,7 @@ class JadwalController extends Controller
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $jadwal = Jadwal::orderBy('hari_id')->OrderBy('jam_mulai')->where('guru_id', $guru->id)->get();
+
         return view('guru.jadwal', compact('jadwal', 'guru'));
     }
 
@@ -140,6 +146,7 @@ class JadwalController extends Controller
         $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
         $kelas = Kelas::findorfail($siswa->kelas_id);
         $jadwal = Jadwal::orderBy('hari_id')->OrderBy('jam_mulai')->where('kelas_id', $kelas->id)->get();
+
         return view('siswa.jadwal', compact('jadwal', 'kelas', 'siswa'));
     }
 
@@ -151,12 +158,13 @@ class JadwalController extends Controller
     public function import_excel(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
+            'file' => 'required|mimes:csv,xls,xlsx',
         ]);
         $file = $request->file('file');
-        $nama_file = rand() . $file->getClientOriginalName();
+        $nama_file = rand().$file->getClientOriginalName();
         $file->move('file_jadwal', $nama_file);
-        Excel::import(new JadwalImport, public_path('/file_jadwal/' . $nama_file));
+        Excel::import(new JadwalImport, public_path('/file_jadwal/'.$nama_file));
+
         return redirect()->back()->with('success', 'Data Siswa Berhasil Diimport!');
     }
 
@@ -166,6 +174,7 @@ class JadwalController extends Controller
         if ($jadwal->count() >= 1) {
             Jadwal::whereNotNull('id')->delete();
             Jadwal::withTrashed()->whereNotNull('id')->forceDelete();
+
             return redirect()->back()->with('success', 'Data table jadwal berhasil dihapus!');
         } else {
             return redirect()->back()->with('warning', 'Data table jadwal kosong!');

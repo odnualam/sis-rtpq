@@ -2,16 +2,16 @@
 
 namespace App\Imports;
 
-use App\Models\Siswa;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Kelas;
+use App\Models\Siswa;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class SiswaImport implements ToModel
 {
     /**
-     * @param array $row
      *
-     * @return \Illuminate\Database\Eloquent\Model|null
+     * @return Model|null
      */
     public function model(array $row)
     {

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Mapel;
 use App\Models\Paket;
-use App\Models\Guru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -15,6 +15,7 @@ class MapelController extends Controller
     {
         $mapel = Mapel::OrderBy('kelompok', 'asc')->OrderBy('nama_mapel', 'asc')->get();
         $paket = Paket::all();
+
         return view('admin.mapel.index', compact('mapel', 'paket'));
     }
 
@@ -23,12 +24,12 @@ class MapelController extends Controller
         $this->validate($request, [
             'nama_mapel' => 'required',
             'paket_id' => 'required',
-            'kelompok' => 'required'
+            'kelompok' => 'required',
         ]);
 
         Mapel::updateOrCreate(
             [
-                'id' => $request->mapel_id
+                'id' => $request->mapel_id,
             ],
             [
                 'nama_mapel' => $request->nama_mapel,
@@ -45,6 +46,7 @@ class MapelController extends Controller
         $id = Crypt::decrypt($id);
         $mapel = Mapel::findorfail($id);
         $paket = Paket::all();
+
         return view('admin.mapel.edit', compact('mapel', 'paket'));
     }
 
@@ -62,6 +64,7 @@ class MapelController extends Controller
         } else {
         }
         $mapel->delete();
+
         return redirect()->back()->with('warning', 'Data mapel berhasil dihapus! (Silahkan cek trash data mapel)');
     }
 
@@ -71,10 +74,10 @@ class MapelController extends Controller
         $jadwal = $jadwal->groupBy('mapel_id');
 
         foreach ($jadwal as $val => $data) {
-            $newForm[] = array(
+            $newForm[] = [
                 'mapel' => $data[0]->pelajaran($val)->nama_mapel,
-                'guru' => $data[0]->pengajar($data[0]->guru_id)->id
-            );
+                'guru' => $data[0]->pengajar($data[0]->guru_id)->id,
+            ];
         }
 
         return response()->json($newForm);

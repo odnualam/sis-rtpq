@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jadwal;
 use App\Models\Guru;
+use App\Models\Jadwal;
 use App\Models\Kehadiran;
 use App\Models\Kelas;
-use App\Models\Siswa;
 use App\Models\Mapel;
-use App\Models\User;
 use App\Models\Paket;
 use App\Models\Pengumuman;
+use App\Models\Siswa;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -26,6 +26,7 @@ class HomeController extends Controller
         $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $hari)->where('jam_mulai', '<=', $jam)->where('jam_selesai', '>=', $jam)->get();
         $pengumuman = Pengumuman::first();
         $kehadiran = Kehadiran::all();
+
         return view('home', compact('jadwal', 'pengumuman', 'kehadiran'));
     }
 
@@ -50,6 +51,7 @@ class HomeController extends Controller
         $mapel = Mapel::count();
         $user = User::count();
         $paket = Paket::all();
+
         return view('admin.index', compact(
             'jadwal',
             'guru',

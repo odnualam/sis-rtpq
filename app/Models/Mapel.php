@@ -14,13 +14,14 @@ class Mapel extends Model
 
     public function paket()
     {
-        return $this->belongsTo('App\Paket')->withDefault();
+        return $this->belongsTo('App\Models\Paket')->withDefault();
     }
 
     public function sikap($id)
     {
         $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
         $nilai = Sikap::where('siswa_id', $siswa->id)->where('mapel_id', $id)->first();
+
         return $nilai;
     }
 
@@ -28,6 +29,7 @@ class Mapel extends Model
     {
         $data = json_decode($id, true);
         $sikap = Sikap::where('siswa_id', $data['siswa'])->where('mapel_id', $data['mapel'])->first();
+
         return $sikap;
     }
 

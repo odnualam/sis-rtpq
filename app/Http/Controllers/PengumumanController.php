@@ -10,6 +10,7 @@ class PengumumanController extends Controller
     public function index()
     {
         $pengumuman = Pengumuman::where('opsi', 'pengumuman')->first();
+
         return view('admin.pengumuman', compact('pengumuman'));
     }
 
@@ -21,7 +22,7 @@ class PengumumanController extends Controller
 
         Pengumuman::updateOrCreate(
             [
-                'id' => $request->id
+                'id' => $request->id,
             ],
             [
                 'isi' => $request->isi,

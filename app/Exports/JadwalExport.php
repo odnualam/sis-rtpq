@@ -2,13 +2,14 @@
 
 namespace App\Exports;
 
+use Illuminate\Support\Collection;
 use App\Models\Jadwal;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class JadwalExport implements FromCollection
 {
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function collection()
     {
@@ -19,6 +20,7 @@ class JadwalExport implements FromCollection
             ->join('ruang', 'ruang.id', '=', 'jadwal.ruang_id')
             ->select('hari.nama_hari', 'kelas.nama_kelas', 'mapel.nama_mapel', 'guru.nama_guru', 'jadwal.jam_mulai', 'jadwal.jam_selesai', 'ruang.nama_ruang')
             ->get();
+
         return $jadwal;
     }
 }

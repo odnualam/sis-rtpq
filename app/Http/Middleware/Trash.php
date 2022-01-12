@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Request;
 use Closure;
 
 class Trash
@@ -9,8 +10,7 @@ class Trash
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param Request $request
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -18,6 +18,7 @@ class Trash
         if ($request->user()->role != 'Admin') {
             return redirect('/');
         }
+
         return $next($request);
     }
 }

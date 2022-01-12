@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kelas;
 use App\Models\Guru;
-use App\Models\Paket;
 use App\Models\Jadwal;
+use App\Models\Kelas;
+use App\Models\Paket;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -16,12 +16,14 @@ class KelasController extends Controller
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $guru = Guru::OrderBy('nama_guru', 'asc')->get();
         $paket = Paket::all();
+
         return view('admin.kelas.index', compact('kelas', 'guru', 'paket'));
     }
 
     public function create()
     {
         $guru = Guru::OrderBy('nama_guru', 'asc')->get();
+
         return view('admin.kelas.create', compact('guru'));
     }
 
@@ -43,7 +45,7 @@ class KelasController extends Controller
 
         Kelas::updateOrCreate(
             [
-                'id' => $request->id
+                'id' => $request->id,
             ],
             [
                 'nama_kelas' => $request->nama_kelas,
@@ -54,6 +56,7 @@ class KelasController extends Controller
 
         return redirect()->back()->with('success', 'Data kelas berhasil diperbarui!');
     }
+
     public function destroy($id)
     {
         $kelas = Kelas::findorfail($id);
@@ -68,6 +71,7 @@ class KelasController extends Controller
         } else {
         }
         $kelas->delete();
+
         return redirect()->back()->with('warning', 'Data kelas berhasil dihapus! (Silahkan cek trash data kelas)');
     }
 
@@ -75,13 +79,14 @@ class KelasController extends Controller
     {
         $kelas = Kelas::where('id', $request->id)->get();
         foreach ($kelas as $val) {
-            $newForm[] = array(
+            $newForm[] = [
                 'id' => $val->id,
                 'nama' => $val->nama_kelas,
                 'paket_id' => $val->paket_id,
                 'guru_id' => $val->guru_id,
-            );
+            ];
         }
+
         return response()->json($newForm);
     }
 }

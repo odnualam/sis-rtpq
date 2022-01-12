@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Models\Guru;
-use App\Models\Mapel;
-use App\Models\Jadwal;
-use App\Models\Absen;
-use App\Models\Kehadiran;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Http\Request;
 use App\Exports\GuruExport;
 use App\Imports\GuruImport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
+use App\Models\Absen;
+use App\Models\Guru;
+use App\Models\Jadwal;
+use App\Models\Kehadiran;
+use App\Models\Mapel;
 use App\Models\Nilai;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Maatwebsite\Excel\Facades\Excel;
 
 class GuruController extends Controller
 {
@@ -23,6 +22,7 @@ class GuruController extends Controller
     {
         $mapel = Mapel::orderBy('nama_mapel')->get();
         $max = Guru::max('id_card');
+
         return view('admin.guru.index', compact('mapel', 'max'));
     }
 
@@ -33,14 +33,14 @@ class GuruController extends Controller
             'nama_guru' => 'required',
             'mapel_id' => 'required',
             'kode' => 'required|string|unique:guru|min:2|max:3',
-            'jk' => 'required'
+            'jk' => 'required',
         ]);
 
         if ($request->foto) {
             $foto = $request->foto;
-            $new_foto = date('siHdmY') . "_" . $foto->getClientOriginalName();
+            $new_foto = date('siHdmY').'_'.$foto->getClientOriginalName();
             $foto->move('uploads/guru/', $new_foto);
-            $nameFoto = 'uploads/guru/' . $new_foto;
+            $nameFoto = 'uploads/guru/'.$new_foto;
         } else {
             if ($request->jk == 'L') {
                 $nameFoto = 'uploads/guru/35251431012020_male.jpg';
@@ -59,11 +59,11 @@ class GuruController extends Controller
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
-            'foto' => $nameFoto
+            'foto' => $nameFoto,
         ]);
 
         Nilai::create([
-            'guru_id' => $guru->id
+            'guru_id' => $guru->id,
         ]);
 
         return redirect()->back()->with('success', 'Berhasil menambahkan data guru baru!');
@@ -73,6 +73,7 @@ class GuruController extends Controller
     {
         $id = Crypt::decrypt($id);
         $guru = Guru::findorfail($id);
+
         return view('admin.guru.details', compact('guru'));
     }
 
@@ -81,6 +82,7 @@ class GuruController extends Controller
         $id = Crypt::decrypt($id);
         $guru = Guru::findorfail($id);
         $mapel = Mapel::all();
+
         return view('admin.guru.edit', compact('guru', 'mapel'));
     }
 
@@ -96,7 +98,7 @@ class GuruController extends Controller
         $user = User::where('id_card', $guru->id_card)->first();
         if ($user) {
             $user_data = [
-                'name' => $request->nama_guru
+                'name' => $request->nama_guru,
             ];
             $user->update($user_data);
         } else {
@@ -107,7 +109,7 @@ class GuruController extends Controller
             'jk' => $request->jk,
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
-            'tgl_lahir' => $request->tgl_lahir
+            'tgl_lahir' => $request->tgl_lahir,
         ];
         $guru->update($guru_data);
 
@@ -128,6 +130,7 @@ class GuruController extends Controller
         } else {
         }
         $guru->delete();
+
         return redirect()->route('guru.index')->with('warning', 'Data guru berhasil dihapus! (Silahkan cek trash data guru)');
     }
 
@@ -135,20 +138,21 @@ class GuruController extends Controller
     {
         $id = Crypt::decrypt($id);
         $guru = Guru::findorfail($id);
+
         return view('admin.guru.ubah-foto', compact('guru'));
     }
 
     public function update_foto(Request $request, $id)
     {
         $this->validate($request, [
-            'foto' => 'required'
+            'foto' => 'required',
         ]);
 
         $guru = Guru::findorfail($id);
         $foto = $request->foto;
-        $new_foto = date('s' . 'i' . 'H' . 'd' . 'm' . 'Y') . "_" . $foto->getClientOriginalName();
+        $new_foto = date('s'.'i'.'H'.'d'.'m'.'Y').'_'.$foto->getClientOriginalName();
         $guru_data = [
-            'foto' => 'uploads/guru/' . $new_foto,
+            'foto' => 'uploads/guru/'.$new_foto,
         ];
         $foto->move('uploads/guru/', $new_foto);
         $guru->update($guru_data);
@@ -161,6 +165,7 @@ class GuruController extends Controller
         $id = Crypt::decrypt($id);
         $mapel = Mapel::findorfail($id);
         $guru = Guru::where('mapel_id', $id)->orderBy('kode', 'asc')->get();
+
         return view('admin.guru.show', compact('mapel', 'guru'));
     }
 
@@ -168,6 +173,7 @@ class GuruController extends Controller
     {
         $absen = Absen::where('tanggal', date('Y-m-d'))->get();
         $kehadiran = Kehadiran::limit(4)->get();
+
         return view('guru.absen', compact('absen', 'kehadiran'));
     }
 
@@ -175,7 +181,7 @@ class GuruController extends Controller
     {
         $this->validate($request, [
             'id_card' => 'required',
-            'kehadiran_id' => 'required'
+            'kehadiran_id' => 'required',
         ]);
         $cekGuru = Guru::where('id_card', $request->id_card)->count();
         if ($cekGuru >= 1) {
@@ -192,25 +198,28 @@ class GuruController extends Controller
                                         'guru_id' => $guru->id,
                                         'kehadiran_id' => '6',
                                     ]);
+
                                     return redirect()->back()->with('info', 'Maaf sekarang sudah waktunya pulang!');
                                 } else {
                                     if ($request->kehadiran_id == '1') {
-                                        $terlambat = date('H') - 9 . ' Jam ' . date('i') . ' Menit';
+                                        $terlambat = date('H') - 9 .' Jam '.date('i').' Menit';
                                         if (date('H') - 9 == 0) {
-                                            $terlambat = date('i') . ' Menit';
+                                            $terlambat = date('i').' Menit';
                                         }
                                         Absen::create([
                                             'tanggal' => date('Y-m-d'),
                                             'guru_id' => $guru->id,
                                             'kehadiran_id' => '5',
                                         ]);
-                                        return redirect()->back()->with('warning', 'Maaf anda terlambat ' . $terlambat . '!');
+
+                                        return redirect()->back()->with('warning', 'Maaf anda terlambat '.$terlambat.'!');
                                     } else {
                                         Absen::create([
                                             'tanggal' => date('Y-m-d'),
                                             'guru_id' => $guru->id,
                                             'kehadiran_id' => $request->kehadiran_id,
                                         ]);
+
                                         return redirect()->back()->with('success', 'Anda hari ini berhasil absen!');
                                     }
                                 }
@@ -220,16 +229,18 @@ class GuruController extends Controller
                                     'guru_id' => $guru->id,
                                     'kehadiran_id' => $request->kehadiran_id,
                                 ]);
+
                                 return redirect()->back()->with('success', 'Anda hari ini berhasil absen tepat waktu!');
                             }
                         } else {
                             return redirect()->back()->with('info', 'Maaf absensi di mulai jam 6 pagi!');
                         }
                     } else {
-                        $namaHari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jum'at", "Sabtu"];
+                        $namaHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
                         $d = date('w');
                         $hari = $namaHari[$d];
-                        return redirect()->back()->with('info', 'Maaf sekolah hari ' . $hari . ' libur!');
+
+                        return redirect()->back()->with('info', 'Maaf sekolah hari '.$hari.' libur!');
                     }
                 } else {
                     return redirect()->back()->with('warning', 'Maaf absensi tidak bisa dilakukan 2x!');
@@ -245,6 +256,7 @@ class GuruController extends Controller
     public function absensi()
     {
         $guru = Guru::all();
+
         return view('admin.guru.absen', compact('guru'));
     }
 
@@ -253,6 +265,7 @@ class GuruController extends Controller
         $id = Crypt::decrypt($id);
         $guru = Guru::findorfail($id);
         $absen = Absen::orderBy('tanggal', 'desc')->where('guru_id', $id)->get();
+
         return view('admin.guru.kehadiran', compact('guru', 'absen'));
     }
 
@@ -264,12 +277,13 @@ class GuruController extends Controller
     public function import_excel(Request $request)
     {
         $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
+            'file' => 'required|mimes:csv,xls,xlsx',
         ]);
         $file = $request->file('file');
-        $nama_file = rand() . $file->getClientOriginalName();
+        $nama_file = rand().$file->getClientOriginalName();
         $file->move('file_guru', $nama_file);
-        Excel::import(new GuruImport, public_path('/file_guru/' . $nama_file));
+        Excel::import(new GuruImport, public_path('/file_guru/'.$nama_file));
+
         return redirect()->back()->with('success', 'Data Guru Berhasil Diimport!');
     }
 
@@ -279,6 +293,7 @@ class GuruController extends Controller
         if ($guru->count() >= 1) {
             Guru::whereNotNull('id')->delete();
             Guru::withTrashed()->whereNotNull('id')->forceDelete();
+
             return redirect()->back()->with('success', 'Data table guru berhasil dihapus!');
         } else {
             return redirect()->back()->with('warning', 'Data table guru kosong!');
