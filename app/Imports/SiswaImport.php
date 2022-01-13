@@ -2,17 +2,12 @@
 
 namespace App\Imports;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class SiswaImport implements ToModel
 {
-    /**
-     *
-     * @return Model|null
-     */
     public function model(array $row)
     {
         $kelas = Kelas::where('nama_kelas', $row[3])->first();

@@ -10,6 +10,7 @@ class Mapel extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'mapel';
     protected $fillable = ['id', 'nama_mapel', 'paket_id', 'kelompok'];
 
     public function paket()
@@ -32,6 +33,4 @@ class Mapel extends Model
 
         return $sikap;
     }
-
-    protected $table = 'mapel';
 }

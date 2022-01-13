@@ -175,7 +175,6 @@ class UserController extends Controller
             ]);
             $guru = Guru::where('id_card', Auth::user()->id_card)->first();
             $user = User::where('id_card', Auth::user()->id_card)->first();
-            dd($user);
             if ($user) {
                 $user_data = [
                     'name' => $request->name,

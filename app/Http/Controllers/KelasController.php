@@ -31,13 +31,13 @@ class KelasController extends Controller
     {
         if ($request->id != '') {
             $this->validate($request, [
-                'nama_kelas' => 'required|min:6|max:10',
+                'nama_kelas' => 'required|min:1|max:10',
                 'paket_id' => 'required',
                 'guru_id' => 'required|unique:kelas',
             ]);
         } else {
             $this->validate($request, [
-                'nama_kelas' => 'required|unique:kelas|min:6|max:10',
+                'nama_kelas' => 'required|unique:kelas|min:1|max:10',
                 'paket_id' => 'required',
                 'guru_id' => 'required|unique:kelas',
             ]);

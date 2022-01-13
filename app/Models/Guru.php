@@ -9,6 +9,7 @@ class Guru extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'guru';
     protected $fillable = ['id_card', 'nip', 'nama_guru', 'mapel_id', 'kode', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
 
     public function mapel()
@@ -22,6 +23,4 @@ class Guru extends Model
 
         return $dsk;
     }
-
-    protected $table = 'guru';
 }

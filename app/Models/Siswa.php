@@ -10,6 +10,7 @@ class Siswa extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'siswa';
     protected $fillable = ['no_induk', 'nis', 'nama_siswa', 'kelas_id', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
 
     public function kelas()
@@ -40,6 +41,4 @@ class Siswa extends Model
 
         return $nilai;
     }
-
-    protected $table = 'siswa';
 }

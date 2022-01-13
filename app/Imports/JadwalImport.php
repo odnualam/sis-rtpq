@@ -2,7 +2,6 @@
 
 namespace App\Imports;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Guru;
 use App\Models\Hari;
 use App\Models\Jadwal;
@@ -13,10 +12,6 @@ use Maatwebsite\Excel\Concerns\ToModel;
 
 class JadwalImport implements ToModel
 {
-    /**
-     *
-     * @return Model|null
-     */
     public function model(array $row)
     {
         $hari = Hari::where('nama_hari', $row[0])->first();

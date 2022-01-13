@@ -2,8 +2,8 @@
 
 namespace App\Exports;
 
-use Illuminate\Support\Collection;
 use App\Models\Jadwal;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class JadwalExport implements FromCollection

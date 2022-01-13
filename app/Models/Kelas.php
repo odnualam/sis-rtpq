@@ -9,6 +9,7 @@ class Kelas extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'kelas';
     protected $fillable = ['paket_id', 'nama_kelas', 'guru_id'];
 
     public function guru()
@@ -20,6 +21,4 @@ class Kelas extends Model
     {
         return $this->belongsTo('App\Models\Paket')->withDefault();
     }
-
-    protected $table = 'kelas';
 }

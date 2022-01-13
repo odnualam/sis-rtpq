@@ -49,8 +49,8 @@ class JadwalController extends Controller
                 'kelas_id' => $request->kelas_id,
                 'mapel_id' => $guru->mapel_id,
                 'guru_id' => $request->guru_id,
-                'jam_mulai' => $request->jam_mulai,
-                'jam_selesai' => $request->jam_selesai,
+                'jam_mulai' => date('H:i:s', strtotime($request->jam_mulai)),
+                'jam_selesai' => date('H:i:s', strtotime($request->jam_selesai)),
                 'ruang_id' => $request->ruang_id,
             ]
         );

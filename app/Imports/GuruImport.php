@@ -2,17 +2,12 @@
 
 namespace App\Imports;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Guru;
 use App\Models\Mapel;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class GuruImport implements ToModel
 {
-    /**
-     *
-     * @return Model|null
-     */
     public function model(array $row)
     {
         $max = Guru::max('id_card');

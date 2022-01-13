@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Absen extends Model
 {
+    protected $table = 'absensi_guru';
     protected $fillable = ['guru_id', 'tanggal', 'kehadiran_id'];
 
     public function guru()
@@ -17,6 +18,4 @@ class Absen extends Model
     {
         return $this->belongsTo('App\Models\Kehadiran')->withDefault();
     }
-
-    protected $table = 'absensi_guru';
 }
