@@ -1,4 +1,4 @@
-## Sistem Informasi Akademik
+## Sistem Informasi Santri Rumah Tahfidz Pejuang Quran
 
 ```
 # First, clone:
