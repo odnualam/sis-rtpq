@@ -11,3 +11,20 @@ if (! function_exists('getInitials')) {
         );
     }
 }
+
+if (! function_exists('__tahun_ajaran__')) {
+    function __tahun_ajaran__() {
+        return (date("Y")-1)."-".date('Y');
+    }
+}
+
+if (! function_exists('__semester__')) {
+    function __semester__($date) {
+        if ($date >= 7 && $date <= 12) {
+            $semester = "Ganjil";
+        } else {
+            $semester = "Genap";
+        }
+        return $semester;
+    }
+}
