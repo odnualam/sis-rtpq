@@ -21,7 +21,6 @@
                             <th>Hari</th>
                             <th>Mata Pelajaran</th>
                             <th>Jam Pelajaran</th>
-                            <th>Ruang Kelas</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +32,6 @@
                                 <p class="card-text"><small class="text-muted">{{ $data->guru->nama_guru }}</small></p>
                             </td>
                             <td>{{ $data->jam_mulai }} - {{ $data->jam_selesai }}</td>
-                            <td>{{ $data->ruang->nama_ruang }}</td>
                         </tr>
                         @endforeach
                     </tbody>

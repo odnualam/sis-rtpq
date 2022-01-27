@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Auth;
  * @property int $guru_id
  * @property string $jam_mulai
  * @property string $jam_selesai
- * @property int $ruang_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -24,7 +23,6 @@ use Illuminate\Support\Facades\Auth;
  * @property-read \App\Models\Hari|null $hari
  * @property-read \App\Models\Kelas|null $kelas
  * @property-read \App\Models\Mapel|null $mapel
- * @property-read \App\Models\Ruang|null $ruang
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newQuery()
  * @method static \Illuminate\Database\Query\Builder|Jadwal onlyTrashed()
@@ -38,11 +36,12 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamSelesai($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereKelasId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereRuangId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Jadwal withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Jadwal withoutTrashed()
  * @mixin \Eloquent
+ * @property int $ruang_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereRuangId($value)
  */
 class Jadwal extends Model
 {
@@ -50,7 +49,7 @@ class Jadwal extends Model
 
     protected $table = 'jadwal';
 
-    protected $fillable = ['hari_id', 'kelas_id', 'mapel_id', 'guru_id', 'jam_mulai', 'jam_selesai', 'ruang_id'];
+    protected $fillable = ['hari_id', 'kelas_id', 'mapel_id', 'guru_id', 'jam_mulai', 'jam_selesai'];
 
     public function hari()
     {
@@ -70,11 +69,6 @@ class Jadwal extends Model
     public function guru()
     {
         return $this->belongsTo('App\Models\Guru')->withDefault();
-    }
-
-    public function ruang()
-    {
-        return $this->belongsTo('App\Models\Ruang')->withDefault();
     }
 
     public function rapot($id)

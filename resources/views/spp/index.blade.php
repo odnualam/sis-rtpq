@@ -56,10 +56,9 @@
                                 <table id="example1" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
                                     <thead class="text-uppercase">
                                         <tr>
-                                            <th>Hari</th>
-                                            <th>Jadwal</th>
-                                            <th>Jam Pelajaran</th>
-                                            <th>Ruang Kelas</th>
+                                            <th>Bulan</th>
+                                            <th>Status</th>
+                                            <th>Tanggal Bayar</th>
                                         </tr>
                                     </thead>
                                     <tbody id="data-jadwal">

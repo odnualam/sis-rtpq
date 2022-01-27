@@ -40,7 +40,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $provinsi
  * @property string|null $jumlah_santri
  * @property string|null $jumlah_guru
- * @property string|null $ruang_kelas
  * @property string|null $logo
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAksesInternet($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAlamat($value)
@@ -59,11 +58,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereNoTelpon($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereNpsn($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereProvinsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereRuangKelas($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereStatusSekolah($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSumberListrik($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWaktuPenyelenggaraan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWebsite($value)
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUpdatedAt($value)
  */
 class Setting extends Model
 {

@@ -7,7 +7,6 @@ use App\Models\Hari;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
-use App\Models\Ruang;
 use Maatwebsite\Excel\Concerns\ToModel;
 
 class JadwalImport implements ToModel
@@ -18,7 +17,6 @@ class JadwalImport implements ToModel
         $kelas = Kelas::where('nama_kelas', $row[1])->first();
         $mapel = Mapel::where('nama_mapel', $row[2])->first();
         $guru = Guru::where('nama_guru', $row[3])->first();
-        $ruang = Ruang::where('nama_ruang', $row[6])->first();
 
         return new Jadwal([
             'hari_id' => $hari->id,
@@ -27,7 +25,6 @@ class JadwalImport implements ToModel
             'guru_id' => $guru->id,
             'jam_mulai' => $row[4],
             'jam_selesai' => $row[5],
-            'ruang_id' => $ruang->id,
         ]);
     }
 }

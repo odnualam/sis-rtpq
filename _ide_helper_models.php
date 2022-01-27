@@ -108,7 +108,6 @@ namespace App\Models{
  * @property int $guru_id
  * @property string $jam_mulai
  * @property string $jam_selesai
- * @property int $ruang_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -116,7 +115,6 @@ namespace App\Models{
  * @property-read \App\Models\Hari|null $hari
  * @property-read \App\Models\Kelas|null $kelas
  * @property-read \App\Models\Mapel|null $mapel
- * @property-read \App\Models\Ruang|null $ruang
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newQuery()
  * @method static \Illuminate\Database\Query\Builder|Jadwal onlyTrashed()
@@ -130,7 +128,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamSelesai($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereKelasId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereRuangId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Jadwal withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Jadwal withoutTrashed()
@@ -327,25 +324,6 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * App\Models\Ruang
- *
- * @property int $id
- * @property string $nama_ruang
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Ruang newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Ruang newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Ruang query()
- * @method static \Illuminate\Database\Eloquent\Builder|Ruang whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ruang whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ruang whereNamaRuang($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ruang whereUpdatedAt($value)
- */
-	class Ruang extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Santri
  *
  * @property-read \App\Models\Kelas|null $kelas
@@ -485,4 +463,3 @@ namespace App\Models{
  */
 	class User extends \Eloquent {}
 }
-

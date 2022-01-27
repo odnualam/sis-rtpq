@@ -8,7 +8,6 @@ use App\Models\Guru;
 use App\Models\Hari;
 use App\Models\Jadwal;
 use App\Models\Kelas;
-use App\Models\Ruang;
 use App\Models\Santri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,10 +21,9 @@ class JadwalController extends Controller
     {
         $hari = Hari::all();
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
-        $ruang = Ruang::all();
         $guru = Guru::OrderBy('kode', 'asc')->get();
 
-        return view('admin.jadwal.index', compact('hari', 'kelas', 'guru', 'ruang'));
+        return view('admin.jadwal.index', compact('hari', 'kelas', 'guru'));
     }
 
     public function store(Request $request)
@@ -36,7 +34,6 @@ class JadwalController extends Controller
             'guru_id' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
-            'ruang_id' => 'required',
         ]);
 
         $guru = Guru::findorfail($request->guru_id);
@@ -51,7 +48,6 @@ class JadwalController extends Controller
                 'guru_id' => $request->guru_id,
                 'jam_mulai' => date('H:i:s', strtotime($request->jam_mulai)),
                 'jam_selesai' => date('H:i:s', strtotime($request->jam_selesai)),
-                'ruang_id' => $request->ruang_id,
             ]
         );
 
@@ -73,10 +69,9 @@ class JadwalController extends Controller
         $jadwal = Jadwal::findorfail($id);
         $hari = Hari::all();
         $kelas = Kelas::all();
-        $ruang = Ruang::all();
         $guru = Guru::OrderBy('kode', 'asc')->get();
 
-        return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru', 'ruang'));
+        return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru'));
     }
 
     public function destroy($id)
@@ -98,7 +93,6 @@ class JadwalController extends Controller
                 'guru' => $val->guru->nama_guru,
                 'jam_mulai' => $val->jam_mulai,
                 'jam_selesai' => $val->jam_selesai,
-                'ruang' => $val->ruang->nama_ruang,
             ];
         }
 
@@ -115,7 +109,6 @@ class JadwalController extends Controller
                 'guru' => $val->guru->nama_guru,
                 'jam_mulai' => $val->jam_mulai,
                 'jam_selesai' => $val->jam_selesai,
-                'ruang' => $val->ruang->nama_ruang,
                 'ket' => $val->absen($val->guru_id),
             ];
         }

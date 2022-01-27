@@ -30,7 +30,6 @@
                             <th>Hari</th>
                             <th>Jadwal</th>
                             <th>Jam Pelajaran</th>
-                            <th>Ruang Kelas</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -44,7 +43,6 @@
                                 <p class="card-text"><small class="text-muted">{{ $data->guru->nama_guru }}</small></p>
                             </td>
                             <td>{{ $data->jam_mulai }} - {{ $data->jam_selesai }}</td>
-                            <td>{{ $data->ruang->nama_ruang }}</td>
                             <td>
                             <form action="{{ route('jadwal.destroy', $data->id) }}" method="post">
                                 @csrf

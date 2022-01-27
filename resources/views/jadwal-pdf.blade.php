@@ -21,7 +21,6 @@
                         <th>Hari</th>
                         <th>Jadwal</th>
                         <th>Jam</th>
-                        <th>Ruang</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +32,6 @@
                                 <p class="card-text"><small class="text-muted">{{ $data->guru->nama_guru }}</small></p>
                             </td>
                             <td>{{ $data->jam_mulai.' - '.$data->jam_selesai }}</td>
-                            <td>{{ $data->ruang->nama_ruang }}</td>
                         </tr>
                     @endforeach
                 </tbody>

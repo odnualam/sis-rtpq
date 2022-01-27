@@ -72,19 +72,6 @@
                                         class="form-control @error('jam_selesai') is-invalid @enderror"
                                         placeholder='JJ:mm:dd'>
                                 </div>
-                                <div class="form-group">
-                                    <label for="ruang_id">Ruang Kelas</label>
-                                    <select id="ruang_id" name="ruang_id"
-                                        class="form-control @error('ruang_id') is-invalid @enderror  ">
-                                        <option value="">-- Pilih Ruang Kelas --</option>
-                                        @foreach ($ruang as $data)
-                                        <option value="{{ $data->id }}" @if ($jadwal->ruang_id == $data->id)
-                                            selected
-                                            @endif
-                                            >{{ $data->nama_ruang }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                             </div>
                         </div>
                     </div>

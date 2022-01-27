@@ -77,7 +77,6 @@
                                     <li>rows 4 = nama guru</li>
                                     <li>rows 5 = jam mulai</li>
                                     <li>rows 6 = jam selesai</li>
-                                    <li>rows 7 = nama ruang</li>
                                 </ul>
                             </div>
                         </div>
@@ -168,16 +167,6 @@
                                     <input type='text' id="jam_selesai" name='jam_selesai'
                                         class="form-control @error('jam_selesai') is-invalid @enderror"
                                         placeholder="{{ Date('H:i') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="ruang_id">Ruang Kelas</label>
-                                    <select id="ruang_id" name="ruang_id"
-                                        class="form-control @error('ruang_id') is-invalid @enderror  ">
-                                        <option value="">-- Pilih Ruang Kelas --</option>
-                                        @foreach ($ruang as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_ruang }}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                         </div>
