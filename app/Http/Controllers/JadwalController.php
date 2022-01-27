@@ -9,7 +9,7 @@ use App\Models\Hari;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Ruang;
-use App\Models\Siswa;
+use App\Models\Santri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -84,7 +84,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::findorfail($id);
         $jadwal->delete();
 
-        return redirect()->back()->with('warning', 'Data jadwal berhasil dihapus! (Silahkan cek trash data jadwal)');
+        return redirect()->back()->with('warning', 'Data jadwal berhasil dihapus!');
     }
 
     public function view(Request $request)
@@ -141,13 +141,13 @@ class JadwalController extends Controller
         return view('guru.jadwal', compact('jadwal', 'guru'));
     }
 
-    public function siswa()
+    public function santri()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($santri->kelas_id);
         $jadwal = Jadwal::orderBy('hari_id')->OrderBy('jam_mulai')->where('kelas_id', $kelas->id)->get();
 
-        return view('siswa.jadwal', compact('jadwal', 'kelas', 'siswa'));
+        return view('santri.jadwal', compact('jadwal', 'kelas', 'santri'));
     }
 
     public function export_excel()
@@ -165,7 +165,7 @@ class JadwalController extends Controller
         $file->move('file_jadwal', $nama_file);
         Excel::import(new JadwalImport, public_path('/file_jadwal/'.$nama_file));
 
-        return redirect()->back()->with('success', 'Data Siswa Berhasil Diimport!');
+        return redirect()->back()->with('success', 'Data Santri Berhasil Diimport!');
     }
 
     public function deleteAll()

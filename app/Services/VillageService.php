@@ -14,11 +14,11 @@ class VillageService
         $this->villageRepository = new VillageRepository();
     }
 
-    public function getAllVillage(){
+    public function getAllVillage() {
         return $this->villageRepository->getAllVillages(new Village());
     }
 
-    public function getVillageByDistrictCode($districtCode){
+    public function getVillageByDistrictCode($districtCode) {
         return $this->villageRepository->getVillageByDistrictCode(new Village(), $districtCode);
     }
 }

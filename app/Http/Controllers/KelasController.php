@@ -6,7 +6,7 @@ use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Paket;
-use App\Models\Siswa;
+use App\Models\Santri;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -17,7 +17,7 @@ class KelasController extends Controller
         $guru = Guru::OrderBy('nama_guru', 'asc')->get();
         $paket = Paket::all();
 
-        return view('admin.kelas.index', compact('kelas', 'guru', 'paket'));
+        return view('admin.kelas.index', compact('kelas', 'guru'));
     }
 
     public function create()
@@ -32,13 +32,11 @@ class KelasController extends Controller
         if ($request->id != '') {
             $this->validate($request, [
                 'nama_kelas' => 'required|min:1|max:10',
-                'paket_id' => 'required',
-                'guru_id' => 'required|unique:kelas',
+                'guru_id' => 'required|unique:kelas,guru_id,'.$request->id,
             ]);
         } else {
             $this->validate($request, [
                 'nama_kelas' => 'required|unique:kelas|min:1|max:10',
-                'paket_id' => 'required',
                 'guru_id' => 'required|unique:kelas',
             ]);
         }
@@ -49,7 +47,6 @@ class KelasController extends Controller
             ],
             [
                 'nama_kelas' => $request->nama_kelas,
-                'paket_id' => $request->paket_id,
                 'guru_id' => $request->guru_id,
             ]
         );
@@ -65,14 +62,14 @@ class KelasController extends Controller
             Jadwal::where('kelas_id', $kelas->id)->delete();
         } else {
         }
-        $countSiswa = Siswa::where('kelas_id', $kelas->id)->count();
-        if ($countSiswa >= 1) {
-            Siswa::where('kelas_id', $kelas->id)->delete();
+        $countsantri = Santri::where('kelas_id', $kelas->id)->count();
+        if ($countsantri >= 1) {
+            Santri::where('kelas_id', $kelas->id)->delete();
         } else {
         }
         $kelas->delete();
 
-        return redirect()->back()->with('warning', 'Data kelas berhasil dihapus! (Silahkan cek trash data kelas)');
+        return redirect()->back()->with('warning', 'Data kelas berhasil dihapus!');
     }
 
     public function getEdit(Request $request)
@@ -82,7 +79,6 @@ class KelasController extends Controller
             $newForm[] = [
                 'id' => $val->id,
                 'nama' => $val->nama_kelas,
-                'paket_id' => $val->paket_id,
                 'guru_id' => $val->guru_id,
             ];
         }

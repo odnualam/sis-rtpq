@@ -13,7 +13,7 @@ class MapelController extends Controller
 {
     public function index()
     {
-        $mapel = Mapel::OrderBy('kelompok', 'asc')->OrderBy('nama_mapel', 'asc')->get();
+        $mapel = Mapel::OrderBy('paket_id', 'asc')->OrderBy('urutan', 'asc')->get();
         $paket = Paket::all();
 
         return view('admin.mapel.index', compact('mapel', 'paket'));
@@ -24,7 +24,7 @@ class MapelController extends Controller
         $this->validate($request, [
             'nama_mapel' => 'required',
             'paket_id' => 'required',
-            'kelompok' => 'required',
+            'urutan' => 'required',
         ]);
 
         Mapel::updateOrCreate(
@@ -34,7 +34,7 @@ class MapelController extends Controller
             [
                 'nama_mapel' => $request->nama_mapel,
                 'paket_id' => $request->paket_id,
-                'kelompok' => $request->kelompok,
+                'urutan' => $request->urutan,
             ]
         );
 
@@ -50,9 +50,8 @@ class MapelController extends Controller
         return view('admin.mapel.edit', compact('mapel', 'paket'));
     }
 
-    public function destroy($id)
-    {
-        $mapel = Mapel::findorfail($id);
+    public function destroy($id) {
+        $mapel = Mapel::findOrFail($id);
         $countJadwal = Jadwal::where('mapel_id', $mapel->id)->count();
         if ($countJadwal >= 1) {
             $jadwal = Jadwal::where('mapel_id', $mapel->id)->delete();
@@ -65,7 +64,7 @@ class MapelController extends Controller
         }
         $mapel->delete();
 
-        return redirect()->back()->with('warning', 'Data mapel berhasil dihapus! (Silahkan cek trash data mapel)');
+        return redirect()->back()->with('warning', 'Data mapel berhasil dihapus!');
     }
 
     public function getMapelJson(Request $request)

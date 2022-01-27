@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Setting
+ * App\Models\Setting.
  *
  * @property int $id
  * @property string|null $value
@@ -70,5 +70,6 @@ class Setting extends Model
     use HasFactory;
 
     protected $table = 'identitas_sekolah';
+
     protected $guarded = [];
 }

@@ -7,9 +7,10 @@ use App\Imports\GuruImport;
 use App\Models\Absen;
 use App\Models\Guru;
 use App\Models\Jadwal;
-use App\Models\Kehadiran;
+use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Nilai;
+use App\Models\Santri;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -131,7 +132,7 @@ class GuruController extends Controller
         }
         $guru->delete();
 
-        return redirect()->route('guru.index')->with('warning', 'Data guru berhasil dihapus! (Silahkan cek trash data guru)');
+        return redirect()->route('guru.index')->with('warning', 'Data guru berhasil dihapus!');
     }
 
     public function ubah_foto($id)
@@ -171,10 +172,13 @@ class GuruController extends Controller
 
     public function absen()
     {
-        $absen = Absen::where('tanggal', date('Y-m-d'))->get();
-        $kehadiran = Kehadiran::limit(4)->get();
+        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+        $jadwal = Jadwal::where('guru_id', $guru->id)->orderBy('kelas_id')->firstOrFail();
+        $absen = Absen::get();
+        $kelas = Kelas::findorfail($jadwal->kelas_id);
+        $santri = Santri::where('kelas_id', $jadwal->kelas_id)->get();
 
-        return view('guru.absen', compact('absen', 'kehadiran'));
+        return view('guru.absen', compact('absen', 'kelas', 'santri'));
     }
 
     public function simpan(Request $request)

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\Kelas;
 use App\Models\Mapel;
-use App\Models\Siswa;
+use App\Models\Santri;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,24 +49,24 @@ class UserController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai guru!');
             }
-        } elseif ($request->role == 'Siswa') {
-            $countSiswa = Siswa::where('no_induk', $request->nomer)->count();
-            $siswaId = Siswa::where('no_induk', $request->nomer)->get();
-            foreach ($siswaId as $val) {
-                $siswa = Siswa::findorfail($val->id);
+        } elseif ($request->role == 'Santri') {
+            $countsantri = Santri::where('no_induk', $request->nomer)->count();
+            $santriId = Santri::where('no_induk', $request->nomer)->get();
+            foreach ($santriId as $val) {
+                $santri = Santri::findorfail($val->id);
             }
-            if ($countSiswa >= 1) {
+            if ($countsantri >= 1) {
                 User::create([
-                    'name' => strtolower($siswa->nama_siswa),
+                    'name' => strtolower($santri->nama_santri),
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => $request->role,
                     'no_induk' => $request->nomer,
                 ]);
 
-                return redirect()->back()->with('success', 'Berhasil menambahkan user Siswa baru!');
+                return redirect()->back()->with('success', 'Berhasil menambahkan user Santri baru!');
             } else {
-                return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai siswa!');
+                return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai santri!');
             }
         } else {
             User::create([
@@ -100,7 +100,7 @@ class UserController extends Controller
             if ($user->id == Auth::user()->id) {
                 $user->delete();
 
-                return redirect()->back()->with('warning', 'Data user berhasil dihapus! (Silahkan cek trash data user)');
+                return redirect()->back()->with('warning', 'Data user berhasil dihapus!');
             } else {
                 return redirect()->back()->with('error', 'Maaf user ini bukan milik anda!');
             }
@@ -108,14 +108,14 @@ class UserController extends Controller
             if ($user->id == Auth::user()->id || Auth::user()->role == 'Admin') {
                 $user->delete();
 
-                return redirect()->back()->with('warning', 'Data user berhasil dihapus! (Silahkan cek trash data user)');
+                return redirect()->back()->with('warning', 'Data user berhasil dihapus!');
             } else {
                 return redirect()->back()->with('error', 'Maaf user ini bukan milik anda!');
             }
         } else {
             $user->delete();
 
-            return redirect()->back()->with('warning', 'Data user berhasil dihapus! (Silahkan cek trash data user)');
+            return redirect()->back()->with('warning', 'Data user berhasil dihapus!');
         }
     }
 
@@ -193,13 +193,13 @@ class UserController extends Controller
             $guru->update($guru_data);
 
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
-        } elseif ($request->role == 'Siswa') {
+        } elseif ($request->role == 'Santri') {
             $this->validate($request, [
-                'nama_siswa' => 'required',
+                'nama_santri' => 'required',
                 'jk' => 'required',
                 'kelas_id' => 'required',
             ]);
-            $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
+            $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
             $user = User::where('no_induk', Auth::user()->no_induk)->first();
             if ($user) {
                 $user_data = [
@@ -208,16 +208,16 @@ class UserController extends Controller
                 $user->update($user_data);
             } else {
             }
-            $siswa_data = [
+            $santri_data = [
                 'nis' => $request->nis,
-                'nama_siswa' => $request->name,
+                'nama_santri' => $request->name,
                 'jk' => $request->jk,
                 'kelas_id' => $request->kelas_id,
                 'telp' => $request->telp,
                 'tmp_lahir' => $request->tmp_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
             ];
-            $siswa->update($siswa_data);
+            $santri->update($santri_data);
 
             return redirect()->route('profile')->with('success', 'Profile anda berhasil diperbarui!');
         } else {
@@ -233,7 +233,7 @@ class UserController extends Controller
 
     public function edit_foto()
     {
-        if (Auth::user()->role == 'Guru' || Auth::user()->role == 'Siswa') {
+        if (Auth::user()->role == 'Guru' || Auth::user()->role == 'Santri') {
             return view('user.foto');
         } else {
             return redirect()->back()->with('error', 'Not Found 404!');
@@ -260,14 +260,14 @@ class UserController extends Controller
             $this->validate($request, [
                 'foto' => 'required',
             ]);
-            $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
+            $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
             $foto = $request->foto;
             $new_foto = date('s'.'i'.'H'.'d'.'m'.'Y').'_'.$foto->getClientOriginalName();
-            $siswa_data = [
-                'foto' => 'uploads/siswa/'.$new_foto,
+            $santri_data = [
+                'foto' => 'uploads/santri/'.$new_foto,
             ];
-            $foto->move('uploads/siswa/', $new_foto);
-            $siswa->update($siswa_data);
+            $foto->move('uploads/santri/', $new_foto);
+            $santri->update($santri_data);
 
             return redirect()->route('profile')->with('success', 'Foto Profile anda berhasil diperbarui!!');
         }

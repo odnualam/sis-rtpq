@@ -7,7 +7,7 @@ use App\Services\DistrictService;
 
 class DistrictController extends Controller
 {
-    public function __invoke(DistrictService  $districtService, $districtCode)
+    public function __invoke(DistrictService $districtService, $districtCode)
     {
         return $districtService->getAllDistrictByCityCode($districtCode);
     }

@@ -7,7 +7,7 @@ use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Nilai;
 use App\Models\Rapot;
-use App\Models\Siswa;
+use App\Models\Santri;
 use App\Models\Ulangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +45,7 @@ class UlanganController extends Controller
                 if ($isi >= 1) {
                     if ($nilai > 90) {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
                             'mapel_id' => $guru->mapel_id,
@@ -55,7 +55,7 @@ class UlanganController extends Controller
                         ]);
                     } elseif ($nilai > 80) {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
                             'mapel_id' => $guru->mapel_id,
@@ -65,7 +65,7 @@ class UlanganController extends Controller
                         ]);
                     } elseif ($nilai > 70) {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
                             'mapel_id' => $guru->mapel_id,
@@ -75,7 +75,7 @@ class UlanganController extends Controller
                         ]);
                     } else {
                         Rapot::create([
-                            'siswa_id' => $request->siswa_id,
+                            'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
                             'mapel_id' => $guru->mapel_id,
@@ -94,7 +94,7 @@ class UlanganController extends Controller
                     'id' => $request->id,
                 ],
                 [
-                    'siswa_id' => $request->siswa_id,
+                    'santri_id' => $request->santri_id,
                     'kelas_id' => $request->kelas_id,
                     'guru_id' => $request->guru_id,
                     'mapel_id' => $guru->mapel_id,
@@ -106,7 +106,7 @@ class UlanganController extends Controller
                 ]
             );
 
-            return response()->json(['success' => 'Nilai ulangan siswa berhasil ditambahkan!']);
+            return response()->json(['success' => 'Nilai ulangan santri berhasil ditambahkan!']);
         } else {
             return response()->json(['error' => 'Maaf guru ini tidak mengajar kelas ini!']);
         }
@@ -117,38 +117,38 @@ class UlanganController extends Controller
         $id = Crypt::decrypt($id);
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::where('kelas_id', $id)->get();
+        $santri = Santri::where('kelas_id', $id)->get();
 
-        return view('guru.ulangan.nilai', compact('guru', 'kelas', 'siswa'));
+        return view('guru.ulangan.nilai', compact('guru', 'kelas', 'santri'));
     }
 
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::orderBy('nama_siswa')->where('kelas_id', $id)->get();
+        $santri = Santri::orderBy('nama_santri')->where('kelas_id', $id)->get();
 
-        return view('admin.ulangan.index', compact('kelas', 'siswa'));
+        return view('admin.ulangan.index', compact('kelas', 'santri'));
     }
 
     public function ulangan($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $santri = Santri::findorfail($id);
+        $kelas = Kelas::findorfail($santri->kelas_id);
         $jadwal = Jadwal::orderBy('mapel_id')->where('kelas_id', $kelas->id)->get();
         $mapel = $jadwal->groupBy('mapel_id');
 
-        return view('admin.ulangan.show', compact('mapel', 'siswa', 'kelas'));
+        return view('admin.ulangan.show', compact('mapel', 'santri', 'kelas'));
     }
 
-    public function siswa()
+    public function santri()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($santri->kelas_id);
         $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
         $mapel = $jadwal->groupBy('mapel_id');
 
-        return view('siswa.ulangan', compact('siswa', 'kelas', 'mapel'));
+        return view('santri.ulangan', compact('santri', 'kelas', 'mapel'));
     }
 }

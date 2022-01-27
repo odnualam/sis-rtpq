@@ -6,7 +6,6 @@ use Laravolt\Indonesia\Models\Village;
 
 class VillageRepository
 {
-
     public function getAllVillages(Village $village)
     {
         return $village->get();

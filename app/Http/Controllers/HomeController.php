@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Guru;
 use App\Models\Jadwal;
-use App\Models\Kehadiran;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Paket;
 use App\Models\Pengumuman;
-use App\Models\Siswa;
+use App\Models\Santri;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -21,24 +21,35 @@ class HomeController extends Controller
 
     public function index()
     {
+        activity()
+        ->performedOn(User::firstOrFail())
+        ->withProperties(['role'=>auth()->user()->role, 'by'=>auth()->user()->name])
+        ->causedBy(auth()->user())
+        ->log('Login');
+
         $hari = date('w');
         $jam = date('H:i');
         $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $hari)->where('jam_mulai', '<=', $jam)->where('jam_selesai', '>=', $jam)->get();
         $pengumuman = Pengumuman::first();
-        $kehadiran = Kehadiran::all();
 
-        return view('home', compact('jadwal', 'pengumuman', 'kehadiran'));
+        return view('home', compact('jadwal', 'pengumuman'));
     }
 
     public function admin()
     {
+        activity()
+            ->performedOn(User::firstOrFail())
+            ->withProperties(['role'=>auth()->user()->role, 'by'=>auth()->user()->name])
+            ->causedBy(auth()->user())
+            ->log('Login');
+
         $jadwal = Jadwal::count();
         $guru = Guru::count();
         $gurulk = Guru::where('jk', 'L')->count();
         $gurupr = Guru::where('jk', 'P')->count();
-        $siswa = Siswa::count();
-        $siswalk = Siswa::where('jk', 'L')->count();
-        $siswapr = Siswa::where('jk', 'P')->count();
+        $santri = Santri::count();
+        $santrilk = Santri::where('jk', 'L')->count();
+        $santripr = Santri::where('jk', 'P')->count();
         $kelas = Kelas::count();
         $bkp = Kelas::where('paket_id', '1')->count();
         $dpib = Kelas::where('paket_id', '2')->count();
@@ -51,15 +62,17 @@ class HomeController extends Controller
         $mapel = Mapel::count();
         $user = User::count();
         $paket = Paket::all();
+        $activity_log = ActivityLog::with('user')->limit(10)->orderBy('id', 'DESC')->get();
+        $pengumuman = Pengumuman::first();
 
         return view('admin.index', compact(
             'jadwal',
             'guru',
             'gurulk',
             'gurupr',
-            'siswalk',
-            'siswapr',
-            'siswa',
+            'santrilk',
+            'santripr',
+            'santri',
             'kelas',
             'bkp',
             'dpib',
@@ -71,7 +84,9 @@ class HomeController extends Controller
             'las',
             'mapel',
             'user',
-            'paket'
+            'paket',
+            'activity_log',
+            'pengumuman'
         ));
     }
 }

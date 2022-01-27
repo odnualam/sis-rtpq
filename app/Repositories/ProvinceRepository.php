@@ -13,7 +13,7 @@ class ProvinceRepository
         $this->province = new Province();
     }
 
-    public function getProvinceOrderByName(){
+    public function getProvinceOrderByName() {
         return $this->province
             ->orderBy('name')
             ->get();

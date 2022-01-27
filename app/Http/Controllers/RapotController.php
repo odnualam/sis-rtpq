@@ -8,8 +8,8 @@ use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Nilai;
 use App\Models\Rapot;
+use App\Models\Santri;
 use App\Models\Sikap;
-use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -42,7 +42,7 @@ class RapotController extends Controller
                     'id' => $request->id,
                 ],
                 [
-                    'siswa_id' => $request->siswa_id,
+                    'santri_id' => $request->santri_id,
                     'kelas_id' => $request->kelas_id,
                     'guru_id' => $request->guru_id,
                     'mapel_id' => $guru->mapel_id,
@@ -52,7 +52,7 @@ class RapotController extends Controller
                 ]
             );
 
-            return response()->json(['success' => 'Nilai rapot siswa berhasil ditambahkan!']);
+            return response()->json(['success' => 'Nilai rapot santri berhasil ditambahkan!']);
         } else {
             return response()->json(['error' => 'Maaf guru ini tidak mengajar kelas ini!']);
         }
@@ -63,29 +63,29 @@ class RapotController extends Controller
         $id = Crypt::decrypt($id);
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::where('kelas_id', $id)->get();
+        $santri = Santri::where('kelas_id', $id)->get();
 
-        return view('guru.rapot.rapot', compact('guru', 'kelas', 'siswa'));
+        return view('guru.rapot.rapot', compact('guru', 'kelas', 'santri'));
     }
 
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::orderBy('nama_siswa')->where('kelas_id', $id)->get();
+        $santri = Santri::orderBy('nama_santri')->where('kelas_id', $id)->get();
 
-        return view('admin.rapot.index', compact('kelas', 'siswa'));
+        return view('admin.rapot.index', compact('kelas', 'santri'));
     }
 
     public function rapot($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $santri = Santri::findorfail($id);
+        $kelas = Kelas::findorfail($santri->kelas_id);
         $jadwal = Jadwal::orderBy('mapel_id')->where('kelas_id', $kelas->id)->get();
         $mapel = $jadwal->groupBy('mapel_id');
 
-        return view('admin.rapot.show', compact('mapel', 'siswa', 'kelas'));
+        return view('admin.rapot.show', compact('mapel', 'santri', 'kelas'));
     }
 
     public function predikat(Request $request)
@@ -116,15 +116,15 @@ class RapotController extends Controller
         return response()->json($newForm);
     }
 
-    public function siswa()
+    public function santri()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($santri->kelas_id);
         $pai = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->first();
         $ppkn = Mapel::where('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->first();
         if ($pai != null && $ppkn != null) {
-            $Spai = Sikap::where('siswa_id', $siswa->id)->where('mapel_id', $pai->id)->first();
-            $Sppkn = Sikap::where('siswa_id', $siswa->id)->where('mapel_id', $ppkn->id)->first();
+            $Spai = Sikap::where('santri_id', $santri->id)->where('mapel_id', $pai->id)->first();
+            $Sppkn = Sikap::where('santri_id', $santri->id)->where('mapel_id', $ppkn->id)->first();
         } else {
             $Spai = '';
             $Sppkn = '';
@@ -132,6 +132,6 @@ class RapotController extends Controller
         $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
         $mapel = $jadwal->groupBy('mapel_id');
 
-        return view('siswa.rapot', compact('siswa', 'kelas', 'mapel', 'Spai', 'Sppkn'));
+        return view('santri.rapot', compact('santri', 'kelas', 'mapel', 'Spai', 'Sppkn'));
     }
 }

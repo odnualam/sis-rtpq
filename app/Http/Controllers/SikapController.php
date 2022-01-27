@@ -6,8 +6,8 @@ use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
+use App\Models\Santri;
 use App\Models\Sikap;
-use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -51,7 +51,7 @@ class SikapController extends Controller
                         'id' => $request->id,
                     ],
                     [
-                        'siswa_id' => $request->siswa_id,
+                        'santri_id' => $request->santri_id,
                         'kelas_id' => $request->kelas_id,
                         'guru_id' => $request->guru_id,
                         'mapel_id' => $guru->mapel_id,
@@ -61,7 +61,7 @@ class SikapController extends Controller
                     ]
                 );
 
-                return response()->json(['success' => 'Nilai sikap siswa berhasil ditambahkan!']);
+                return response()->json(['success' => 'Nilai sikap santri berhasil ditambahkan!']);
             } else {
                 return redirect()->json(['error' => 'Maaf guru ini tidak dapat menambahkan nilai sikap!']);
             }
@@ -75,36 +75,36 @@ class SikapController extends Controller
         $id = Crypt::decrypt($id);
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::where('kelas_id', $id)->get();
+        $santri = Santri::where('kelas_id', $id)->get();
 
-        return view('guru.sikap.show', compact('guru', 'kelas', 'siswa'));
+        return view('guru.sikap.show', compact('guru', 'kelas', 'santri'));
     }
 
     public function edit($id)
     {
         $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
-        $siswa = Siswa::orderBy('nama_siswa')->where('kelas_id', $id)->get();
+        $santri = Santri::orderBy('nama_santri')->where('kelas_id', $id)->get();
 
-        return view('admin.sikap.index', compact('kelas', 'siswa'));
+        return view('admin.sikap.index', compact('kelas', 'santri'));
     }
 
     public function sikap($id)
     {
         $id = Crypt::decrypt($id);
-        $siswa = Siswa::findorfail($id);
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $santri = Santri::findorfail($id);
+        $kelas = Kelas::findorfail($santri->kelas_id);
         $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
 
-        return view('admin.sikap.show', compact('mapel', 'siswa', 'kelas'));
+        return view('admin.sikap.show', compact('mapel', 'santri', 'kelas'));
     }
 
-    public function siswa()
+    public function santri()
     {
-        $siswa = Siswa::where('no_induk', Auth::user()->no_induk)->first();
-        $kelas = Kelas::findorfail($siswa->kelas_id);
+        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $kelas = Kelas::findorfail($santri->kelas_id);
         $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
 
-        return view('siswa.sikap', compact('siswa', 'kelas', 'mapel'));
+        return view('santri.sikap', compact('santri', 'kelas', 'mapel'));
     }
 }

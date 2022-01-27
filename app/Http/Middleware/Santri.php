@@ -4,11 +4,11 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Siswa
+class Santri
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->role != 'Siswa') {
+        if ($request->user()->role != 'Santri') {
             return redirect('home');
         }
 

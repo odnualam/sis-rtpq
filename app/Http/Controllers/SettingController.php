@@ -25,7 +25,7 @@ class SettingController extends Controller
             'provinces' => $provinces,
             'city' => $city,
             'district' => $district,
-            'village' => $village
+            'village' => $village,
         ]);
     }
 
@@ -57,9 +57,9 @@ class SettingController extends Controller
 
         if ($request->has('logo')) {
             $image = $request->file('logo');
-            $name = Str::slug($image->getClientOriginalName()) . '_' . time();
+            $name = Str::slug($image->getClientOriginalName()).'_'.time();
             $folder = '/setting/logo';
-            $filePath = $name . '.' . $image->getClientOriginalExtension();
+            $filePath = $name.'.'.$image->getClientOriginalExtension();
             $this->uploadOne($image, $folder, 'public', $name);
             $input['logo'] = $filePath;
         } else {
