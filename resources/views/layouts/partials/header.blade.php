@@ -4,9 +4,7 @@
             <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
                 <ul class="menu-nav">
                     <li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here menu-item-active" data-menu-toggle="click" aria-haspopup="true">
-                        <a href="">
-                            <h4 class="text-dark font-weight-bold mt-2 mb-2 mr-5">SIS Rumah Tahfidz Pejuang Quran</h4>
-                        </a>
+                        <h4 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Semester {{ __semester__(date('n')) }} TA {{ __tahun_ajaran__() }}</h4>
                     </li>
                 </ul>
             </div>

@@ -28,6 +28,6 @@
 @endsection
 @section('script')
     <script>
-        $("#Pengumuman").addClass("active");
+        $("#Pengumuman").addClass("menu-item-open");
     </script>
 @endsection

@@ -1,7 +1,7 @@
  @extends('layouts.admin')
-@section('heading', 'Data Siswa')
+@section('heading', 'Data Santri')
 @section('page')
-    <li class="breadcrumb-item active">Data Siswa</li>
+    <li class="breadcrumb-item active">Data Santri</li>
 @endsection
 @section('content')
     <div class="row">
@@ -16,7 +16,7 @@
                             <button type="button" class="btn btn-icon btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
                                 <i class="flaticon-plus"></i>
                             </button>
-                            <a href="{{ route('siswa.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
+                            <a href="{{ route('santri.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
                                 <i class="flaticon-download"></i>
                             </a>
                             <button type="button" class="btn btn-icon btn-outline-warning btn-sm" data-toggle="modal" data-target="#importExcel">
@@ -30,7 +30,7 @@
                 </div>
                 <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <form method="post" action="{{ route('siswa.import_excel') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('santri.import_excel') }}" enctype="multipart/form-data">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
@@ -43,8 +43,8 @@
                                         </div>
                                         <div class="card-body">
                                             <ul>
-                                                <li>rows 1 = nama siswa</li>
-                                                <li>rows 2 = no induk siswa</li>
+                                                <li>rows 1 = nama santri</li>
+                                                <li>rows 2 = no induk santri</li>
                                                 <li>rows 3 = jenis kelamin</li>
                                                 <li>rows 4 = nama kelas</li>
                                             </ul>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="modal fade" id="dropTable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <form method="post" action="{{ route('siswa.deleteAll') }}">
+                        <form method="post" action="{{ route('santri.deleteAll') }}">
                             @csrf
                             @method('delete')
                             <div class="modal-content">
@@ -82,26 +82,26 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                <table id="example1" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
-                    <thead class="text-uppercase">
-                        <tr>
-                            <th>No.</th>
-                            <th>Kelas</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($kelas as $data)
+                    <table id="example1" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
+                        <thead class="text-uppercase">
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nama_kelas }}</td>
-                                <td>
-                                    <a href="{{ route('siswa.kelas', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-eye"></i></a>
-                                </td>
+                                <th>No.</th>
+                                <th>Kelas</th>
+                                <th>Aksi</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($kelas as $data)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $data->nama_kelas }}</td>
+                                    <td>
+                                        <a href="{{ route('santri.kelas', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-eye"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -111,13 +111,13 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Siswa</h4>
+                    <h4 class="modal-title">Tambah Data Santri</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('siswa.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('santri.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -127,9 +127,9 @@
                                         class="form-control @error('no_induk') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
-                                    <label for="nama_siswa">Nama Siswa</label>
-                                    <input type="text" id="nama_siswa" name="nama_siswa"
-                                        class="form-control @error('nama_siswa') is-invalid @enderror">
+                                    <label for="nama_santri">Nama Santri</label>
+                                    <input type="text" id="nama_santri" name="nama_santri"
+                                        class="form-control @error('nama_santri') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
                                     <label for="jk">Jenis Kelamin</label>
@@ -197,8 +197,8 @@
 @endsection
 @section('script')
     <script>
-        $("#MasterData").addClass("active");
-        $("#liMasterData").addClass("menu-open");
-        $("#DataSiswa").addClass("active");
+        $("#MasterData").addClass("menu-item-open");
+        $("#liMasterData").addClass("menu-item-open");
+        $("#Datasantri").addClass("menu-item-open");
     </script>
 @endsection

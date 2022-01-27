@@ -1,7 +1,7 @@
  @extends('layouts.admin')
 @section('heading', 'Ubah Foto')
 @section('page')
-    <li class="breadcrumb-item active"><a href="{{ route('siswa.index') }}">Siswa</a></li>
+    <li class="breadcrumb-item active"><a href="{{ route('santri.index') }}">Santri</a></li>
     <li class="breadcrumb-item active">Ubah Foto</li>
 @endsection
 @section('content')
@@ -18,14 +18,14 @@
                         </div>
                     </div>
                 </div>
-                <form action="{{ route('siswa.update-foto', $siswa->id) }}" enctype="multipart/form-data" method="post">
+                <form action="{{ route('santri.update-foto', $santri->id) }}" enctype="multipart/form-data" method="post">
                     @csrf
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="nama_siswa">Nama Siswa</label>
-                                    <input type="text" name="nama_siswa" class="form-control" value="{{ $siswa->nama_siswa }}"
+                                    <label for="nama_santri">Nama Santri</label>
+                                    <input type="text" name="nama_santri" class="form-control" value="{{ $santri->nama_santri }}"
                                         readonly>
                                 </div>
                                 <div class="form-group">
@@ -40,14 +40,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <img src="{{ asset($siswa->foto) }}" class="img img-responsive" alt="" width="30%" />
+                                <img src="{{ asset($santri->foto) }}" class="img img-responsive" alt="" width="30%" />
                             </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <a href="{{ route(" siswa.index") }}" class="btn btn-default"><span><i class="flaticon2-left-arrow-1"></i></span>Kembali</a> &nbsp;
+                        <a href="{{ route(" santri.index") }}" class="btn btn-default"><span><i class="flaticon2-left-arrow-1"></i></span>Kembali</a> &nbsp;
                         <button name="submit" class="btn btn-primary"><i class="nav-icon fas fa-upload"></i> &nbsp;
                             Upload</button>
                     </div>
@@ -58,8 +58,8 @@
 @endsection
 @section('script')
     <script>
-        $("#MasterData").addClass("active");
-        $("#liMasterData").addClass("menu-open");
-        $("#DataSiswa").addClass("active");
+        $("#MasterData").addClass("menu-item-open");
+        $("#liMasterData").addClass("menu-item-open");
+        $("#Datasantri").addClass("menu-item-open");
     </script>
 @endsection

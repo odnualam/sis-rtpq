@@ -65,8 +65,8 @@
 @endsection
 @section('script')
     <script>
-        $("#Nilai").addClass("active");
-        $("#liNilai").addClass("menu-open");
-        $("#Deskripsi").addClass("active");
+        $("#Nilai").addClass("menu-item-open");
+        $("#liNilai").addClass("menu-item-open");
+        $("#Deskripsi").addClass("menu-item-open");
     </script>
 @endsection

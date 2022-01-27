@@ -15,14 +15,14 @@
                     <div class="col-md-12">
                         <table class="table" style="margin-top: -10px;">
                             <tr>
-                                <td>No Induk Siswa</td>
+                                <td>No Induk Santri</td>
                                 <td>:</td>
-                                <td>{{ $siswa->no_induk }}</td>
+                                <td>{{ $santri->no_induk }}</td>
                             </tr>
                             <tr>
-                                <td>Nama Siswa</td>
+                                <td>Nama Santri</td>
                                 <td>:</td>
-                                <td>{{ $siswa->nama_siswa }}</td>
+                                <td>{{ $santri->nama_santri }}</td>
                             </tr>
                             <tr>
                                 <td>Nama Kelas</td>
@@ -68,7 +68,7 @@
                             <thead class="text-uppercase">
                                 <tr>
                                     <th rowspan="2" class="ctr">No.</th>
-                                    <th rowspan="2">Nama Siswa</th>
+                                    <th rowspan="2">Nama Santri</th>
                                     <th colspan="3" class="ctr">Nilai Sikap</th>
                                 </tr>
                                 <tr>
@@ -83,7 +83,7 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $data->nama_mapel }}</td>
                                             @php
-                                                $array = array('mapel' => $data->id, 'siswa' => $siswa->id);
+                                                $array = array('mapel' => $data->id, 'santri' => $santri->id);
                                                 $jsonData = json_encode($array);
                                             @endphp
                                             <td class="ctr">{{ $data->cekSikap($jsonData)['sikap_1'] }}</td>
@@ -102,8 +102,8 @@
 @endsection
 @section('script')
     <script>
-        $("#Nilai").addClass("active");
-        $("#liNilai").addClass("menu-open");
-        $("#Sikap").addClass("active");
+        $("#Nilai").addClass("menu-item-open");
+        $("#liNilai").addClass("menu-item-open");
+        $("#Sikap").addClass("menu-item-open");
     </script>
 @endsection

@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                <table id="example2" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
+                <table id="example1" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
                     <thead class="text-uppercase">
                         <tr>
                             <th>Hari</th>
@@ -43,6 +43,6 @@
 @endsection
 @section('script')
     <script>
-        $("#JadwalGuru").addClass("active");
+        $("#JadwalGuru").addClass("menu-item-open");
     </script>
 @endsection

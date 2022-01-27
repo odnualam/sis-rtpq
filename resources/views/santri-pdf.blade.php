@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Laravel</title>
+    <title>Sistem Informasi Santri Rumah Tahfidz Pejuang Quran</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -19,16 +19,16 @@
                     </tr>
                     <tr>
                         <th>No. Induk</th>
-                        <th>Nama Siswa</th>
+                        <th>Nama Santri</th>
                         <th>L/P</th>
                         <th>Foto</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($siswa as $data)
+                    @foreach ($santri as $data)
                         <tr>
                             <td>{{ $data->no_induk }}</td>
-                            <td>{{ $data->nama_siswa }}</td>
+                            <td>{{ $data->nama_santri }}</td>
                             <td>{{ $data->jk }}</td>
                             <td><img src="{{ asset($data->foto) }}" width="100" alt=""></td>
                         </tr>

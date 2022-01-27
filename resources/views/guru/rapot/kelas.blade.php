@@ -4,28 +4,39 @@
     <li class="breadcrumb-item active">Entry Nilai Rapot</li>
 @endsection
 @section('content')
-<div class="row">
-    <div class="col-md-12">
+<div class="d-flex flex-row">
+    <div class="flex-row-auto offcanvas-mobile w-300px w-xl-325px" id="kt_profile_aside">
         <div class="card card-custom gutter-b">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12" style="margin-top: -21px;">
-                        <table class="table">
-                            <tr>
-                                <td>Nama Guru</td>
-                                <td>:</td>
-                                <td>{{ $guru->nama_guru }}</td>
-                            </tr>
-                            <tr>
-                                <td>Mata Pelajaran</td>
-                                <td>:</td>
-                                <td>{{ $guru->mapel->nama_mapel }}</td>
-                            </tr>
-                        </table>
-                        <hr>
+                <div class="d-flex justify-content-between flex-column pt-4 h-100">
+                    <div class="pb-5">
+                        <div class="d-flex flex-column flex-center">
+                            <div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
+                                <span class="font-size-h1 symbol-label font-weight-boldest">@php $inisial =
+                                    getInitials($guru->nama_guru) @endphp {{ $inisial }}</span>
+                            </div>
+                            <a
+                                class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{
+                                $guru->nama_guru }}</a>
+                            <div class="font-weight-bold text-dark-50 font-size-sm pb-6">{{ $guru->mapel->nama_mapel }}
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="flex-row-fluid ml-lg-8">
+        <div class="card card-custom gutter-bs">
+            <div class="card-header">
+                <h3 class="card-title">Entry Nilai Rapot</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
                     <div class="col-md-12">
-                        <table id="example2" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
+                        <table id="example2"
+                            class="table table-striped table-bordered table-hover table-checkable datatable"
+                            style="margin-top: 13px !important">
                             <thead class="text-uppercase">
                                 <tr>
                                     <th>No.</th>
@@ -53,8 +64,7 @@
 @endsection
 @section('script')
   <script>
-    $("#NilaiGuru").addClass("active");
-    $("#liNilaiGuru").addClass("menu-open");
-    $("#RapotGuru").addClass("active");
+    $("#liNilaiGuru").addClass("menu-item-open");
+    $("#RapotGuru").addClass("menu-item-active");
   </script>
 @endsection

@@ -56,10 +56,10 @@
                       </span>
                     @enderror
                   `);
-                } else if(kel == "Siswa") {
+                } else if(kel == "Santri") {
                   $("#noId").addClass("mb-3");
                   $("#noId").html(`
-                    <input id="nomer" type="text" placeholder="No Induk Siswa" class="form-control" name="nomer" autocomplete="nomer">
+                    <input id="nomer" type="text" placeholder="No Induk Santri" class="form-control" name="nomer" autocomplete="nomer">
                     <div class="input-group-append">
                       <div class="input-group-text">
                         <span class="fas fa-id-card"></span>

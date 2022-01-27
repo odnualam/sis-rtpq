@@ -106,8 +106,8 @@
         window.location="{{ route('jadwal.show', Crypt::encrypt($jadwal->kelas_id)) }}";
         });
     });
-    $("#MasterData").addClass("active");
-    $("#liMasterData").addClass("menu-open");
-    $("#DataJadwal").addClass("active");
+    $("#MasterData").addClass("menu-item-open");
+    $("#liMasterData").addClass("menu-item-open");
+    $("#DataJadwal").addClass("menu-item-open");
 </script>
 @endsection

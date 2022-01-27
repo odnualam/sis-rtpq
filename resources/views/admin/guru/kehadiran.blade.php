@@ -46,6 +46,6 @@
 @endsection
 @section('script')
     <script>
-        $("#AbsensiGuru").addClass("active");
+        $("#AbsensiGuru").addClass("menu-item-open");
     </script>
 @endsection

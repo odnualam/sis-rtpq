@@ -193,9 +193,9 @@
 @endsection
 @section('script')
     <script>
-        $("#MasterData").addClass("active");
-        $("#liMasterData").addClass("menu-open");
-        $("#DataJadwal").addClass("active");
+        $("#MasterData").addClass("menu-item-open");
+        $("#liMasterData").addClass("menu-item-open");
+        $("#DataJadwal").addClass("menu-item-open");
         $("#jam_mulai,#jam_selesai").timepicker({
             timeFormat: 'HH:mm'
         });

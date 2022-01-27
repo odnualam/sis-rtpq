@@ -25,9 +25,9 @@
                                 <td>{{ $kelas->guru->nama_guru }}</td>
                             </tr>
                             <tr>
-                                <td>Jumlah Siswa</td>
+                                <td>Jumlah Santri</td>
                                 <td>:</td>
-                                <td>{{ $siswa->count() }}</td>
+                                <td>{{ $santri->count() }}</td>
                             </tr>
                             <tr>
                                 <td>Mata Pelajaran</td>
@@ -73,7 +73,7 @@
                             <thead class="text-uppercase">
                                 <tr>
                                     <th class="ctr" rowspan="2">No.</th>
-                                    <th rowspan="2">Nama Siswa</th>
+                                    <th rowspan="2">Nama Santri</th>
                                     <th class="ctr" colspan="3">Pengetahuan</th>
                                     <th class="ctr" colspan="3">Keterampilan</th>
                                     <th class="ctr" rowspan="2">Aksi</th>
@@ -92,11 +92,11 @@
                                     @csrf
                                     <input type="hidden" name="guru_id" value="{{$guru->id}}">
                                     <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
-                                    @foreach ($siswa as $data)
-                                        <input type="hidden" name="siswa_id" value="{{$data->id}}">
+                                    @foreach ($santri as $data)
+                                        <input type="hidden" name="santri_id" value="{{$data->id}}">
                                         <tr>
                                             <td class="ctr">{{ $loop->iteration }}</td>
-                                            <td>{{ $data->nama_siswa }}</td>
+                                            <td>{{ $data->nama_santri }}</td>
                                             @if ($data->nilai($data->id))
                                                 <td class="ctr">
                                                     <input type="hidden" class="rapot_{{$data->id}}" value="{{ $data->nilai($data->id)->id }}">
@@ -222,7 +222,7 @@
                     data 	: {
                         _token: '{{ csrf_token() }}',
                         id : rapot,
-                        siswa_id : id,
+                        santri_id : id,
                         kelas_id : kelas_id,
                         guru_id : guru_id,
                         nilai : nilai,
@@ -236,7 +236,7 @@
                         $(".knilai_"+id).append(nilai);
                         $(".kpredikat_"+id).append(predikat);
                         $(".sub_"+id).append(ok);
-                        toastr.success("Nilai rapot siswa berhasil ditambahkan!");
+                        toastr.success("Nilai rapot santri berhasil ditambahkan!");
                     },
                     error: function (data) {
                         toastr.warning("Errors 404!");
@@ -245,8 +245,8 @@
             }
         });
 
-        $("#NilaiGuru").addClass("active");
-        $("#liNilaiGuru").addClass("menu-open");
-        $("#RapotGuru").addClass("active");
+        $("#NilaiGuru").addClass("menu-item-open");
+        $("#liNilaiGuru").addClass("menu-item-open");
+        $("#RapotGuru").addClass("menu-item-open");
     </script>
 @endsection

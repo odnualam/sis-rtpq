@@ -15,14 +15,14 @@
                         <div class="col-md-12">
                             <table class="table" style="margin-top: -10px;">
                                 <tr>
-                                    <td>No Induk Siswa</td>
+                                    <td>No Induk Santri</td>
                                     <td>:</td>
-                                    <td>{{ $siswa->no_induk }}</td>
+                                    <td>{{ $santri->no_induk }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Nama Siswa</td>
+                                    <td>Nama Santri</td>
                                     <td>:</td>
-                                    <td>{{ $siswa->nama_siswa }}</td>
+                                    <td>{{ $santri->nama_santri }}</td>
                                 </tr>
                                 <tr>
                                     <td>Nama Kelas</td>
@@ -83,21 +83,21 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($mapel as $val => $data)
-                                    <?php $data = $data[0]; ?>
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->mapel->nama_mapel }}</td>
-                                        @php
-                                        $array = array('mapel' => $val, 'siswa' => $siswa->id);
-                                        $jsonData = json_encode($array);
-                                        @endphp
-                                        <td class="ctr">{{ $data->cekRapot($jsonData)['p_nilai'] }}</td>
-                                        <td class="ctr">{{ $data->cekRapot($jsonData)['p_predikat'] }}</td>
-                                        <td class="ctr">{{ $data->cekRapot($jsonData)['p_deskripsi'] }}</td>
-                                        <td class="ctr">{{ $data->cekRapot($jsonData)['k_nilai'] }}</td>
-                                        <td class="ctr">{{ $data->cekRapot($jsonData)['k_predikat'] }}</td>
-                                        <td class="ctr">{{ $data->cekRapot($jsonData)['k_deskripsi'] }}</td>
-                                    </tr>
+                                        <?php $data = $data[0]; ?>
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $data->mapel->nama_mapel }}</td>
+                                            @php
+                                            $array = array('mapel' => $val, 'santri' => $santri->id);
+                                            $jsonData = json_encode($array);
+                                            @endphp
+                                            <td class="ctr">{{ $data->cekRapot($jsonData)['p_nilai'] }}</td>
+                                            <td class="ctr">{{ $data->cekRapot($jsonData)['p_predikat'] }}</td>
+                                            <td class="ctr">{{ $data->cekRapot($jsonData)['p_deskripsi'] }}</td>
+                                            <td class="ctr">{{ $data->cekRapot($jsonData)['k_nilai'] }}</td>
+                                            <td class="ctr">{{ $data->cekRapot($jsonData)['k_predikat'] }}</td>
+                                            <td class="ctr">{{ $data->cekRapot($jsonData)['k_deskripsi'] }}</td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -110,8 +110,8 @@
 @endsection
 @section('script')
     <script>
-        $("#Nilai").addClass("active");
-        $("#liNilai").addClass("menu-open");
-        $("#Rapot").addClass("active");
+        $("#Nilai").addClass("menu-item-open");
+        $("#liNilai").addClass("menu-item-open");
+        $("#Rapot").addClass("menu-item-open");
     </script>
 @endsection

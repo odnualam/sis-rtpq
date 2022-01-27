@@ -34,8 +34,8 @@
                         @foreach ($role as $d => $data)
                             @if ($d == 'Guru')
                             <th>No Id Card</th>
-                            @elseif ($d == 'Siswa')
-                            <th>No Induk Siswa</th>
+                            @elseif ($d == 'Santri')
+                            <th>No Induk Santri</th>
                             @else
 
                             @endif
@@ -51,7 +51,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td class="text-capitalize">{{ $data->name }}</td>
                         <td>{{ $data->email }}</td>
-                        @if ($data->role == 'Siswa')
+                        @if ($data->role == 'Santri')
                             <td>{{ $data->no_induk }}</td>
                         @elseif ($data->role == 'Guru')
                             <td>{{ $data->id_card }}</td>
@@ -81,8 +81,8 @@
 @endsection
 @section('script')
     <script>
-        $("#MasterData").addClass("active");
-        $("#liMasterData").addClass("menu-open");
-        $("#DataUser").addClass("active");
+        $("#MasterData").addClass("menu-item-open");
+        $("#liMasterData").addClass("menu-item-open");
+        $("#DataUser").addClass("menu-item-open");
     </script>
 @endsection

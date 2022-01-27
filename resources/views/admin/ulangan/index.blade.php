@@ -27,15 +27,15 @@
                     <thead class="text-uppercase">
                         <tr>
                         <th>No.</th>
-                        <th>Nama Siswa</th>
+                        <th>Nama Santri</th>
                         <th>No. Induk</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
-                        @foreach ($siswa as $data)
+                        @foreach ($santri as $data)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $data->nama_siswa }}</td>
+                            <td>{{ $data->nama_santri }}</td>
                             <td>{{ $data->no_induk }}</td>
                             <td><a href="{{ route('ulangan-show', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Show Ulangan</a></td>
                         </tr>
@@ -51,8 +51,8 @@
 @endsection
 @section('script')
     <script>
-        $("#Nilai").addClass("active");
-        $("#liNilai").addClass("menu-open");
-        $("#Ulangan").addClass("active");
+        $("#Nilai").addClass("menu-item-open");
+        $("#liNilai").addClass("menu-item-open");
+        $("#Ulangan").addClass("menu-item-open");
     </script>
 @endsection

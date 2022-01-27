@@ -56,8 +56,7 @@
 @endsection
 @section('script')
   <script>
-    $("#NilaiGuru").addClass("active");
-    $("#liNilaiGuru").addClass("menu-open");
-    $("#SikapGuru").addClass("active");
+    $("#liNilaiGuru").addClass("menu-item-open");
+    $("#SikapGuru").addClass("menu-item-active");
   </script>
 @endsection

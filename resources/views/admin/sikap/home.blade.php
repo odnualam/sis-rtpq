@@ -25,7 +25,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nama_kelas }}</td>
-                            <td><a href="{{ route('sikap-siswa', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-eye"></i></a></td>
+                            <td><a href="{{ route('sikap-santri', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-eye"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -39,8 +39,8 @@
 @endsection
 @section('script')
     <script>
-      $("#Nilai").addClass("active");
-      $("#liNilai").addClass("menu-open");
-      $("#Sikap").addClass("active");
+      $("#Nilai").addClass("menu-item-open");
+      $("#liNilai").addClass("menu-item-open");
+      $("#Sikap").addClass("menu-item-open");
     </script>
 @endsection

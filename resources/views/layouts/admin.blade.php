@@ -66,7 +66,7 @@
                 margin-top: 28px !important;
             }
 
-            .btn-details-siswa {
+            .btn-details-santri {
                 margin-top: 175px !important;
             }
         }
@@ -101,7 +101,8 @@
 
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
-    <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('plugins/chart.js/Chart.min.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <script src="{{ asset('admin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha512-2cbsQGdowNDPcKuoBd2bCcsJky87Mv0LEtD/nunJUgk6MOYTgVMGihS/xCEghNf04DPhNiJ4DZw5BxDd1uyOdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -139,8 +140,7 @@
         } );
 
         $(function() {
-            $("#example1").DataTable();
-            $('#example2').DataTable({
+            $("#example1").DataTable({
                 'responsive': true,
                 'searchDelay': 500,
                 'processing': true,
@@ -148,6 +148,18 @@
                 "columnDefs": [
                     { "orderable": false, "targets": 'action' }
                 ]
+            });
+            $('#example2').DataTable({
+                'searchDelay': 500,
+                'processing': true,
+                'serverSide': false,
+                "columnDefs": [
+                    { "orderable": false, "targets": 'action' }
+                ],
+                "scrollX": true,
+                "paging":   false,
+                "ordering":   false,
+                "info":   false
             });
         });
 

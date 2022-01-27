@@ -109,8 +109,7 @@
         window.location="{{ url('/') }}";
         });
     });
-    $("#NilaiGuru").addClass("active");
-    $("#liNilaiGuru").addClass("menu-open");
-    $("#DesGuru").addClass("active");
+    $("#liNilaiGuru").addClass("menu-item-open");
+    $("#DesGuru").addClass("menu-item-active");
 </script>
 @endsection
