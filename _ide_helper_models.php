@@ -196,7 +196,7 @@ namespace App\Models{
  * @property int $id
  * @property string $nama_mapel
  * @property int $paket_id
- * @property string $kelompok
+ * @property int $urutan
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -208,10 +208,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereKelompok($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereNamaMapel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mapel wherePaketId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereUrutan($value)
  * @method static \Illuminate\Database\Query\Builder|Mapel withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Mapel withoutTrashed()
  */
@@ -346,6 +346,40 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Santri
+ *
+ * @property-read \App\Models\Kelas|null $kelas
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Santri onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri query()
+ * @method static \Illuminate\Database\Query\Builder|Santri withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Santri withoutTrashed()
+ */
+	class Santri extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Setting
+ *
+ * @property int $id
+ * @property string|null $value
+ * @property string|null $nama
+ * @property string|null $key
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereNama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Setting whereValue($value)
+ */
+	class Setting extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Sikap
  *
  * @property int $id
@@ -373,47 +407,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereUpdatedAt($value)
  */
 	class Sikap extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Siswa
- *
- * @property int $id
- * @property string $no_induk
- * @property string|null $nis
- * @property string $nama_siswa
- * @property string $jk
- * @property string|null $telp
- * @property string|null $tmp_lahir
- * @property string|null $tgl_lahir
- * @property string $foto
- * @property int $kelas_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Kelas|null $kelas
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa newQuery()
- * @method static \Illuminate\Database\Query\Builder|Siswa onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa query()
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereFoto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereJk($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNamaSiswa($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNis($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereNoInduk($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereTelp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereTglLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereTmpLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Siswa whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|Siswa withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Siswa withoutTrashed()
- */
-	class Siswa extends \Eloquent {}
 }
 
 namespace App\Models{

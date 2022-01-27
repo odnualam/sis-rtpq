@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect('/login');
-});
+Route::redirect('/', '/login', 302);
 
 Auth::routes();
 Route::get('/login/cek_email/json', 'UserController@cek_email');
@@ -15,7 +13,6 @@ Route::get('/reset/password/{id}', 'UserController@password')->name('reset.passw
 Route::patch('/reset/password/update/{id}', 'UserController@update_password')->name('reset.password.update')->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/', 'HomeController@index')->name('home');
     Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/jadwal/sekarang', 'JadwalController@jadwalSekarang');
     Route::get('/profile', 'UserController@profile')->name('profile');
@@ -28,15 +25,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/pengaturan/password', 'UserController@edit_password')->name('pengaturan.password');
     Route::post('/pengaturan/ubah-password', 'UserController@ubah_password')->name('pengaturan.ubah-password');
 
-    Route::middleware(['siswa'])->group(function () {
-        Route::get('/jadwal/siswa', 'JadwalController@siswa')->name('jadwal.siswa');
-        Route::get('/ulangan/siswa', 'UlanganController@siswa')->name('ulangan.siswa');
-        Route::get('/sikap/siswa', 'SikapController@siswa')->name('sikap.siswa');
-        Route::get('/rapot/siswa', 'RapotController@siswa')->name('rapot.siswa');
+    Route::middleware(['santri'])->group(function () {
+        Route::get('/jadwal/santri', 'JadwalController@santri')->name('jadwal.santri');
+        Route::get('/ulangan/santri', 'UlanganController@santri')->name('ulangan.santri');
+        Route::get('/sikap/santri', 'SikapController@santri')->name('sikap.santri');
+        Route::get('/rapot/santri', 'RapotController@santri')->name('rapot.santri');
     });
 
     Route::middleware(['guru'])->group(function () {
-        Route::get('/absen/harian', 'GuruController@absen')->name('absen.harian');
+        Route::get('/absen', 'GuruController@absen')->name('absen');
         Route::post('/absen/simpan', 'GuruController@simpan')->name('absen.simpan');
         Route::get('/jadwal/guru', 'JadwalController@guru')->name('jadwal.guru');
         Route::resource('/nilai', 'NilaiController');
@@ -47,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['admin'])->group(function () {
+        Route::get('/admin/setting', 'SettingController@index')->name('setting.index');
+        Route::patch('/admin/setting/{setting}', 'SettingController@update')->name('setting.update');
         Route::get('/admin/home', 'HomeController@admin')->name('admin.home');
         Route::get('/admin/pengumuman', 'PengumumanController@index')->name('admin.pengumuman');
         Route::post('/admin/pengumuman/simpan', 'PengumumanController@simpan')->name('admin.pengumuman.simpan');
@@ -63,15 +62,15 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/guru', 'GuruController');
         Route::get('/kelas/edit/json', 'KelasController@getEdit');
         Route::resource('/kelas', 'KelasController');
-        Route::get('/siswa/kelas/{id}', 'SiswaController@kelas')->name('siswa.kelas');
-        Route::get('/siswa/view/json', 'SiswaController@view');
-        Route::get('/listsiswapdf/{id}', 'SiswaController@cetak_pdf');
-        Route::get('/siswa/ubah-foto/{id}', 'SiswaController@ubah_foto')->name('siswa.ubah-foto');
-        Route::post('/siswa/update-foto/{id}', 'SiswaController@update_foto')->name('siswa.update-foto');
-        Route::get('/siswa/export_excel', 'SiswaController@export_excel')->name('siswa.export_excel');
-        Route::post('/siswa/import_excel', 'SiswaController@import_excel')->name('siswa.import_excel');
-        Route::delete('/siswa/deleteAll', 'SiswaController@deleteAll')->name('siswa.deleteAll');
-        Route::resource('/siswa', 'SiswaController');
+        Route::get('/santri/kelas/{id}', 'santriController@kelas')->name('santri.kelas');
+        Route::get('/santri/view/json', 'santriController@view');
+        Route::get('/listsantripdf/{id}', 'santriController@cetak_pdf');
+        Route::get('/santri/ubah-foto/{id}', 'santriController@ubah_foto')->name('santri.ubah-foto');
+        Route::post('/santri/update-foto/{id}', 'santriController@update_foto')->name('santri.update-foto');
+        Route::get('/santri/export_excel', 'santriController@export_excel')->name('santri.export_excel');
+        Route::post('/santri/import_excel', 'santriController@import_excel')->name('santri.import_excel');
+        Route::delete('/santri/deleteAll', 'santriController@deleteAll')->name('santri.deleteAll');
+        Route::resource('/santri', 'santriController');
         Route::get('/mapel/getMapelJson', 'MapelController@getMapelJson');
         Route::resource('/mapel', 'MapelController');
         Route::get('/jadwal/view/json', 'JadwalController@view');
@@ -81,15 +80,16 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/jadwal/deleteAll', 'JadwalController@deleteAll')->name('jadwal.deleteAll');
         Route::resource('/jadwal', 'JadwalController');
         Route::get('/ulangan-kelas', 'UlanganController@create')->name('ulangan-kelas');
-        Route::get('/ulangan-siswa/{id}', 'UlanganController@edit')->name('ulangan-siswa');
+        Route::get('/ulangan-santri/{id}', 'UlanganController@edit')->name('ulangan-santri');
         Route::get('/ulangan-show/{id}', 'UlanganController@ulangan')->name('ulangan-show');
         Route::get('/sikap-kelas', 'SikapController@create')->name('sikap-kelas');
-        Route::get('/sikap-siswa/{id}', 'SikapController@edit')->name('sikap-siswa');
+        Route::get('/sikap-santri/{id}', 'SikapController@edit')->name('sikap-santri');
         Route::get('/sikap-show/{id}', 'SikapController@sikap')->name('sikap-show');
         Route::get('/rapot-kelas', 'RapotController@create')->name('rapot-kelas');
-        Route::get('/rapot-siswa/{id}', 'RapotController@edit')->name('rapot-siswa');
+        Route::get('/rapot-santri/{id}', 'RapotController@edit')->name('rapot-santri');
         Route::get('/rapot-show/{id}', 'RapotController@rapot')->name('rapot-show');
         Route::get('/predikat', 'NilaiController@create')->name('predikat');
+        Route::get('pembayaran-spp', 'SPPController@index')->name('spp.index');
         Route::resource('/user', 'UserController');
     });
 });
