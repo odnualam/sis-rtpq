@@ -45,8 +45,6 @@ use Illuminate\Support\Facades\Auth;
  */
 class Jadwal extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'jadwal';
 
     protected $fillable = ['hari_id', 'kelas_id', 'mapel_id', 'guru_id', 'jam_mulai', 'jam_selesai'];

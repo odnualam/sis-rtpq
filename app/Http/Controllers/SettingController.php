@@ -8,6 +8,7 @@ use App\Services\DistrictService;
 use App\Services\ProvinceService;
 use App\Services\VillageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
@@ -53,15 +54,17 @@ class SettingController extends Controller
         $input['provinsi'] = $input['provinsi'];
         $input['jumlah_santri'] = $input['jumlah_santri'];
         $input['jumlah_guru'] = $input['jumlah_guru'];
-        $input['ruang_kelas'] = $input['ruang_kelas'];
 
         if ($request->has('logo')) {
-            $image = $request->file('logo');
-            $name = Str::slug($image->getClientOriginalName()).'_'.time();
-            $folder = '/setting/logo';
-            $filePath = $name.'.'.$image->getClientOriginalExtension();
-            $this->uploadOne($image, $folder, 'public', $name);
-            $input['logo'] = $filePath;
+            if (File::exists(public_path('uploads/setting/'.$input['logo']))) {
+                dd("ADA");
+                File::delete(public_path('uploads/setting/'.$input['logo']));
+            } else {
+                $image = $request->file('logo');
+                $name = date('d'.'m'.'Y').'_'.$image->getClientOriginalName();
+                $image->move('uploads/setting/', $name);
+                $input['logo'] = $name;
+            }
         } else {
             unset($input['logo']);
         }

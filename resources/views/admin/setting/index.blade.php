@@ -59,7 +59,7 @@
                                 <div class="form-group row">
                                     <label class="col-form-label col-4 text-lg-right text-left">Logo</label>
                                     <div class="col-8">
-                                        <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url(/metronic/theme/html/demo1/dist/assets/media/users/blank.png)">
+                                        <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url({{ asset('uploads/setting/'. $setting->logo) }})">
                                             <div class="image-input-wrapper"></div>
                                             <label
                                                 class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
@@ -127,12 +127,6 @@
                                     <label class="col-form-label col-4 text-lg-right text-left">Jumlah Guru</label>
                                     <div class="col-8">
                                         <input class="form-control form-control-lg form-control-solid" type="number" name="jumlah_guru" value="{{ $setting->jumlah_guru }}" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-form-label col-4 text-lg-right text-left">Jumlah Kelas</label>
-                                    <div class="col-8">
-                                        <input class="form-control form-control-lg form-control-solid" type="number" name="ruang_kelas" value="{{ $setting->ruang_kelas }}" />
                                     </div>
                                 </div>
                             </div>

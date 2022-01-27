@@ -20,7 +20,6 @@
                     <thead class="text-uppercase">
                     <tr>
                         <th rowspan="2">No.</th>
-                        <th rowspan="2">Kode Mapel</th>
                         <th rowspan="2">Guru Mata Pelajaran</th>
                         <th rowspan="2">KKM</th>
                         <th colspan="4" class="text-center">Predikat</th>
@@ -36,7 +35,6 @@
                         @foreach ($guru as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->kode }}</td>
                                 <td>
                                     <h5 class="card-title">{{ $data->mapel->nama_mapel }}</h5>
                                     <p class="card-text"><small class="text-muted">{{ $data->nama_guru }}</small></p>

@@ -22,10 +22,6 @@
                                         <input type="text" id="nama_gur" name="nama_gur" value="{{ $guru->nama_guru }}" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <label for="guru_id">Kode Mapel</label>
-                                        <input type="text" id="guru_id" name="guru_id" value="{{ $guru->kode }}" class="form-control" readonly>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="predikat_a">Predikat A</label>
                                         <textarea class="form-control" required name="predikat_a" id="predikat_a" rows="4">{{ $nilai->deskripsi_a }}</textarea>
                                     </div>
@@ -57,10 +53,6 @@
                                     <div class="form-group">
                                         <label for="nama_gur">Nama Guru</label>
                                         <input type="text" id="nama_gur" name="nama_gur" value="{{ $guru->nama_guru }}" class="form-control" readonly>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="guru_id">Kode Mapel</label>
-                                        <input type="text" id="guru_id" name="guru_id" value="{{ $guru->kode }}" class="form-control" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="predikat_a">Predikat A</label>
