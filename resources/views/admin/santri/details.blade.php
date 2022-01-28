@@ -28,8 +28,7 @@
                         <div class="col-md-1 mb-4"></div>
                         <div class="col-md-7">
                             <h5 class="card-title card-text mb-2">Nama : {{ $santri->nama_santri }}</h5>
-                            <h5 class="card-title card-text mb-2">No. Induk : {{ $santri->no_induk }}</h5>
-                            <h5 class="card-title card-text mb-2">NIS : {{ $santri->nis }}</h5>
+                            <h5 class="card-title card-text mb-2">NISN : {{ $santri->nisn }}</h5>
                             <h5 class="card-title card-text mb-2">Kelas : {{ $santri->kelas->nama_kelas }}</h5>
                             @if ($santri->jk == 'L')
                             <h5 class="card-title card-text mb-2">Jenis Kelamin : Laki-laki</h5>
@@ -39,7 +38,6 @@
                             <h5 class="card-title card-text mb-2">Tempat Lahir : {{ $santri->tmp_lahir }}</h5>
                             <h5 class="card-title card-text mb-2">Tanggal Lahir : {{ date('l, d F Y',
                                 strtotime($santri->tgl_lahir)) }}</h5>
-                            <h5 class="card-title card-text mb-2">No. Telepon : {{ $santri->telp }}</h5>
                         </div>
                     </div>
                 </div>

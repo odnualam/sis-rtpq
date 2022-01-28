@@ -47,7 +47,7 @@ class Mapel extends Model
 
     public function sikap($id)
     {
-        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
         $nilai = Sikap::where('santri_id', $santri->id)->where('mapel_id', $id)->first();
 
         return $nilai;

@@ -15,9 +15,9 @@
                         <div class="col-md-12">
                             <table class="table" style="margin-top: -10px;">
                                 <tr>
-                                    <td>No Induk Santri</td>
+                                    <td>NISN Santri</td>
                                     <td>:</td>
-                                    <td>{{ $santri->no_induk }}</td>
+                                    <td>{{ $santri->nisn }}</td>
                                 </tr>
                                 <tr>
                                     <td>Nama Santri</td>

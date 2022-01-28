@@ -18,7 +18,7 @@
                         <th colspan="4" class="text-center">Daftar Murid Kelas {{ $kelas->nama_kelas }}</th>
                     </tr>
                     <tr>
-                        <th>No. Induk</th>
+                        <th>NISN</th>
                         <th>Nama Santri</th>
                         <th>L/P</th>
                         <th>Foto</th>
@@ -27,7 +27,7 @@
                 <tbody>
                     @foreach ($santri as $data)
                         <tr>
-                            <td>{{ $data->no_induk }}</td>
+                            <td>{{ $data->nisn }}</td>
                             <td>{{ $data->nama_santri }}</td>
                             <td>{{ $data->jk }}</td>
                             <td><img src="{{ asset($data->foto) }}" width="100" alt=""></td>

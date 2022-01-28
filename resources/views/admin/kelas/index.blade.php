@@ -122,7 +122,7 @@
                                 <table class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important" width="100%">
                                     <thead class="text-uppercase">
                                         <tr>
-                                            <th>No Induk Santri</th>
+                                            <th>NISN Santri</th>
                                             <th>Nama Santri</th>
                                             <th>L/P</th>
                                             <th>Foto Santri</th>
@@ -132,7 +132,7 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th>No Induk Santri</th>
+                                            <th>NISN Santri</th>
                                             <th>Nama Santri</th>
                                             <th>L/P</th>
                                             <th>Foto Santri</th>
@@ -243,7 +243,7 @@
                     $.each(result,function(index, val){
                     $("#judul-santri").text('View Data Santri ' + val.kelas);
                     santri += "<tr>";
-                        santri += "<td>"+val.no_induk+"</td>";
+                        santri += "<td>"+val.nisn+"</td>";
                         santri += "<td>"+val.nama_santri+"</td>";
                         santri += "<td>"+val.jk+"</td>";
                         santri += "<td><img src='"+val.foto+"' width='100px'></td>";

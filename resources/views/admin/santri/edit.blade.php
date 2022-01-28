@@ -18,8 +18,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="no_induk">Nomor Induk</label>
-                            <input type="text" id="no_induk" name="no_induk" value="{{ $santri->no_induk }}" class="form-control" readonly>
+                            <label for="nisn">NISN</label>
+                            <input type="text" id="nisn" name="nisn" value="{{ $santri->nisn }}" class="form-control" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nama_santri">Nama Santri</label>
@@ -47,10 +47,6 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="nis">NIS</label>
-                            <input type="text" id="nis" name="nis" onkeypress="return inputAngka(event)" value="{{ $santri->nis }}" class="form-control @error('nis') is-invalid @enderror">
-                        </div>
                         <div class="form-group">
                             <label for="kelas_id">Kelas</label>
                             <select id="kelas_id" name="kelas_id" class="  form-control @error('kelas_id') is-invalid @enderror">

@@ -101,7 +101,7 @@ class SikapController extends Controller
 
     public function santri()
     {
-        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
         $kelas = Kelas::findorfail($santri->kelas_id);
         $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
 

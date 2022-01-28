@@ -134,7 +134,7 @@
             if (kel == "Guru") {
               $("#noId").html('<label for="nomer">Nomer Id Card</label><input id="nomer" type="text" maxlength="5" onkeypress="return inputAngka(event)" placeholder="No Id Card" class="form-control" name="nomer" autocomplete="off">');
             } else if(kel == "Santri") {
-              $("#noId").html(`<label for="nomer">Nomer Induk Santri</label><input id="nomer" type="text" placeholder="No Induk Santri" class="form-control" name="nomer" autocomplete="off">`);
+              $("#noId").html(`<label for="nomer">NISN Santri</label><input id="nomer" type="text" placeholder="NISN Santri" class="form-control" name="nomer" autocomplete="off">`);
             } else if(kel == "Admin" || kel == "Operator") {
               $("#noId").html(`<label for="name">Username</label><input id="name" type="text" placeholder="Username" class="form-control" name="name" autocomplete="off">`);
             } else {

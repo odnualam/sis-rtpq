@@ -19,7 +19,7 @@ class SantriImport implements ToModel
 
         return new Santri([
             'nama_santri' => $row[0],
-            'no_induk' => $row[1],
+            'nisn' => $row[1],
             'jk' => $row[2],
             'foto' => $foto,
             'kelas_id' => $kelas->id,

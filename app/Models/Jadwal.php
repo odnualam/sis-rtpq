@@ -85,7 +85,7 @@ class Jadwal extends Model
 
     public function ulangan($id)
     {
-        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
         $nilai = Ulangan::where('santri_id', $santri->id)->where('mapel_id', $id)->first();
 
         return $nilai;
@@ -93,7 +93,7 @@ class Jadwal extends Model
 
     public function nilai($id)
     {
-        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
         $nilai = Rapot::where('santri_id', $santri->id)->where('mapel_id', $id)->first();
 
         return $nilai;

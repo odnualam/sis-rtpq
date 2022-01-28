@@ -50,8 +50,8 @@ class UserController extends Controller
                 return redirect()->back()->with('error', 'Maaf User ini tidak terdaftar sebagai guru!');
             }
         } elseif ($request->role == 'Santri') {
-            $countsantri = Santri::where('no_induk', $request->nomer)->count();
-            $santriId = Santri::where('no_induk', $request->nomer)->get();
+            $countsantri = Santri::where('nisn', $request->nomer)->count();
+            $santriId = Santri::where('nisn', $request->nomer)->get();
             foreach ($santriId as $val) {
                 $santri = Santri::findorfail($val->id);
             }
@@ -61,7 +61,7 @@ class UserController extends Controller
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => $request->role,
-                    'no_induk' => $request->nomer,
+                    'nisn' => $request->nomer,
                 ]);
 
                 return redirect()->back()->with('success', 'Berhasil menambahkan user Santri baru!');
@@ -199,8 +199,8 @@ class UserController extends Controller
                 'jk' => 'required',
                 'kelas_id' => 'required',
             ]);
-            $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
-            $user = User::where('no_induk', Auth::user()->no_induk)->first();
+            $santri = Santri::where('nisn', Auth::user()->nisn)->first();
+            $user = User::where('nisn', Auth::user()->nisn)->first();
             if ($user) {
                 $user_data = [
                     'name' => $request->name,
@@ -209,7 +209,6 @@ class UserController extends Controller
             } else {
             }
             $santri_data = [
-                'nis' => $request->nis,
                 'nama_santri' => $request->name,
                 'jk' => $request->jk,
                 'kelas_id' => $request->kelas_id,
@@ -260,7 +259,7 @@ class UserController extends Controller
             $this->validate($request, [
                 'foto' => 'required',
             ]);
-            $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+            $santri = Santri::where('nisn', Auth::user()->nisn)->first();
             $foto = $request->foto;
             $new_foto = date('s'.'i'.'H'.'d'.'m'.'Y').'_'.$foto->getClientOriginalName();
             $santri_data = [

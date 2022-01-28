@@ -24,7 +24,7 @@ class SantriController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'no_induk' => 'required|string|unique:santri',
+            'nisn' => 'required|string|unique:santri',
             'nama_santri' => 'required',
             'jk' => 'required',
             'kelas_id' => 'required',
@@ -44,12 +44,10 @@ class SantriController extends Controller
         }
 
         Santri::create([
-            'no_induk' => $request->no_induk,
-            'nis' => $request->nis,
+            'nisn' => $request->nisn,
             'nama_santri' => $request->nama_santri,
             'jk' => $request->jk,
             'kelas_id' => $request->kelas_id,
-            'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
             'foto' => $nameFoto,
@@ -84,7 +82,7 @@ class SantriController extends Controller
         ]);
 
         $santri = Santri::findorfail($id);
-        $user = User::where('no_induk', $santri->no_induk)->first();
+        $user = User::where('nisn', $santri->nisn)->first();
         if ($user) {
             $user_data = [
                 'name' => $request->nama_santri,
@@ -93,11 +91,9 @@ class SantriController extends Controller
         } else {
         }
         $santri_data = [
-            'nis' => $request->nis,
             'nama_santri' => $request->nama_santri,
             'jk' => $request->jk,
             'kelas_id' => $request->kelas_id,
-            'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
         ];
@@ -109,9 +105,9 @@ class SantriController extends Controller
     public function destroy($id)
     {
         $santri = Santri::findorfail($id);
-        $countUser = User::where('no_induk', $santri->no_induk)->count();
+        $countUser = User::where('nisn', $santri->nisn)->count();
         if ($countUser >= 1) {
-            $user = User::where('no_induk', $santri->no_induk)->first();
+            $user = User::where('nisn', $santri->nisn)->first();
             $santri->delete();
             $user->delete();
 
@@ -156,7 +152,7 @@ class SantriController extends Controller
         foreach ($santri as $val) {
             $newForm[] = [
                 'kelas' => $val->kelas->nama_kelas,
-                'no_induk' => $val->no_induk,
+                'nisn' => $val->nisn,
                 'nama_santri' => $val->nama_santri,
                 'jk' => $val->jk,
                 'foto' => $val->foto,

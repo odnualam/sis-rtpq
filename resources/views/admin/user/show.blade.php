@@ -35,7 +35,7 @@
                             @if ($d == 'Guru')
                             <th>No Id Card</th>
                             @elseif ($d == 'Santri')
-                            <th>No Induk Santri</th>
+                            <th>NISN Santri</th>
                             @else
 
                             @endif
@@ -52,7 +52,7 @@
                         <td class="text-capitalize">{{ $data->name }}</td>
                         <td>{{ $data->email }}</td>
                         @if ($data->role == 'Santri')
-                            <td>{{ $data->no_induk }}</td>
+                            <td>{{ $data->nisn }}</td>
                         @elseif ($data->role == 'Guru')
                             <td>{{ $data->id_card }}</td>
                         @else

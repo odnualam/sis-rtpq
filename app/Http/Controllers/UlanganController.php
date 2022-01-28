@@ -144,7 +144,7 @@ class UlanganController extends Controller
 
     public function santri()
     {
-        $santri = Santri::where('no_induk', Auth::user()->no_induk)->first();
+        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
         $kelas = Kelas::findorfail($santri->kelas_id);
         $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
         $mapel = $jadwal->groupBy('mapel_id');

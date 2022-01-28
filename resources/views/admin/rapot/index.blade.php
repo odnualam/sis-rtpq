@@ -28,7 +28,7 @@
                         <tr>
                         <th>No.</th>
                         <th>Nama Santri</th>
-                        <th>No. Induk</th>
+                        <th>NISN</th>
                         <th>Aksi</th>
                     </thead>
                     <tbody>
@@ -36,7 +36,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nama_santri }}</td>
-                            <td>{{ $data->no_induk }}</td>
+                            <td>{{ $data->nisn }}</td>
                             <td><a href="{{ route('rapot-show', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Show Rapot</a></td>
                         </tr>
                         @endforeach

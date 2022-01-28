@@ -85,8 +85,8 @@
 
                     <li class="menu-item" aria-haspopup="true" id="AbsensiGuru">
                         <a href="{{ route('guru.absensi') }}" class="menu-link">
-                            <i class="menu-icon flaticon2-accept"></i>
-                            <span class="menu-text">Absensi Santri</span>
+                            <i class="menu-icon flaticon2-analytics"></i>
+                            <span class="menu-text">Naik Kelas</span>
                         </a>
                     </li>
 
@@ -236,7 +236,7 @@
                             </ul>
                         </div>
                     </li>
-                @elseif (Auth::user()->role == 'Santri' && Auth::user()->santri(Auth::user()->no_induk))
+                @elseif (Auth::user()->role == 'Santri' && Auth::user()->santri(Auth::user()->nisn))
                     <li class="menu-item" aria-haspopup="true" id="Home">
                         <a href="{{ url('/') }}" class="menu-link">
                             <i class="menu-icon flaticon-home"></i>

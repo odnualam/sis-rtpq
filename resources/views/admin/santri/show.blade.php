@@ -28,7 +28,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Nama Santri</th>
-                            <th>No Induk</th>
+                            <th>NISN</th>
                             <th>Foto</th>
                             <th>Aksi</th>
                         </tr>
@@ -38,7 +38,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $data->nama_santri }}</td>
-                                <td>{{ $data->no_induk }}</td>
+                                <td>{{ $data->nisn }}</td>
                                 <td>
                                     <a href="{{ asset($data->foto) }}" data-toggle="lightbox" data-title="Foto {{ $data->nama_santri }}" data-gallery="gallery" data-footer='<a href="{{ route('santri.ubah-foto', Crypt::encrypt($data->id)) }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
                                         <img src="{{ asset($data->foto) }}" width="130px" class="img-fluid mb-2">

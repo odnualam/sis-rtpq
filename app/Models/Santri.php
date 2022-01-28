@@ -18,11 +18,9 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Query\Builder|Santri withoutTrashed()
  * @mixin \Eloquent
  * @property int $id
- * @property string $no_induk
- * @property string|null $nis
+ * @property string $nisn
  * @property string $nama_santri
  * @property string $jk
- * @property string|null $telp
  * @property string|null $tmp_lahir
  * @property string|null $tgl_lahir
  * @property string $foto
@@ -38,7 +36,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereKelasId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaSantri($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNis($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNoInduk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNISN($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTelp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTglLahir($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTmpLahir($value)
@@ -50,7 +48,7 @@ class Santri extends Model
 
     protected $table = 'santri';
 
-    protected $fillable = ['no_induk', 'nis', 'nama_santri', 'kelas_id', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
+    protected $fillable = ['nisn', 'nama_santri', 'kelas_id', 'jk', 'tmp_lahir', 'tgl_lahir', 'foto'];
 
     public function kelas()
     {

@@ -13,7 +13,7 @@ class SantriExport implements FromCollection
      */
     public function collection()
     {
-        $santri = Santri::join('kelas', 'kelas.id', '=', 'santri.kelas_id')->select('santri.nama_santri', 'santri.no_induk', 'santri.jk', 'kelas.nama_kelas')->get();
+        $santri = Santri::join('kelas', 'kelas.id', '=', 'santri.kelas_id')->select('santri.nama_santri', 'santri.nisn', 'santri.jk', 'kelas.nama_kelas')->get();
 
         return $santri;
     }

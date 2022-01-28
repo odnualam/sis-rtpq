@@ -17,7 +17,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string $role
- * @property string|null $no_induk
+ * @property string|null $nisn
  * @property string|null $id_card
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -38,7 +38,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIdCard($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereNoInduk($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereNISN($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
@@ -52,7 +52,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
-        'name', 'email', 'password', 'role', 'no_induk', 'id_card',
+        'name', 'email', 'password', 'role', 'nisn', 'id_card',
     ];
 
     public function guru($id)
@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function santri($id)
     {
-        $santri = Santri::where('no_induk', $id)->first();
+        $santri = Santri::where('nisn', $id)->first();
 
         return $santri;
     }

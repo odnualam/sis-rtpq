@@ -14,8 +14,8 @@
                                 <img src="{{ asset(Auth::user()->guru(Auth::user()->id_card)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
                             </a>
                         @elseif (Auth::user()->role == 'Santri')
-                            <a href="{{ asset(Auth::user()->santri(Auth::user()->no_induk)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
-                                <img src="{{ asset(Auth::user()->santri(Auth::user()->no_induk)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                            <a href="{{ asset(Auth::user()->santri(Auth::user()->nisn)->foto) }}" data-toggle="lightbox" data-title="Foto {{ Auth::user()->name }}" data-gallery="gallery" data-footer='<a href="{{ route('pengaturan.edit-foto') }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
+                                <img src="{{ asset(Auth::user()->santri(Auth::user()->nisn)->foto) }}" width="130px" class="profile-user-img img-fluid img-circle" alt="User profile picture">
                             </a>
                         @else
                             <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/male.jpg') }}" alt="User profile picture">
@@ -53,22 +53,16 @@
                     @elseif (Auth::user()->role == 'Santri')
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">No Induk</span> <a class="text-muted float-right">{{ Auth::user()->no_induk }}</a>
+                                <span class="font-weight-bold text-uppercase">NISN</span> <a class="text-muted float-right">{{ Auth::user()->nisn }}</a>
                             </li>
                             <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">NIS</span> <a class="text-muted float-right">{{ Auth::user()->santri(Auth::user()->no_induk)->nis }}</a>
+                                <span class="font-weight-bold text-uppercase">Tempat Lahir</span> <a class="text-muted float-right">{{ Auth::user()->santri(Auth::user()->nisn)->kelas->nama_kelas }}</a>
                             </li>
                             <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">Tempat Lahir</span> <a class="text-muted float-right">{{ Auth::user()->santri(Auth::user()->no_induk)->kelas->nama_kelas }}</a>
+                                <span class="font-weight-bold text-uppercase">Tempat Lahir</span> <a class="text-muted float-right">{{ Auth::user()->santri(Auth::user()->nisn)->tmp_lahir }}</a>
                             </li>
                             <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">Tempat Lahir</span> <a class="text-muted float-right">{{ Auth::user()->santri(Auth::user()->no_induk)->tmp_lahir }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">Tanggal Lahir</span> <a class="text-muted float-right">{{ date('l, d F Y', strtotime(Auth::user()->santri(Auth::user()->no_induk)->tgl_lahir)) }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">No Telepon</span> <a class="text-muted float-right">{{ Auth::user()->santri(Auth::user()->no_induk)->telp }}</a>
+                                <span class="font-weight-bold text-uppercase">Tanggal Lahir</span> <a class="text-muted float-right">{{ date('l, d F Y', strtotime(Auth::user()->santri(Auth::user()->nisn)->tgl_lahir)) }}</a>
                             </li>
                         </ul>
                     @else

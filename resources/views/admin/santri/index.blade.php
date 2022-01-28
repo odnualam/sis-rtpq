@@ -44,7 +44,7 @@
                                         <div class="card-body">
                                             <ul>
                                                 <li>rows 1 = nama santri</li>
-                                                <li>rows 2 = no induk santri</li>
+                                                <li>rows 2 = NISN santri</li>
                                                 <li>rows 3 = jenis kelamin</li>
                                                 <li>rows 4 = nama kelas</li>
                                             </ul>
@@ -122,9 +122,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="no_induk">Nomor Induk</label>
-                                    <input type="text" id="no_induk" name="no_induk" onkeypress="return inputAngka(event)"
-                                        class="form-control @error('no_induk') is-invalid @enderror">
+                                    <label for="nisn">NISN</label>
+                                    <input type="text" id="nisn" name="nisn" onkeypress="return inputAngka(event)"
+                                        class="form-control @error('nisn') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
                                     <label for="nama_santri">Nama Santri</label>
@@ -158,11 +158,6 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="nis">NISN</label>
-                                    <input type="text" id="nis" name="nis" onkeypress="return inputAngka(event)"
-                                        class="form-control @error('nis') is-invalid @enderror">
-                                </div>
-                                <div class="form-group">
                                     <label for="kelas_id">Kelas</label>
                                     <select id="kelas_id" name="kelas_id"
                                         class="  form-control @error('kelas_id') is-invalid @enderror">
@@ -171,11 +166,6 @@
                                         <option value="{{ $data->id }}">{{ $data->nama_kelas }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="telp">Nomor Telpon/HP</label>
-                                    <input type="text" id="telp" name="telp" onkeypress="return inputAngka(event)"
-                                        class="form-control @error('telp') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
                                     <label for="tgl_lahir">Tanggal Lahir</label>

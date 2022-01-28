@@ -37,7 +37,6 @@
                                     <input type="hidden" name="santri_id" value="{{$data->id}}">
                                     <tr>
                                         <td class="ctr">{{ $loop->iteration }}</td>
-                                        <td class="ctr">{{ $data->nis }}</td>
                                         <td class="ctr">{{ $data->nama_santri }}</td>
                                         <td class="ctr">{{ $data->jk }}</td>
                                         <td class="ctr">
