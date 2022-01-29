@@ -119,34 +119,24 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card-body">
-                                <table class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important" width="100%">
+                                <table class="table table-striped table-bordered table-hover table-checkable datatable" width="100%">
                                     <thead class="text-uppercase">
                                         <tr>
-                                            <th>NISN Santri</th>
+                                            <th>Foto</th>
+                                            <th>NISN</th>
                                             <th>Nama Santri</th>
-                                            <th>L/P</th>
-                                            <th>Foto Santri</th>
+                                            <th>Jenis Kelamin</th>
                                         </tr>
                                     </thead>
                                     <tbody id="data-santri">
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>NISN Santri</th>
-                                            <th>Nama Santri</th>
-                                            <th>L/P</th>
-                                            <th>Foto Santri</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
-                            <!-- /.col -->
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><span><i class="flaticon2-left-arrow-1"></i></span>Kembali</button>
-                        <a id="link-santri" href="#" class="btn btn-primary"><i class="nav-icon fas fa-download"></i> &nbsp;
-                            Download PDF</a>
+                        <a id="link-santri" href="#" class="btn btn-primary" target="_blank"><i class="nav-icon fas fa-download"></i> &nbsp;Download PDF</a>
                     </div>
                 </div>
             </div>
@@ -189,8 +179,7 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><span><i class="flaticon2-left-arrow-1"></i></span>Kembali</button>
-                        <a id="link-jadwal" href="#" class="btn btn-primary"><i class="nav-icon fas fa-download"></i> &nbsp;
-                            Download PDF</a>
+                        <a id="link-jadwal" target="_blank" href="#" class="btn btn-primary"><i class="nav-icon fas fa-download"></i> &nbsp;Download PDF</a>
                     </div>
                 </div>
             </div>
@@ -243,10 +232,10 @@
                     $.each(result,function(index, val){
                     $("#judul-santri").text('View Data Santri ' + val.kelas);
                     santri += "<tr>";
+                        santri += "<td><img src='"+val.foto+"' width='100px'></td>";
                         santri += "<td>"+val.nisn+"</td>";
                         santri += "<td>"+val.nama_santri+"</td>";
                         santri += "<td>"+val.jk+"</td>";
-                        santri += "<td><img src='"+val.foto+"' width='100px'></td>";
                     santri+="</tr>";
                     });
                     $("#data-santri").html(santri);
@@ -256,7 +245,7 @@
                 toastr.error("Errors 404!");
             }
         });
-        $("#link-santri").attr("href", "{{ url('/listsantripdf/') }}"+id);
+        $("#link-santri").attr("href", "{{ url('/listsantripdf') }}/"+id);
     }
 
     function getSubsJadwal(id){
@@ -284,7 +273,7 @@
                 toastr.error("Errors 404!");
             }
         });
-      $("#link-jadwal").attr("href", "{{ url('/listsantripdf') }}/"+id);
+        $("#link-jadwal").attr("href", "{{ url('/jadwalkelaspdf') }}/"+id);
     }
 
     $("#MasterData").addClass("menu-item-open");

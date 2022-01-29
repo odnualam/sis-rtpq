@@ -18,27 +18,22 @@
                         <th colspan="4" class="text-center">Daftar Murid Kelas {{ $kelas->nama_kelas }}</th>
                     </tr>
                     <tr>
+                        <th>Foto</th>
                         <th>NISN</th>
                         <th>Nama Santri</th>
-                        <th>L/P</th>
-                        <th>Foto</th>
+                        <th>Jenis Kelamin</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($santri as $data)
                         <tr>
+                            <td><img src="{{ public_path($data->foto) }}" alt="" style="width: 100px; height: 100px;"></td>
                             <td>{{ $data->nisn }}</td>
                             <td>{{ $data->nama_santri }}</td>
                             <td>{{ $data->jk }}</td>
-                            <td><img src="{{ asset($data->foto) }}" width="100" alt=""></td>
                         </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="4" class="text-center"><strong>Copyright &copy; <script>document.write(new Date().getFullYear());</script> :: <a href="">SMK Negeri 1 Jenangan Ponorogo</a>. </strong></th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>
