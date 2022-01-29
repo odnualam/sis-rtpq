@@ -107,27 +107,17 @@
                             <tr>
                                 <th>No.</th>
                                 <th>User</th>
-                                <th>Level</th>
+                                <th>Deskripsi</th>
                                 <th>Aktivitas</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($activity_log as $data)
+                            @foreach ($activity_log as $activity)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <?php $attributes = $data->properties['name']; ?>
-                                        <ul class="list-unstyled">
-                                            @foreach ($attributes as $key => $value)
-                                            <li>
-                                                <i class="fas fa-angle-right"></i> <em>{{label_case($key)}}</em>: <mark>{{$value}}</mark>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    </td>
-                                    <td>{{ $data->properties }}</td>
-                                    <td>{{ $data->properties }}</td>
-                                    <td>{{ $data->description }}</td>
+                                    <td>{{ $activity->user->name }}</td>
+                                    <td>{{ $activity->description }}</td>
+                                    <td>{{ $activity->created_at->diffForHumans() }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
