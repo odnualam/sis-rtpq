@@ -35,7 +35,7 @@
                             @if ($d == 'Guru')
                             <th>No Id Card</th>
                             @elseif ($d == 'Santri')
-                            <th>NISN Santri</th>
+                            <th>NISN</th>
                             @else
 
                             @endif

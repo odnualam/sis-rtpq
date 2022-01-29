@@ -15,7 +15,7 @@
                         <div class="col-md-12">
                             <table class="table" style="margin-top: -10px;">
                                 <tr>
-                                    <td>NISN Santri</td>
+                                    <td>NISN</td>
                                     <td>:</td>
                                     <td>{{ $santri->nisn }}</td>
                                 </tr>
