@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -44,11 +43,9 @@ use Illuminate\Support\Facades\Auth;
  */
 class Santri extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'santri';
 
-    protected $fillable = ['nisn', 'nama_santri', 'kelas_id', 'jk', 'tmp_lahir', 'tgl_lahir', 'foto'];
+    protected $fillable = ['nisn', 'nama_santri', 'kelas_id', 'jk', 'tmp_lahir', 'tgl_lahir', 'foto', 'agama', 'anak_ke', 'status_keluarga', 'alamat_santri', 'nama_ayah', 'nama_ibu', 'pekerjaan_ayah', 'pekerjaan_ibu', 'alamat_ayah', 'alamat_ibu', 'nama_wali', 'alamat_wali', 'pekerjaan_wali', 'tahun_ajaran'];
 
     public function kelas()
     {

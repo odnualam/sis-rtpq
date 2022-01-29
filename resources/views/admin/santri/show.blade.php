@@ -1,10 +1,6 @@
- @extends('layouts.admin')
+@extends('layouts.admin')
 @section('heading')
-  Data Santri {{ $kelas->nama_kelas }}
-@endsection
-@section('page')
-    <li class="breadcrumb-item active"><a href="{{ route('santri.index') }}">Santri</a></li>
-    <li class="breadcrumb-item active">{{ $kelas->nama_kelas }}</li>
+    Data Santri {{ $kelas->nama_kelas }}
 @endsection
 @section('content')
     <div class="row">
@@ -27,9 +23,10 @@
                     <thead class="text-uppercase">
                         <tr>
                             <th>No.</th>
-                            <th>Nama Santri</th>
-                            <th>NISN</th>
                             <th>Foto</th>
+                            <th>NISN</th>
+                            <th>Nama Santri</th>
+                            <th>Jenis Kelamin</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -37,21 +34,21 @@
                         @foreach ($santri as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nama_santri }}</td>
-                                <td>{{ $data->nisn }}</td>
                                 <td>
-                                    <a href="{{ asset($data->foto) }}" data-toggle="lightbox" data-title="Foto {{ $data->nama_santri }}" data-gallery="gallery" data-footer='<a href="{{ route('santri.ubah-foto', Crypt::encrypt($data->id)) }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
-                                        <img src="{{ asset($data->foto) }}" width="130px" class="img-fluid mb-2">
+                                    <a href="{{ route('santri.ubah-foto', Crypt::encrypt($data->id)) }}">
+                                        <img src="{{ asset($data->foto) }}" style="height: 90px;width: 100px;object-fit: cover;object-position: center center;">
                                     </a>
-                                    {{-- https://siakad.didev.id/santri/ubah-foto/{{$data->id}} --}}
                                 </td>
+                                <td>{{ $data->nisn }}</td>
+                                <td>{{ $data->nama_santri }}</td>
+                                <td>{{ $data->jk == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                 <td>
                                     <form action="{{ route('santri.destroy', $data->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <a href="{{ route('santri.show', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm mt-2"><i class="nav-icon fas fa-id-card"></i> &nbsp; Detail</a>
-                                        <a href="{{ route('santri.edit', Crypt::encrypt($data->id)) }}" class="btn btn-success btn-sm mt-2"><i class="nav-icon fas fa-edit"></i> &nbsp; Edit</a>
-                                        <button class="btn btn-danger btn-sm mt-2"><i class="nav-icon fas fa-trash-alt"></i> &nbsp; Hapus</button>
+                                        <a href="{{ route('santri.show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-primary btn-sm"><i class="flaticon-eye"></i></a>
+                                        <a href="{{ route('santri.edit', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-edit"></i></a>
+                                        <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
                                     </form>
                                 </td>
                             </tr>

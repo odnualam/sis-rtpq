@@ -27,7 +27,9 @@ class SantriController extends Controller
             'nisn' => 'required|string|unique:santri',
             'nama_santri' => 'required',
             'jk' => 'required',
-            'kelas_id' => 'required',
+            'tmp_lahir' => 'required',
+            'tgl_lahir' => 'required',
+            'agama' => 'required'
         ]);
 
         if ($request->foto) {
@@ -50,6 +52,20 @@ class SantriController extends Controller
             'kelas_id' => $request->kelas_id,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
+            'agama' => $request->agama,
+            'anak_ke' => $request->anak_ke,
+            'status_keluarga' => $request->status_keluarga,
+            'alamat_santri' => $request->alamat_santri,
+            'nama_ayah' => $request->nama_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'pekerjaan_ayah' => $request->pekerjaan_ayah,
+            'pekerjaan_ibu' => $request->pekerjaan_ibu,
+            'alamat_ayah' => $request->alamat_ayah,
+            'alamat_ibu' => $request->alamat_ibu,
+            'nama_wali' => $request->nama_wali,
+            'alamat_wali' => $request->alamat_wali,
+            'pekerjaan_wali' => $request->pekerjaan_wali,
+            'tahun_ajaran' => $request->tahun_ajaran,
             'foto' => $nameFoto,
         ]);
 
@@ -60,8 +76,9 @@ class SantriController extends Controller
     {
         $id = Crypt::decrypt($id);
         $santri = Santri::findorfail($id);
+        $kelas = Kelas::all();
 
-        return view('admin.santri.details', compact('santri'));
+        return view('admin.santri.details', compact('santri', 'kelas'));
     }
 
     public function edit($id)
@@ -96,6 +113,20 @@ class SantriController extends Controller
             'kelas_id' => $request->kelas_id,
             'tmp_lahir' => $request->tmp_lahir,
             'tgl_lahir' => $request->tgl_lahir,
+            'agama' => $request->agama,
+            'anak_ke' => $request->anak_ke,
+            'status_keluarga' => $request->status_keluarga,
+            'alamat_santri' => $request->alamat_santri,
+            'nama_ayah' => $request->nama_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'pekerjaan_ayah' => $request->pekerjaan_ayah,
+            'pekerjaan_ibu' => $request->pekerjaan_ibu,
+            'alamat_ayah' => $request->alamat_ayah,
+            'alamat_ibu' => $request->alamat_ibu,
+            'nama_wali' => $request->nama_wali,
+            'alamat_wali' => $request->alamat_wali,
+            'pekerjaan_wali' => $request->pekerjaan_wali,
+            'tahun_ajaran' => $request->tahun_ajaran
         ];
         $santri->update($santri_data);
 
@@ -170,7 +201,6 @@ class SantriController extends Controller
         $pdf = PDF::loadView('santri-pdf', ['santri' => $santri, 'kelas' => $kelas]);
 
         return $pdf->stream();
-        // return $pdf->stream('jadwal-pdf.pdf');
     }
 
     public function kelas($id)

@@ -1,8 +1,5 @@
- @extends('layouts.admin')
+@extends('layouts.admin')
 @section('heading', 'Data Santri')
-@section('page')
-    <li class="breadcrumb-item active">Data Santri</li>
-@endsection
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -16,12 +13,12 @@
                             <button type="button" class="btn btn-icon btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
                                 <i class="flaticon-plus"></i>
                             </button>
-                            <a href="{{ route('santri.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
+                            {{-- <a href="{{ route('santri.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
                                 <i class="flaticon-download"></i>
                             </a>
                             <button type="button" class="btn btn-icon btn-outline-warning btn-sm" data-toggle="modal" data-target="#importExcel">
                                 <i class="flaticon-upload-1"></i>
-                            </button>
+                            </button> --}}
                             <button type="button" class="btn btn-icon btn-outline-danger btn-sm" data-toggle="modal" data-target="#dropTable">
                                 <i class="flaticon-delete"></i>
                             </button>
@@ -44,7 +41,7 @@
                                         <div class="card-body">
                                             <ul>
                                                 <li>rows 1 = nama santri</li>
-                                                <li>rows 2 = NISN santri</li>
+                                                <li>rows 2 = NISN</li>
                                                 <li>rows 3 = jenis kelamin</li>
                                                 <li>rows 4 = nama kelas</li>
                                             </ul>
@@ -80,7 +77,7 @@
                         </form>
                     </div>
                 </div>
-                <!-- /.card-header -->
+
                 <div class="card-body">
                     <table id="example1" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
                         <thead class="text-uppercase">
@@ -108,7 +105,7 @@
     </div>
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Tambah Data Santri</h4>
@@ -132,6 +129,16 @@
                                         class="form-control @error('nama_santri') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
+                                    <label for="kelas_id">Kelas</label>
+                                    <select id="kelas_id" name="kelas_id"
+                                        class="  form-control @error('kelas_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Kelas --</option>
+                                        @foreach ($kelas as $data)
+                                        <option value="{{ $data->id }}">{{ $data->nama_kelas }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label for="jk">Jenis Kelamin</label>
                                     <select id="jk" name="jk"
                                         class="  form-control @error('jk') is-invalid @enderror">
@@ -146,31 +153,131 @@
                                         class="form-control @error('tmp_lahir') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
-                                    <label for="foto">File input</label>
+                                    <label for="tgl_lahir">Tanggal Lahir</label>
+                                    <input type="date" id="tgl_lahir" name="tgl_lahir"
+                                        class="form-control @error('tgl_lahir') is-invalid @enderror">
+                                </div>
+                                <div class="form-group">
+                                    <label for="agama">Agama</label>
+                                    <select id="agama" name="agama"
+                                        class="form-control @error('agama') is-invalid @enderror">
+                                        <option value="">-- Pilih Agama --</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Kristen Protestan">Kristen Protestan</option>
+                                        <option value="Katolik">Katolik</option>
+                                        <option value="Hindu">Hindu</option>
+                                        <option value="Buddha">Buddha</option>
+                                        <option value="Khonghucu">Khonghucu</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="alamat_santri">Alamat Santri</label>
+                                    <textarea class="form-control @error('alamat_santri') is-invalid @enderror" name="alamat_santri" id="alamat_santri" cols="30" rows="5"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="foto">Foto</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="foto"
-                                                class="custom-file-input @error('foto') is-invalid @enderror" id="foto">
+                                            <input type="file" name="foto" class="custom-file-input @error('foto') is-invalid @enderror" id="foto">
                                             <label class="custom-file-label" for="foto">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
+
                                 <div class="form-group">
-                                    <label for="kelas_id">Kelas</label>
-                                    <select id="kelas_id" name="kelas_id"
-                                        class="  form-control @error('kelas_id') is-invalid @enderror">
-                                        <option value="">-- Pilih Kelas --</option>
-                                        @foreach ($kelas as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_kelas }}</option>
+                                    <label for="tahun_ajaran">Tahun Ajaran</label>
+                                    @php
+                                        foreach (range(2017,date('Y')) as $i ) {
+                                            $j=$i+1;
+                                            $tahun_ajaran[$i.'-'.$j] = $i.'/'.$j;
+                                        }
+                                    @endphp
+                                    <select id="tahun_ajaran" name="tahun_ajaran" class="form-control @error('tahun_ajaran') is-invalid @enderror">
+                                        <option value="">-- Pilih Tahun Ajaran --</option>
+                                        @foreach ($tahun_ajaran as $item)
+                                            <option value="{{ $item }}">{{ $item }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+
                                 <div class="form-group">
-                                    <label for="tgl_lahir">Tanggal Lahir</label>
-                                    <input type="date" id="tgl_lahir" name="tgl_lahir"
-                                        class="form-control @error('tgl_lahir') is-invalid @enderror">
+                                    <label for="anak_ke">Anak Ke</label>
+                                    <input type="text" id="anak_ke" name="anak_ke" class="form-control @error('anak_ke') is-invalid @enderror" placeholder="2 dari 3 bersaudara">
+                                </div>
+                                <div class="form-group">
+                                    <label for="status_keluarga">Status Dalam Keluarga</label>
+                                    <input type="text" id="status_keluarga" name="status_keluarga" class="form-control @error('status_keluarga') is-invalid @enderror">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h3 class="font-size-lg text-dark font-weight-bold mb-6">Nama Orang Tua:</h3>
+                                <div class="mb-15">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="nama_ayah">Ayah</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="nama_ayah" name="nama_ayah" class="form-control @error('nama_ayah') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="nama_ibu">Ibu</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="nama_ibu" name="nama_ibu" class="form-control @error('nama_ibu') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="font-size-lg text-dark font-weight-bold mb-6">Pekerjaan Orang Tua:</h3>
+                                <div class="mb-15">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="pekerjaan_ayah">Ayah</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="pekerjaan_ayah" name="pekerjaan_ayah" class="form-control @error('pekerjaan_ayah') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="pekerjaan_ibu">Ibu</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="pekerjaan_ibu" name="pekerjaan_ibu" class="form-control @error('pekerjaan_ibu') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="font-size-lg text-dark font-weight-bold mb-6">Alamat Orang Tua:</h3>
+                                <div class="mb-15">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="alamat_ayah">Ayah</label>
+                                        <div class="col-lg-6">
+                                            <textarea class="form-control @error('alamat_ayah') is-invalid @enderror" name="alamat_ayah" id="alamat_ayah" cols="30" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="alamat_ibu">Ibu</label>
+                                        <div class="col-lg-6">
+                                            <textarea class="form-control @error('alamat_ibu') is-invalid @enderror" name="alamat_ibu" id="alamat_ibu" cols="30" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="font-size-lg text-dark font-weight-bold mb-6">Wali Santri:</h3>
+                                <div class="mb-15">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="nama_wali">Nama</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="nama_wali" name="nama_wali" class="form-control @error('nama_wali') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="alamat_wali">Alamat</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="alamat_wali" name="alamat_wali" class="form-control @error('alamat_wali') is-invalid @enderror">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label text-right" for="pekerjaan_wali">Pekerjaan</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" id="pekerjaan_wali" name="pekerjaan_wali" class="form-control @error('pekerjaan_wali') is-invalid @enderror">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
