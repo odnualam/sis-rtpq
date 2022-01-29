@@ -1,9 +1,10 @@
 <?php
 // @formatter:off
+// phpcs:ignoreFile
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 8.79.0.
+ * Generated for Laravel 8.81.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2337,6 +2338,19 @@
                         return $instance->compileString($value);
         }
                     /**
+         * Evaluate and render a Blade string to HTML.
+         *
+         * @param string $string
+         * @param array $data
+         * @param bool $deleteCachedView
+         * @return string 
+         * @static 
+         */ 
+        public static function render($string, $data = [], $deleteCachedView = false)
+        {
+                        return \Illuminate\View\Compilers\BladeCompiler::render($string, $data, $deleteCachedView);
+        }
+                    /**
          * Strip the parentheses from the given expression.
          *
          * @param string $expression
@@ -4445,7 +4459,7 @@
      * @method static \Illuminate\Support\Carbon now($tz = null)
      * @method static \Illuminate\Support\Carbon parse($time = null, $tz = null)
      * @method static \Illuminate\Support\Carbon setHumanDiffOptions($humanDiffOptions)
-     * @method static \Illuminate\Support\Carbon setTestNow($testNow = null)
+     * @method static void setTestNow($testNow = null)
      * @method static \Illuminate\Support\Carbon setUtf8($utf8)
      * @method static \Illuminate\Support\Carbon today($tz = null)
      * @method static \Illuminate\Support\Carbon tomorrow($tz = null)
@@ -7579,6 +7593,10 @@
             /**
      * 
      *
+     * @method static void alwaysFrom(string $address, string|null $name = null)
+     * @method static void alwaysReplyTo(string $address, string|null $name = null)
+     * @method static void alwaysReturnPath(string $address)
+     * @method static void alwaysTo(string $address, string|null $name = null)
      * @method static mixed laterOn(string $queue, \DateTimeInterface|\DateInterval|int $delay, \Illuminate\Contracts\Mail\Mailable|string|array $view)
      * @method static mixed queueOn(string $queue, \Illuminate\Contracts\Mail\Mailable|string|array $view)
      * @method static void plain(string $view, array $data, $callback)
@@ -11604,6 +11622,7 @@
      * 
      *
      * @method static \Illuminate\Routing\RouteRegistrar as(string $value)
+     * @method static \Illuminate\Routing\RouteRegistrar controller(string $controller)
      * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
@@ -16690,382 +16709,6 @@
      
 }
 
-    namespace UxWeb\SweetAlert { 
-            /**
-     * 
-     *
-     */ 
-        class SweetAlert {
-                    /**
-         * Display an alert message with a text and an optional title.
-         * 
-         * By default the alert is not typed.
-         *
-         * @param string $text
-         * @param string $title
-         * @param string $icon
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function message($text = '', $title = null, $icon = null)
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->message($text, $title, $icon);
-        }
-                    /**
-         * Display a not typed alert message with a text and a title.
-         *
-         * @param string $text
-         * @param string $title
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function basic($text, $title)
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->basic($text, $title);
-        }
-                    /**
-         * Display an info typed alert message with a text and an optional title.
-         *
-         * @param string $text
-         * @param string $title
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function info($text, $title = '')
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->info($text, $title);
-        }
-                    /**
-         * Display a success typed alert message with a text and an optional title.
-         *
-         * @param string $text
-         * @param string $title
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function success($text, $title = '')
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->success($text, $title);
-        }
-                    /**
-         * Display an error typed alert message with a text and an optional title.
-         *
-         * @param string $text
-         * @param string $title
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function error($text, $title = '')
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->error($text, $title);
-        }
-                    /**
-         * Display a warning typed alert message with a text and an optional title.
-         *
-         * @param string $text
-         * @param string $title
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function warning($text, $title = '')
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->warning($text, $title);
-        }
-                    /**
-         * Set the duration for this alert until it autocloses.
-         *
-         * @param int $milliseconds
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function autoclose($milliseconds = null)
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->autoclose($milliseconds);
-        }
-                    /**
-         * Add a confirmation button to the alert.
-         *
-         * @param string $buttonText
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function confirmButton($buttonText = 'OK', $overrides = [])
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->confirmButton($buttonText, $overrides);
-        }
-                    /**
-         * Add a cancel button to the alert.
-         *
-         * @param string $buttonText
-         * @param array $overrides
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function cancelButton($buttonText = 'Cancel', $overrides = [])
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->cancelButton($buttonText, $overrides);
-        }
-                    /**
-         * Add a new custom button to the alert.
-         *
-         * @param string $key
-         * @param string $buttonText
-         * @param array $overrides
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function addButton($key, $buttonText, $overrides = [])
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->addButton($key, $buttonText, $overrides);
-        }
-                    /**
-         * Toggle close the alert message when clicking outside.
-         *
-         * @param string $buttonText
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function closeOnClickOutside($value = true)
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->closeOnClickOutside($value);
-        }
-                    /**
-         * Make this alert persistent with a confirmation button.
-         *
-         * @param string $buttonText
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function persistent($buttonText = 'OK')
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->persistent($buttonText);
-        }
-                    /**
-         * Make Message HTML view.
-         *
-         * @param bool|true $html
-         * @return \UxWeb\SweetAlert\SweetAlertNotifier $this
-         * @static 
-         */ 
-        public static function html()
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->html();
-        }
-                    /**
-         * Return the current alert configuration.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getConfig($key = null)
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->getConfig($key);
-        }
-                    /**
-         * Customize alert configuration "by hand".
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function setConfig($config = [])
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->setConfig($config);
-        }
-                    /**
-         * Return the current alert configuration as Json.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getJsonConfig()
-        {
-                        /** @var \UxWeb\SweetAlert\SweetAlertNotifier $instance */
-                        return $instance->getJsonConfig();
-        }
-         
-    }
-     
-}
-
-    namespace Yoeunes\Toastr\Facades { 
-            /**
-     * 
-     *
-     */ 
-        class Toastr {
-                    /**
-         * Shortcut for adding an error notification.
-         *
-         * @param string $message The notification's message
-         * @param string $title The notification's title
-         * @param array $options
-         * @return \Toastr 
-         * @static 
-         */ 
-        public static function error($message, $title = '', $options = [])
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->error($message, $title, $options);
-        }
-                    /**
-         * Shortcut for adding an info notification.
-         *
-         * @param string $message The notification's message
-         * @param string $title The notification's title
-         * @param array $options
-         * @return \Toastr 
-         * @static 
-         */ 
-        public static function info($message, $title = '', $options = [])
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->info($message, $title, $options);
-        }
-                    /**
-         * Shortcut for adding a success notification.
-         *
-         * @param string $message The notification's message
-         * @param string $title The notification's title
-         * @param array $options
-         * @return \Toastr 
-         * @static 
-         */ 
-        public static function success($message, $title = '', $options = [])
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->success($message, $title, $options);
-        }
-                    /**
-         * Shortcut for adding a warning notification.
-         *
-         * @param string $message The notification's message
-         * @param string $title The notification's title
-         * @param array $options
-         * @return \Toastr 
-         * @static 
-         */ 
-        public static function warning($message, $title = '', $options = [])
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->warning($message, $title, $options);
-        }
-                    /**
-         * Add a notification.
-         *
-         * @param string $type Could be error, info, success, or warning.
-         * @param string $message The notification's message
-         * @param string $title The notification's title
-         * @param array $options
-         * @return \Toastr 
-         * @static 
-         */ 
-        public static function addNotification($type, $message, $title = '', $options = [])
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->addNotification($type, $message, $title, $options);
-        }
-                    /**
-         * Render the notifications' script tag.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function render()
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->render();
-        }
-                    /**
-         * Get global toastr options.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function options()
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->options();
-        }
-                    /**
-         * 
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function notificationsAsString()
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->notificationsAsString();
-        }
-                    /**
-         * map over all notifications and create an array of toastrs.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function notifications()
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->notifications();
-        }
-                    /**
-         * Create a single toastr.
-         *
-         * @param string $type
-         * @param string $message
-         * @param string|null $title
-         * @param string|null $options
-         * @return string 
-         * @static 
-         */ 
-        public static function toastr($type, $message = '', $title = '', $options = '')
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->toastr($type, $message, $title, $options);
-        }
-                    /**
-         * Clear all notifications.
-         *
-         * @return \Toastr 
-         * @static 
-         */ 
-        public static function clear()
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->clear();
-        }
-                    /**
-         * Limit the number of displayed toasts.
-         *
-         * @param int $max
-         * @return \Yoeunes\Toastr\Toastr 
-         * @static 
-         */ 
-        public static function maxItems($max)
-        {
-                        /** @var \Yoeunes\Toastr\Toastr $instance */
-                        return $instance->maxItems($max);
-        }
-         
-    }
-     
-}
-
     namespace Illuminate\Http { 
             /**
      * 
@@ -18522,7 +18165,7 @@ namespace  {
                 /**
              * Query lazily, by chunking the results of a query by comparing IDs.
              *
-             * @param int $count
+             * @param int $chunkSize
              * @param string|null $column
              * @param string|null $alias
              * @return \Illuminate\Support\LazyCollection 
@@ -18538,7 +18181,7 @@ namespace  {
                 /**
              * Query lazily, by chunking the results of a query by comparing IDs in descending order.
              *
-             * @param int $count
+             * @param int $chunkSize
              * @param string|null $column
              * @param string|null $alias
              * @return \Illuminate\Support\LazyCollection 
@@ -20670,8 +20313,6 @@ namespace  {
             class Excel extends \Maatwebsite\Excel\Facades\Excel {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
             class Indonesia extends \Laravolt\Indonesia\Facade {}
-            class Alert extends \UxWeb\SweetAlert\SweetAlert {}
-            class Toastr extends \Yoeunes\Toastr\Facades\Toastr {}
      
 }
 

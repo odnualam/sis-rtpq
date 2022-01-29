@@ -123,7 +123,6 @@ class JadwalController extends Controller
         $pdf = PDF::loadView('jadwal-pdf', ['jadwal' => $jadwal, 'kelas' => $kelas]);
 
         return $pdf->stream();
-        // return $pdf->stream('jadwal-pdf.pdf');
     }
 
     public function guru()

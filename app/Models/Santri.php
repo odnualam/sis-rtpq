@@ -40,6 +40,35 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTglLahir($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTmpLahir($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Santri whereUpdatedAt($value)
+ * @property string|null $agama
+ * @property string|null $anak_ke
+ * @property string|null $status_keluarga
+ * @property string|null $alamat_santri
+ * @property string|null $nama_ayah
+ * @property string|null $nama_ibu
+ * @property string|null $pekerjaan_ayah
+ * @property string|null $pekerjaan_ibu
+ * @property string|null $alamat_ayah
+ * @property string|null $alamat_ibu
+ * @property string|null $nama_wali
+ * @property string|null $alamat_wali
+ * @property string|null $pekerjaan_wali
+ * @property string|null $tahun_ajaran
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAgama($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatAyah($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatIbu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatSantri($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatWali($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAnakKe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaAyah($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaIbu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaWali($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNisn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanAyah($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanIbu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanWali($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereStatusKeluarga($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTahunAjaran($value)
  */
 class Santri extends Model
 {
