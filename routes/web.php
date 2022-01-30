@@ -67,6 +67,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/listsantripdf/{id}', 'santriController@cetak_pdf');
         Route::get('/santri/ubah-foto/{id}', 'santriController@ubah_foto')->name('santri.ubah-foto');
         Route::post('/santri/update-foto/{id}', 'santriController@update_foto')->name('santri.update-foto');
+        Route::post('/santri/naik-kelas/{id}', 'santriController@naik_kelas')->name('santri.naik-kelas');
         Route::get('/santri/export_excel', 'santriController@export_excel')->name('santri.export_excel');
         Route::post('/santri/import_excel', 'santriController@import_excel')->name('santri.import_excel');
         Route::delete('/santri/deleteAll', 'santriController@deleteAll')->name('santri.deleteAll');
@@ -79,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/jadwal/import_excel', 'JadwalController@import_excel')->name('jadwal.import_excel');
         Route::delete('/jadwal/deleteAll', 'JadwalController@deleteAll')->name('jadwal.deleteAll');
         Route::resource('/jadwal', 'JadwalController');
+        Route::resource('/mengajar', 'MengajarController');
         Route::get('/ulangan-kelas', 'UlanganController@create')->name('ulangan-kelas');
         Route::get('/ulangan-santri/{id}', 'UlanganController@edit')->name('ulangan-santri');
         Route::get('/ulangan-show/{id}', 'UlanganController@ulangan')->name('ulangan-show');

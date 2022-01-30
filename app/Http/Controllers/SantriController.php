@@ -16,7 +16,7 @@ class SantriController extends Controller
 {
     public function index()
     {
-        $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
+        $kelas = Kelas::OrderBy('id', 'asc')->get();
 
         return view('admin.santri.index', compact('kelas'));
     }
@@ -156,6 +156,22 @@ class SantriController extends Controller
         $santri = Santri::findorfail($id);
 
         return view('admin.santri.ubah-foto', compact('santri'));
+    }
+
+    public function naik_kelas($id)
+    {
+        $id = Crypt::decrypt($id);
+        $santri = Santri::findorfail($id);
+
+        if ($santri->kelas_id == 1) {
+            $santri->update(['kelas_id' => 2]);
+        } elseif ($santri->kelas_id == 2) {
+            $santri->update(['kelas_id' => 3]);
+        } else {
+            return redirect()->back()->with('success', 'Saat ini santri berada dikelas tertinggi.');
+        }
+
+        return redirect()->back()->with('success', 'Santri Berhasil Naik Kelas');
     }
 
     public function update_foto(Request $request, $id)

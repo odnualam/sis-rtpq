@@ -76,17 +76,17 @@
                         </a>
                     </li>
 
+                    <li class="menu-item" aria-haspopup="true" id="DataMengajar">
+                        <a href="{{ route('mengajar.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon-clock-2"></i>
+                            <span class="menu-text">Data Mengajar</span>
+                        </a>
+                    </li>
+
                     <li class="menu-item" aria-haspopup="true" id="DataMapel">
                         <a href="{{ route('mapel.index') }}" class="menu-link">
                             <i class="menu-icon flaticon2-list-1"></i>
                             <span class="menu-text">Data Mata Pelajaran</span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item" aria-haspopup="true" id="AbsensiGuru">
-                        <a href="{{ route('guru.absensi') }}" class="menu-link">
-                            <i class="menu-icon flaticon2-analytics"></i>
-                            <span class="menu-text">Naik Kelas</span>
                         </a>
                     </li>
 

@@ -43,13 +43,19 @@
                                 <td>{{ $data->nama_santri }}</td>
                                 <td>{{ $data->jk == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                 <td>
-                                    <form action="{{ route('santri.destroy', $data->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <a href="{{ route('santri.show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-primary btn-sm"><i class="flaticon-eye"></i></a>
-                                        <a href="{{ route('santri.edit', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-edit"></i></a>
-                                        <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
-                                    </form>
+                                    <div class="btn-group">
+                                        <form action="{{ route('santri.destroy', $data->id) }}" method="post" class="mr-2">
+                                            @csrf
+                                            @method('delete')
+                                            <a href="{{ route('santri.show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-primary btn-sm"><i class="flaticon-eye"></i></a>
+                                            <a href="{{ route('santri.edit', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-edit"></i></a>
+                                            <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
+                                        </form>
+                                        <form action="{{ route('santri.naik-kelas', Crypt::encrypt($data->id)) }}" method="post">
+                                            @csrf
+                                            <button title="Naik Kelas" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon2-zig-zag-line-sign"></i></button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
