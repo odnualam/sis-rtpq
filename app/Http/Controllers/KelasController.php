@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
-use App\Models\Paket;
+use App\Models\Kelompok;
 use App\Models\Santri;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class KelasController extends Controller
     {
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $guru = Guru::OrderBy('nama_guru', 'asc')->get();
-        $paket = Paket::all();
+        $kelompok = Kelompok::all();
 
         return view('admin.kelas.index', compact('kelas', 'guru'));
     }

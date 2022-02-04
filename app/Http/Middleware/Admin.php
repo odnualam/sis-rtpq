@@ -8,7 +8,7 @@ class Admin
 {
     public function handle($request, Closure $next)
     {
-        if ($request->user()->role != 'Operator' && $request->user()->role != 'Admin') {
+        if ($request->user()->role != 'Admin') {
             return redirect('/');
         }
 

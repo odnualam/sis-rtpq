@@ -33,7 +33,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['guru'])->group(function () {
-        Route::get('/absen', 'GuruController@absen')->name('absen');
+        Route::get('/absen', 'GuruController@absensi')->name('absensi.index');
+        Route::get('/absen/{id}', 'GuruController@absensiShow')->name('absensi.show');
         Route::post('/absen/simpan', 'GuruController@simpan')->name('absen.simpan');
         Route::get('/jadwal/guru', 'JadwalController@guru')->name('jadwal.guru');
         Route::resource('/nilai', 'NilaiController');
@@ -49,7 +50,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/admin/home', 'HomeController@admin')->name('admin.home');
         Route::get('/admin/pengumuman', 'PengumumanController@index')->name('admin.pengumuman');
         Route::post('/admin/pengumuman/simpan', 'PengumumanController@simpan')->name('admin.pengumuman.simpan');
-        Route::get('/guru/absensi', 'GuruController@absensi')->name('guru.absensi');
         Route::get('/guru/kehadiran/{id}', 'GuruController@kehadiran')->name('guru.kehadiran');
         Route::get('/absen/json', 'GuruController@json');
         Route::get('/guru/mapel/{id}', 'GuruController@mapel')->name('guru.mapel');
@@ -74,6 +74,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/santri', 'santriController');
         Route::get('/mapel/getMapelJson', 'MapelController@getMapelJson');
         Route::resource('/mapel', 'MapelController');
+        Route::resource('/kelompok', 'KelompokController');
         Route::get('/jadwal/view/json', 'JadwalController@view');
         Route::get('/jadwalkelaspdf/{id}', 'JadwalController@cetak_pdf');
         Route::get('/jadwal/export_excel', 'JadwalController@export_excel')->name('jadwal.export_excel');

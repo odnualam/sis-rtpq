@@ -13,12 +13,23 @@ class MengajarController extends Controller
 {
     public function index()
     {
-        $mapel = Mapel::OrderBy('paket_id', 'asc')->OrderBy('urutan', 'asc')->get();
+        $mapel = Mapel::OrderBy('kelompok_id', 'asc')->OrderBy('urutan', 'asc')->get();
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $guru = Guru::OrderBy('kode', 'asc')->get();
         $mengajar  = Mengajar::all();
 
         return view('admin.mengajar.index', compact('mapel', 'kelas', 'guru', 'mengajar'));
+    }
+
+    public function show($id)
+    {
+        $id = Crypt::decrypt($id);
+        $mapel = Mapel::OrderBy('kelompok_id', 'asc')->OrderBy('urutan', 'asc')->get();
+        $kelas = Kelas::findorfail($id);
+        $guru = Guru::OrderBy('kode', 'asc')->get();
+        $mengajar  = Mengajar::where('kelas_id', $id)->get();
+
+        return view('admin.mengajar.show', compact('mapel', 'kelas', 'guru', 'mengajar'));
     }
 
     public function store(Request $request)
@@ -49,7 +60,7 @@ class MengajarController extends Controller
         $mengajar  = Mengajar::findorfail($id);
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $guru = Guru::OrderBy('kode', 'asc')->get();
-        $mapel = Mapel::OrderBy('paket_id', 'asc')->OrderBy('urutan', 'asc')->get();
+        $mapel = Mapel::OrderBy('kelompok_id', 'asc')->OrderBy('urutan', 'asc')->get();
 
         return view('admin.mengajar.edit', compact('mengajar', 'mapel', 'kelas', 'guru', 'mapel'));
     }

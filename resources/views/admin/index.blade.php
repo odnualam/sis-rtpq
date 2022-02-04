@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 @section('heading', 'Dashboard')
-@section('page')
-    <li class="breadcrumb-item active">Admin</li>
-    <li class="breadcrumb-item active">Dashboard</li>
-@endsection
 @section('content')
     <div class="row">
         <div class="col-xl-3">

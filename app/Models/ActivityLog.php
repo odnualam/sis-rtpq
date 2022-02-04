@@ -7,7 +7,7 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * App\Models\ActivityLog.
+ * App\Models\ActivityLog
  *
  * @property int $id
  * @property string|null $log_name

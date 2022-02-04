@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Hari.
+ * App\Models\Hari
  *
  * @property int $id
  * @property string $nama_hari

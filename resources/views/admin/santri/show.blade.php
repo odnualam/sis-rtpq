@@ -44,7 +44,7 @@
                                 <td>{{ $data->jk == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <form action="{{ route('santri.destroy', $data->id) }}" method="post" class="mr-2">
+                                        <form action="{{ route('santri.destroy', $data->id) }}" method="post" class="delete_form">
                                             @csrf
                                             @method('delete')
                                             <a href="{{ route('santri.show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-primary btn-sm"><i class="flaticon-eye"></i></a>

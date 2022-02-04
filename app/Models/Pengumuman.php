@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Pengumuman.
+ * App\Models\Pengumuman
  *
  * @property int $id
  * @property string $opsi

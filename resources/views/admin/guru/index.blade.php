@@ -16,12 +16,12 @@
                             <button type="button" class="btn btn-icon btn-outline-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">
                                 <i class="flaticon-plus"></i>
                             </button>
-                            <a href="{{ route('guru.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
+                            {{-- <a href="{{ route('guru.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
                                 <i class="flaticon-download"></i>
                             </a>
                             <button type="button" class="btn btn-icon btn-outline-warning btn-sm" data-toggle="modal" data-target="#importExcel">
                                 <i class="flaticon-upload-1"></i>
-                            </button>
+                            </button> --}}
                             <button type="button" class="btn btn-icon btn-outline-danger btn-sm" data-toggle="modal" data-target="#dropTable">
                                 <i class="flaticon-delete"></i>
                             </button>
@@ -34,19 +34,33 @@
                         <thead class="text-uppercase">
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Mapel</th>
-                                <th>Lihat Guru</th>
+                                <th>Nama</th>
+                                <th>Id Card</th>
+                                <th>Foto</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mapel as $data)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->nama_mapel }}</td>
-                                    <td>
-                                        <a href="{{ route('guru.mapel', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-eye"></i></a>
-                                    </td>
-                                </tr>
+                            @foreach ($guru as $data)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data->nama_guru }}</td>
+                                <td>{{ $data->id_card }}</td>
+                                <td>
+                                    <a href="{{ asset($data->foto) }}" data-toggle="lightbox" data-title="Foto {{ $data->nama_guru }}" data-gallery="gallery" data-footer='<a href="{{ route('guru.ubah-foto', Crypt::encrypt($data->id)) }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
+                                        <img src="{{ asset($data->foto) }}" width="130px" class="img-fluid mb-2">
+                                    </a>
+                                </td>
+                                <td>
+                                    <form class="delete_form" action="{{ route('guru.destroy', $data->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <a href="{{ route('guru.show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-primary btn-sm"><i class="flaticon-eye"></i></a>
+                                        <a href="{{ route('guru.edit', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-edit"></i></a>
+                                        <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -100,11 +114,6 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="nip">NIP</label>
-                                    <input type="text" id="nip" name="nip" onkeypress="return inputAngka(event)"
-                                        class="form-control @error('nip') is-invalid @enderror">
-                                </div>
                                 <div class="form-group">
                                     <label for="mapel_id">Mapel</label>
                                     <select id="mapel_id" name="mapel_id"
@@ -179,7 +188,6 @@
                             <div class="card-body">
                                 <ul>
                                     <li>rows 1 = nama guru</li>
-                                    <li>rows 2 = nip guru</li>
                                     <li>rows 3 = jenis kelamin</li>
                                     <li>rows 4 = mata pelajaran</li>
                                 </ul>

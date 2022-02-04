@@ -29,16 +29,10 @@
                                 <span class="font-weight-bold text-uppercase">Id Card</span> <a class="text-muted float-right">{{ Auth::user()->id_card }}</a>
                             </li>
                             <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">NIP</span> <a class="text-muted float-right">{{ Auth::user()->guru(Auth::user()->id_card)->nip }}</a>
-                            </li>
-                            <li class="list-group-item">
                                 <span class="font-weight-bold text-uppercase">Email</span> <a class="text-muted float-right">{{ Auth::user()->email }}</a>
                             </li>
                             <li class="list-group-item">
                                 <span class="font-weight-bold text-uppercase">Guru Mapel</span> <a class="text-muted float-right">{{ Auth::user()->guru(Auth::user()->id_card)->mapel->nama_mapel }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <span class="font-weight-bold text-uppercase">Kode Jadwal</span> <a class="text-muted float-right">{{ Auth::user()->guru(Auth::user()->id_card)->kode }}</a>
                             </li>
                             <li class="list-group-item">
                                 <span class="font-weight-bold text-uppercase">Tempat Lahir</span> <a class="text-muted float-right">{{ Auth::user()->guru(Auth::user()->id_card)->tmp_lahir }}</a>

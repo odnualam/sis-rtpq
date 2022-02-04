@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Mapel;
-use App\Models\Paket;
+use App\Models\Kelompok;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -13,17 +13,17 @@ class MapelController extends Controller
 {
     public function index()
     {
-        $mapel = Mapel::OrderBy('paket_id', 'asc')->OrderBy('urutan', 'asc')->get();
-        $paket = Paket::all();
+        $mapel = Mapel::OrderBy('kelompok_id', 'asc')->OrderBy('urutan', 'asc')->get();
+        $kelompok = Kelompok::all();
 
-        return view('admin.mapel.index', compact('mapel', 'paket'));
+        return view('admin.mapel.index', compact('mapel', 'kelompok'));
     }
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'nama_mapel' => 'required',
-            'paket_id' => 'required',
+            'kelompok_id' => 'required',
             'urutan' => 'required',
         ]);
 
@@ -33,7 +33,7 @@ class MapelController extends Controller
             ],
             [
                 'nama_mapel' => $request->nama_mapel,
-                'paket_id' => $request->paket_id,
+                'kelompok_id' => $request->kelompok_id,
                 'urutan' => $request->urutan,
             ]
         );
@@ -45,9 +45,9 @@ class MapelController extends Controller
     {
         $id = Crypt::decrypt($id);
         $mapel = Mapel::findorfail($id);
-        $paket = Paket::all();
+        $kelompok = Kelompok::all();
 
-        return view('admin.mapel.edit', compact('mapel', 'paket'));
+        return view('admin.mapel.edit', compact('mapel', 'kelompok'));
     }
 
     public function destroy($id) {

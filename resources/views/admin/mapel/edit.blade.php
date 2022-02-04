@@ -22,15 +22,15 @@
                                 <input type="text" id="nama_mapel" name="nama_mapel" value="{{ $mapel->nama_mapel }}" class="form-control @error('nama_mapel') is-invalid @enderror" placeholder="{{ __('Nama Mata Pelajaran') }}">
                                 </div>
                                 <div class="form-group">
-                                <label for="paket_id">Paket</label>
-                                <select id="paket_id" name="paket_id" class="form-control @error('paket_id') is-invalid @enderror  ">
-                                    <option value="">-- Pilih Paket Mapel --</option>
-                                    @foreach ($paket as $data)
+                                <label for="kelompok_id">Kelompok</label>
+                                <select id="kelompok_id" name="kelompok_id" class="form-control @error('kelompok_id') is-invalid @enderror  ">
+                                    <option value="">-- Pilih Kelompok Mapel --</option>
+                                    @foreach ($kelompok as $data)
                                         <option value="{{ $data->id }}"
-                                            @if ($mapel->paket_id == $data->id)
+                                            @if ($mapel->kelompok_id == $data->id)
                                                 selected
                                             @endif
-                                        >{{ $data->ket }}
+                                        >{{ $data->nama }}
                                     </option>
                                     @endforeach
                                 </select>

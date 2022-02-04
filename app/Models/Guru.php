@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * App\Models\Guru.
+ * App\Models\Guru
  *
  * @property int $id
  * @property string $id_card
- * @property string|null $nip
+ * @property string|null $pendidikan
  * @property string $nama_guru
  * @property int $mapel_id
  * @property string|null $kode
@@ -36,7 +36,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Guru whereKode($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guru whereMapelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guru whereNamaGuru($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereNip($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Guru wherePendidikan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guru whereTelp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guru whereTglLahir($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Guru whereTmpLahir($value)
@@ -51,7 +51,7 @@ class Guru extends Model
 
     protected $table = 'guru';
 
-    protected $fillable = ['id_card', 'nip', 'nama_guru', 'mapel_id', 'kode', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
+    protected $fillable = ['id_card', 'pendidikan', 'nama_guru', 'mapel_id', 'kode', 'jk', 'telp', 'tmp_lahir', 'tgl_lahir', 'foto'];
 
     public function mapel()
     {

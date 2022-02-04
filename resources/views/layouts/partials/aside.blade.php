@@ -16,7 +16,7 @@
     <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
         <div id="kt_aside_menu" class="aside-menu my-4" data-menu-vertical="1" data-menu-scroll="1" data-menu-dropdown-timeout="500">
             <ul class="menu-nav">
-                @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Operator')
+                @if (Auth::user()->role == 'Admin')
                     <li class="menu-item" aria-haspopup="true" id="AdminHome">
                         <a href="{{ route('admin.home') }}" class="menu-link">
                             <i class="menu-icon flaticon2-layers"></i>
@@ -83,6 +83,12 @@
                         </a>
                     </li>
 
+                    <li class="menu-item" aria-haspopup="true" id="DataKelompok">
+                        <a href="{{ route('kelompok.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon2-cube"></i>
+                            <span class="menu-text">Data Kelompok Mapel</span>
+                        </a>
+                    </li>
                     <li class="menu-item" aria-haspopup="true" id="DataMapel">
                         <a href="{{ route('mapel.index') }}" class="menu-link">
                             <i class="menu-icon flaticon2-list-1"></i>
@@ -166,27 +172,20 @@
                 @elseif (Auth::user()->role == 'Guru' && Auth::user()->guru(Auth::user()->id_card))
                     <li class="menu-item" aria-haspopup="true" id="Home">
                         <a href="{{ url('/') }}" class="menu-link">
-                            <i class="menu-icon flaticon-home"></i>
+                            <i class="menu-icon flaticon2-layers"></i>
                             <span class="menu-text">Beranda</span>
                         </a>
                     </li>
 
                     <li class="menu-section">
-                        <h4 class="menu-text">Main Menu</h4>
+                        <h4 class="menu-text">Akademik</h4>
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                     </li>
 
                     <li class="menu-item" aria-haspopup="true" id="AbsenGuru">
-                        <a href="{{ route('absen') }}" class="menu-link">
+                        <a href="{{ route('absensi.index') }}" class="menu-link">
                             <i class="menu-icon flaticon2-accept"></i>
-                            <span class="menu-text">Absen</span>
-                        </a>
-                    </li>
-
-                    <li class="menu-item" aria-haspopup="true" id="JadwalGuru">
-                        <a href="{{ route('jadwal.guru') }}" class="menu-link">
-                            <i class="menu-icon flaticon2-calendar-4"></i>
-                            <span class="menu-text">Jadwal Guru</span>
+                            <span class="menu-text">Absensi Santri</span>
                         </a>
                     </li>
 
@@ -239,7 +238,7 @@
                 @elseif (Auth::user()->role == 'Santri' && Auth::user()->santri(Auth::user()->nisn))
                     <li class="menu-item" aria-haspopup="true" id="Home">
                         <a href="{{ url('/') }}" class="menu-link">
-                            <i class="menu-icon flaticon-home"></i>
+                            <i class="menu-icon flaticon2-layers"></i>
                             <span class="menu-text">Beranda</span>
                         </a>
                     </li>

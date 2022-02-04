@@ -79,7 +79,6 @@
                             <div class="col-md-12">
                                 <input type="hidden" id="id" name="id">
                                 <div class="form-group" id="form_nama"></div>
-                                <div class="form-group" id="form_paket"></div>
                                 <div class="form-group">
                                     <label for="nama_kelas">Nama Kelas</label>
                                     <input type='text' id="nama_kelas" onkeyup="this.value = this.value.toUpperCase()" name='nama_kelas' class="form-control @error('nama_kelas') is-invalid @enderror" placeholder="{{ __('Nama Kelas') }}">

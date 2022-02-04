@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * App\Models\Jadwal.
+ * App\Models\Jadwal
  *
  * @property int $id
  * @property int $hari_id
@@ -16,16 +16,15 @@ use Illuminate\Support\Facades\Auth;
  * @property int $guru_id
  * @property string $jam_mulai
  * @property string $jam_selesai
- * @property \Illuminate\Support\Carbon|null $created_at
+ * @property string|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
  * @property-read \App\Models\Guru|null $guru
  * @property-read \App\Models\Hari|null $hari
  * @property-read \App\Models\Kelas|null $kelas
  * @property-read \App\Models\Mapel|null $mapel
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newQuery()
- * @method static \Illuminate\Database\Query\Builder|Jadwal onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal query()
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereDeletedAt($value)
@@ -37,11 +36,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereKelasId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereMapelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereUpdatedAt($value)
- * @method static \Illuminate\Database\Query\Builder|Jadwal withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Jadwal withoutTrashed()
  * @mixin \Eloquent
- * @property int $ruang_id
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereRuangId($value)
  */
 class Jadwal extends Model
 {

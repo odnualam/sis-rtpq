@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Sikap.
+ * App\Models\Sikap
  *
  * @property int $id
- * @property int $siswa_id
+ * @property int $santri_id
  * @property int $kelas_id
  * @property int $guru_id
  * @property int $mapel_id
@@ -25,14 +25,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereKelasId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereMapelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSantriId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSikap1($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSikap2($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSikap3($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSiswaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property int $santri_id
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSantriId($value)
  */
 class Sikap extends Model
 {

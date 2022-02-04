@@ -33,7 +33,7 @@ class GuruImport implements ToModel
         return new Guru([
             'id_card' => $id_card,
             'nama_guru' => $row[0],
-            'nip' => $row[1],
+            'pendidikan' => $row[1],
             'jk' => $row[2],
             'foto' => $foto,
             'mapel_id' => $mapel->id,

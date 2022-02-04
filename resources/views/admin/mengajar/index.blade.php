@@ -1,4 +1,4 @@
- @extends('layouts.admin')
+@extends('layouts.admin')
 @section('heading', 'Data Mengajar')
 @section('page')
     <li class="breadcrumb-item active">Data Mengajar</li>
@@ -24,22 +24,18 @@
                         <thead class="text-uppercase">
                             <tr>
                                 <th>No.</th>
-                                <th>Nama Guru</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Kelas</th>
-                                <th>Aksi</th>
+                                <th>Nama Kelas</th>
+                                <th>Lihat Mengajar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($mengajar as $data)
+                            @foreach ($kelas as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->guru->nama_guru }}</td>
-                                <td>{{ $data->mapel->nama_mapel }}</td>
-                                <td>{{ $data->kelas->nama_kelas }}</td>
+                                <td>{{ $data->nama_kelas }}</td>
                                 <td>
-                                    <a href="{{ route('mengajar.edit', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm">
-                                        <i class="flaticon-edit"></i>
+                                    <a href="{{ route('mengajar.show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm">
+                                        <i class="flaticon-eye"></i>
                                     </a>
                                 </td>
                             </tr>

@@ -59,7 +59,7 @@
                         @endif
                         {{-- <td>{{ $data->created_at->format('l, d F Y') }}</td> --}}
                         <td>
-                            <form action="{{ route('user.destroy', $data->id) }}" method="post">
+                            <form class="delete_form" action="{{ route('user.destroy', $data->id) }}" method="post">
                             @csrf
                             @method('delete')
                             <button class="btn btn-danger btn-sm"><i class="nav-icon fas fa-trash-alt"></i> &nbsp; Hapus</button>

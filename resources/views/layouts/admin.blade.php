@@ -230,6 +230,29 @@
         $(function() {
             $('.textarea').summernote()
         })
+
+        $(function(){
+            $("form.delete_form button").click(function(e) {
+                e.preventDefault();
+                var form = $(this).parent();
+                Swal.fire({
+                    title: 'Hapus?',
+                    text: "Data Tidak Dapat kembali!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, hapus!'
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                            "Dihapus!",
+                            "Data telah dihapus.",
+                            "success"
+                        )
+                        form.submit();
+                    }
+                });
+            });
+        });
     </script>
 
     @yield('script')

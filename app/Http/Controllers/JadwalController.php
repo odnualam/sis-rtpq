@@ -8,6 +8,8 @@ use App\Models\Guru;
 use App\Models\Hari;
 use App\Models\Jadwal;
 use App\Models\Kelas;
+use App\Models\Mapel;
+use App\Models\Mengajar;
 use App\Models\Santri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,8 +24,9 @@ class JadwalController extends Controller
         $hari = Hari::all();
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
         $guru = Guru::OrderBy('kode', 'asc')->get();
+        $mapel = Mapel::OrderBy('kelompok_id', 'asc')->OrderBy('urutan', 'asc')->get();
 
-        return view('admin.jadwal.index', compact('hari', 'kelas', 'guru'));
+        return view('admin.jadwal.index', compact('hari', 'kelas', 'guru', 'mapel'));
     }
 
     public function store(Request $request)
@@ -31,12 +34,12 @@ class JadwalController extends Controller
         $this->validate($request, [
             'hari_id' => 'required',
             'kelas_id' => 'required',
-            'guru_id' => 'required',
+            'mapel_id' => 'required',
             'jam_mulai' => 'required',
             'jam_selesai' => 'required',
         ]);
 
-        $guru = Guru::findorfail($request->guru_id);
+        $mengajar = Mengajar::where('kelas_id', $request->kelas_id)->first();
         Jadwal::updateOrCreate(
             [
                 'id' => $request->jadwal_id,
@@ -44,8 +47,8 @@ class JadwalController extends Controller
             [
                 'hari_id' => $request->hari_id,
                 'kelas_id' => $request->kelas_id,
-                'mapel_id' => $guru->mapel_id,
-                'guru_id' => $request->guru_id,
+                'mapel_id' => $request->mapel_id,
+                'guru_id' => $mengajar->guru_id,
                 'jam_mulai' => date('H:i:s', strtotime($request->jam_mulai)),
                 'jam_selesai' => date('H:i:s', strtotime($request->jam_selesai)),
             ]

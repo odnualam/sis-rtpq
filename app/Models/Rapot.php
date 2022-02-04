@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Rapot.
+ * App\Models\Rapot
  *
  * @property int $id
- * @property int $siswa_id
+ * @property int $santri_id
  * @property int $kelas_id
  * @property int $guru_id
  * @property int $mapel_id
@@ -34,11 +34,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Rapot wherePDeskripsi($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Rapot wherePNilai($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Rapot wherePPredikat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereSiswaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereSantriId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereUpdatedAt($value)
  * @mixin \Eloquent
- * @property int $santri_id
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereSantriId($value)
  */
 class Rapot extends Model
 {

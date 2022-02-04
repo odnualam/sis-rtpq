@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Ulangan.
+ * App\Models\Ulangan
  *
  * @property int $id
- * @property int $siswa_id
+ * @property int $santri_id
  * @property int $kelas_id
  * @property int $guru_id
  * @property int $mapel_id
@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereKelasId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereSiswaId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereSantriId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUas($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUlha1($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUlha2($value)
@@ -35,8 +35,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUts($value)
  * @mixin \Eloquent
- * @property int $santri_id
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereSantriId($value)
  */
 class Ulangan extends Model
 {

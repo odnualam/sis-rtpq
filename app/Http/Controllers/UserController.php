@@ -83,7 +83,7 @@ class UserController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
-        if ($id == 'Admin' && Auth::user()->role == 'Operator') {
+        if ($id == 'Admin' && Auth::user()->role != 'Admin') {
             return redirect()->back()->with('warning', 'Maaf halaman ini hanya bisa di akses oleh Admin!');
         } else {
             $user = User::where('role', $id)->get();
@@ -104,8 +104,8 @@ class UserController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Maaf user ini bukan milik anda!');
             }
-        } elseif ($user->role == 'Operator') {
-            if ($user->id == Auth::user()->id || Auth::user()->role == 'Admin') {
+        } elseif ($user->role == 'Admin') {
+            if ($user->id == Auth::user()->id) {
                 $user->delete();
 
                 return redirect()->back()->with('warning', 'Data user berhasil dihapus!');

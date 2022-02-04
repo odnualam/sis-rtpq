@@ -50,10 +50,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nip">NIP</label>
-                            <input type="text" id="nip" name="nip" onkeypress="return inputAngka(event)" value="{{ Auth::user()->guru(Auth::user()->id_card)->nip }}" class="form-control @error('nip') is-invalid @enderror" disabled>
-                        </div>
-                        <div class="form-group">
                             <label for="jk">Jenis Kelamin</label>
                             <select id="jk" name="jk" class="  form-control @error('jk') is-invalid @enderror">
                                 <option value="">-- Pilih Jenis Kelamin --</option>

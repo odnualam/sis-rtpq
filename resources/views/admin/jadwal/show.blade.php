@@ -44,7 +44,7 @@
                             </td>
                             <td>{{ $data->jam_mulai }} - {{ $data->jam_selesai }}</td>
                             <td>
-                            <form action="{{ route('jadwal.destroy', $data->id) }}" method="post">
+                            <form class="delete_form" action="{{ route('jadwal.destroy', $data->id) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="{{ route('jadwal.edit',Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-edit"></i></a>

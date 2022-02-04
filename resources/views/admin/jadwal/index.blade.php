@@ -16,12 +16,12 @@
                             <button type="button" class="btn btn-icon btn-outline-primary btn-sm" data-toggle="modal" data-target=".tambah-jadwal">
                                 <i class="flaticon-plus"></i>
                             </button>
-                            <a href="{{ route('jadwal.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
+                            {{-- <a href="{{ route('jadwal.export_excel') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
                                 <i class="flaticon-download"></i>
                             </a>
                             <button type="button" class="btn btn-icon btn-outline-warning btn-sm" data-toggle="modal" data-target="#importExcel">
                                 <i class="flaticon-upload-1"></i>
-                            </button>
+                            </button> --}}
                             <button type="button" class="btn btn-icon btn-outline-danger btn-sm" data-toggle="modal" data-target="#dropTable">
                                 <i class="flaticon-delete"></i>
                             </button>
@@ -130,7 +130,7 @@
                                         class="form-control @error('hari_id') is-invalid @enderror  ">
                                         <option value="">-- Pilih Hari --</option>
                                         @foreach ($hari as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_hari }}</option>
+                                            <option value="{{ $data->id }}">{{ $data->nama_hari }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -140,17 +140,16 @@
                                         class="form-control @error('kelas_id') is-invalid @enderror  ">
                                         <option value="">-- Pilih Kelas --</option>
                                         @foreach ($kelas as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_kelas }}</option>
+                                            <option value="{{ $data->id }}">{{ $data->nama_kelas }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="guru_id">Pengajar</label>
-                                    <select id="guru_id" name="guru_id"
-                                        class="form-control @error('guru_id') is-invalid @enderror  ">
-                                        <option value="">-- Pilih Guru --</option>
-                                        @foreach ($guru as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_guru }}</option>
+                                    <label for="mapel_id">Mata Pelajaran</label>
+                                    <select id="mapel_id" name="mapel_id" class="form-control @error('mapel_id') is-invalid @enderror">
+                                        <option value="">-- Pilih Mapel --</option>
+                                        @foreach ($mapel as $data)
+                                            <option value="{{ $data->id }}">{{ $data->nama_mapel }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Nilai.
+ * App\Models\Nilai
  *
  * @property int $id
  * @property int $guru_id

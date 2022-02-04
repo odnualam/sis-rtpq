@@ -15,6 +15,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
 class GuruController extends Controller
@@ -23,8 +24,9 @@ class GuruController extends Controller
     {
         $mapel = Mapel::orderBy('nama_mapel')->get();
         $max = Guru::max('id_card');
+        $guru = Guru::all();
 
-        return view('admin.guru.index', compact('mapel', 'max'));
+        return view('admin.guru.index', compact('mapel', 'max', 'guru'));
     }
 
     public function store(Request $request)
@@ -52,7 +54,7 @@ class GuruController extends Controller
 
         $guru = Guru::create([
             'id_card' => $request->id_card,
-            'nip' => $request->nip,
+            'pendidikan' => $request->pendidikan,
             'nama_guru' => $request->nama_guru,
             'mapel_id' => $request->mapel_id,
             'kode' => $request->kode,
@@ -170,98 +172,72 @@ class GuruController extends Controller
         return view('admin.guru.show', compact('mapel', 'guru'));
     }
 
-    public function absen()
+    public function absensi()
     {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $jadwal = Jadwal::where('guru_id', $guru->id)->orderBy('kelas_id')->firstOrFail();
-        $absen = Absen::get();
-        $kelas = Kelas::findorfail($jadwal->kelas_id);
-        $santri = Santri::where('kelas_id', $jadwal->kelas_id)->get();
+        $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
 
-        return view('guru.absen', compact('absen', 'kelas', 'santri'));
+        return view('guru.absensi.index', compact('kelas'));
+    }
+
+    public function absensiShow($id)
+    {
+        $id = Crypt::decrypt($id);
+        $kelas = Kelas::findorfail($id);
+
+        $santri = DB::table('santri')
+            ->leftJoin('absensi', function($join) use ($id)
+                {
+                    $join->on('santri.id', '=', 'absensi.santri_id')
+                        ->where('absensi.tahun_ajaran', __tahun_ajaran__())
+                        ->where('absensi.semester', __semester__(date('n')))
+                        ->where('absensi.kelas_id', $id);
+                })
+            ->select('santri.id', 'santri.kelas_id', 'santri.nisn', 'santri.nama_santri', 'santri.jk', 'absensi.absen_s', 'absensi.absen_i', 'absensi.absen_a')
+            ->where('santri.kelas_id', $id)
+            ->groupBy('santri.id')
+            ->get();
+
+        return view('guru.absensi.show', compact('santri', 'kelas'));
     }
 
     public function simpan(Request $request)
     {
-        $this->validate($request, [
-            'id_card' => 'required',
-            'kehadiran_id' => 'required',
-        ]);
-        $cekGuru = Guru::where('id_card', $request->id_card)->count();
-        if ($cekGuru >= 1) {
-            $guru = Guru::where('id_card', $request->id_card)->first();
-            if ($guru->id_card == Auth::user()->id_card) {
-                $cekAbsen = Absen::where('guru_id', $guru->id)->where('tanggal', date('Y-m-d'))->count();
-                if ($cekAbsen == 0) {
-                    if (date('w') != '0' && date('w') != '6') {
-                        if (date('H:i:s') >= '06:00:00') {
-                            if (date('H:i:s') >= '09:00:00') {
-                                if (date('H:i:s') >= '16:15:00') {
-                                    Absen::create([
-                                        'tanggal' => date('Y-m-d'),
-                                        'guru_id' => $guru->id,
-                                        'kehadiran_id' => '6',
-                                    ]);
+        $now = Absen::where('santri_id', $request->santri_id)
+            ->where('tahun_ajaran', $request->tahun_ajaran)
+            ->where('semester', $request->semester)
+            ->where('kelas_id', $request->kelas_id)
+            ->first();
 
-                                    return redirect()->back()->with('info', 'Maaf sekarang sudah waktunya pulang!');
-                                } else {
-                                    if ($request->kehadiran_id == '1') {
-                                        $terlambat = date('H') - 9 .' Jam '.date('i').' Menit';
-                                        if (date('H') - 9 == 0) {
-                                            $terlambat = date('i').' Menit';
-                                        }
-                                        Absen::create([
-                                            'tanggal' => date('Y-m-d'),
-                                            'guru_id' => $guru->id,
-                                            'kehadiran_id' => '5',
-                                        ]);
+        if ($now != null) {
+            foreach($request->input('santri_id') as $key => $value) {
+                if(!empty($request->input('santri_id.' . $key))) {
+                    $data = [
+                        'absen_s' => $request->input('absen_s.' . $key),
+                        'absen_i' => $request->input('absen_i.' . $key),
+                        'absen_a' => $request->input('absen_a.' . $key)
+                    ];
 
-                                        return redirect()->back()->with('warning', 'Maaf anda terlambat '.$terlambat.'!');
-                                    } else {
-                                        Absen::create([
-                                            'tanggal' => date('Y-m-d'),
-                                            'guru_id' => $guru->id,
-                                            'kehadiran_id' => $request->kehadiran_id,
-                                        ]);
-
-                                        return redirect()->back()->with('success', 'Anda hari ini berhasil absen!');
-                                    }
-                                }
-                            } else {
-                                Absen::create([
-                                    'tanggal' => date('Y-m-d'),
-                                    'guru_id' => $guru->id,
-                                    'kehadiran_id' => $request->kehadiran_id,
-                                ]);
-
-                                return redirect()->back()->with('success', 'Anda hari ini berhasil absen tepat waktu!');
-                            }
-                        } else {
-                            return redirect()->back()->with('info', 'Maaf absensi di mulai jam 6 pagi!');
-                        }
-                    } else {
-                        $namaHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
-                        $d = date('w');
-                        $hari = $namaHari[$d];
-
-                        return redirect()->back()->with('info', 'Maaf sekolah hari '.$hari.' libur!');
-                    }
-                } else {
-                    return redirect()->back()->with('warning', 'Maaf absensi tidak bisa dilakukan 2x!');
+                    Absen::where('santri_id', $request->input('santri_id.' . $key))
+                    ->where('tahun_ajaran', $request->tahun_ajaran)
+                    ->where('semester', $request->semester)
+                    ->where('kelas_id', $request->kelas_id)
+                    ->update($data);
                 }
-            } else {
-                return redirect()->back()->with('error', 'Maaf id card ini bukan milik anda!');
             }
         } else {
-            return redirect()->back()->with('error', 'Maaf id card ini tidak terdaftar!');
+            foreach($request->input('santri_id') as $key => $value) {
+                Absen::create([
+                    'tahun_ajaran' => $request->tahun_ajaran,
+                    'semester' => $request->semester,
+                    'kelas_id' => $request->kelas_id,
+                    'santri_id' => $request->input('santri_id.' . $key),
+                    'absen_s' => $request->input('absen_s.' . $key),
+                    'absen_i' => $request->input('absen_i.' . $key),
+                    'absen_a' => $request->input('absen_a.' . $key),
+                ]);
+            }
         }
-    }
-
-    public function absensi()
-    {
-        $guru = Guru::all();
-
-        return view('admin.guru.absen', compact('guru'));
+        return redirect()->back()->with('success', 'Data Absensi Santri Berhasil Diperbaharui.');
     }
 
     public function kehadiran($id)

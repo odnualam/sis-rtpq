@@ -7,10 +7,11 @@ use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
-use App\Models\Paket;
+use App\Models\Kelompok;
 use App\Models\Pengumuman;
 use App\Models\Santri;
 use App\Models\User;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,10 +24,19 @@ class HomeController extends Controller
     {
         $hari = date('w');
         $jam = date('H:i');
-        $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('hari_id', $hari)->where('jam_mulai', '<=', $jam)->where('jam_selesai', '>=', $jam)->get();
+        $guru_count = Guru::count();
+        $kelas = Kelas::count();
+        $santri = Santri::count();
+        $mapel = Mapel::count();
+        if (auth()->user()->role == 'Guru') {
+            $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+            $jadwal = Jadwal::orderBy('hari_id')->OrderBy('jam_mulai')->where('guru_id', $guru->id)->where('hari_id', $hari)->get();
+        } else {
+            $jadwal = Jadwal::OrderBy('jam_mulai')->OrderBy('jam_selesai')->OrderBy('kelas_id')->where('kelas_id', )->where('hari_id', $hari)->get();
+        }
         $pengumuman = Pengumuman::first();
 
-        return view('home', compact('jadwal', 'pengumuman'));
+        return view('home', compact('jadwal', 'pengumuman', 'guru_count', 'santri', 'kelas', 'mapel'));
     }
 
     public function admin()
@@ -41,7 +51,7 @@ class HomeController extends Controller
         $kelas = Kelas::count();
         $mapel = Mapel::count();
         $user = User::count();
-        $paket = Paket::all();
+        $kelompok = Kelompok::all();
         $activity_log = ActivityLog::with('user')->latest()->get();
         $pengumuman = Pengumuman::first();
 
@@ -56,7 +66,7 @@ class HomeController extends Controller
             'kelas',
             'mapel',
             'user',
-            'paket',
+            'kelompok',
             'activity_log',
             'pengumuman'
         ));
