@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Traits\FileHelper;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 if (! function_exists('getInitials')) {
     function getInitials($string = null) {
         return array_reduce(
@@ -27,5 +30,22 @@ if (! function_exists('__semester__')) {
         }
 
         return $semester;
+    }
+}
+
+if (!function_exists('save_image')) {
+    /**
+     * Save the uploaded image.
+     *
+     * @param UploadedFile $file     Uploaded file.
+     * @param int          $maxWidth
+     * @param string       $path
+     * @param Closure      $callback Custom file naming method.
+     *
+     * @return string File name.
+     */
+    function save_image(UploadedFile $file, $maxWidth = 150, $path = null, Closure $callback = null)
+    {
+        return FileHelper::saveImage($file, $maxWidth, $path, $callback);
     }
 }

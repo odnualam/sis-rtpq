@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Exports\santriExport;
 use App\Imports\santriImport;
 use App\Models\Kelas;
+use App\Models\Pembayaran;
 use App\Models\Santri;
+use App\Models\SPP;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
@@ -257,5 +260,47 @@ class SantriController extends Controller
         } else {
             return redirect()->back()->with('warning', 'Data table santri kosong!');
         }
+    }
+
+    public function spp()
+    {
+        return view('santri.spp.index', [
+            'spp' => Pembayaran::where('nisn', Auth::user()->nisn)->get()
+        ]);
+    }
+
+    public function store_spp(Request $request)
+    {
+        $this->validate($request, [
+            'id_spp' => 'required',
+            'bulan_dibayar' => 'required',
+            'jenis_pembayaran' => 'required',
+            'tgl_bayar' => 'required',
+        ]);
+
+        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
+        $spp = SPP::where('id', $request->id_spp)->first();
+        $pembayaran = Pembayaran::orderBy('id', 'DESC')->pluck('id')->first();
+        if ($pembayaran == null OR $pembayaran == "") {
+            $pembayaran = 1;
+        } else {
+            $pembayaran = $pembayaran + 1;
+        }
+
+        $inv = "INV/".$spp->tahun.$request->bulan_dibayar."/00".$pembayaran;
+
+        Pembayaran::create([
+            'kode' => $inv,
+            'santri_id' => $request->santri_id,
+            'kelas_id' => $santri->kelas_id,
+            'id_spp' => $request->id_spp,
+            'bulan_dibayar' => $request->bulan_dibayar,
+            'jenis_pembayaran' => $request->jenis_pembayaran,
+            'bukti_non_tunai' => $request->bukti_non_tunai,
+            'jumlah_bayar' => $request->jumlah_bayar,
+            'tgl_bayar' => $request->tgl_bayar,
+        ]);
+
+        return redirect()->back()->with('success', 'Berhasil menambahkan data spp baru!');
     }
 }

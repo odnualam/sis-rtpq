@@ -156,10 +156,17 @@
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                     </li>
 
-                    <li class="menu-item" aria-haspopup="true" id="AbsensiGuru">
+                    <li class="menu-item" aria-haspopup="true" id="DataSPP">
                         <a href="{{ route('spp.index') }}" class="menu-link">
                             <i class="menu-icon flaticon-coins"></i>
                             <span class="menu-text">SPP</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item" aria-haspopup="true" id="DataPembayaran">
+                        <a href="{{ route('data-pembayaran.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon-coins"></i>
+                            <span class="menu-text">Data Pembayaran</span>
                         </a>
                     </li>
 
@@ -244,7 +251,7 @@
                     </li>
 
                     <li class="menu-section">
-                        <h4 class="menu-text">Main Menu</h4>
+                        <h4 class="menu-text">Akademik</h4>
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                     </li>
 
@@ -292,6 +299,18 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+
+                    <li class="menu-section">
+                        <h4 class="menu-text">Transaksi / Pembayaran</h4>
+                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                    </li>
+
+                    <li class="menu-item" aria-haspopup="true" id="AbsensiGuru">
+                        <a href="{{ route('spp.santri.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon-coins"></i>
+                            <span class="menu-text">SPP</span>
+                        </a>
                     </li>
                 @else
                     <li class="menu-item has-treeview" id="Home">

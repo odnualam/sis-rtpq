@@ -38,10 +38,5 @@ class SPP extends Model
 
     protected $table = 'spp';
 
-    protected $fillable = ['santri_id', 'bukti', 'status', 'type', 'nominal', 'kode_pembayaran'];
-
-    public function santri()
-    {
-        return $this->belongsTo(Santri::class);
-    }
+    protected $fillable = ['tahun','nominal'];
 }

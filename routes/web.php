@@ -30,6 +30,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/ulangan/santri', 'UlanganController@santri')->name('ulangan.santri');
         Route::get('/sikap/santri', 'SikapController@santri')->name('sikap.santri');
         Route::get('/rapot/santri', 'RapotController@santri')->name('rapot.santri');
+
+        Route::get('santri/spp','SantriController@spp')->name('spp.santri.index');
+        Route::post('santri/spp/store','SantriController@store_spp')->name('spp.santri.store');
     });
 
     Route::middleware(['guru'])->group(function () {
@@ -92,7 +95,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/rapot-santri/{id}', 'RapotController@edit')->name('rapot-santri');
         Route::get('/rapot-show/{id}', 'RapotController@rapot')->name('rapot-show');
         Route::get('/predikat', 'NilaiController@create')->name('predikat');
-        Route::get('pembayaran-spp', 'SPPController@index')->name('spp.index');
+        Route::resource('/spp', 'SPPController');
         Route::resource('/user', 'UserController');
+        Route::resource('/data-pembayaran', 'PembayaranController');
     });
 });
