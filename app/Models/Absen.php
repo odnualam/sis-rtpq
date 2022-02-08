@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Absen
+ * App\Models\Absen.
  *
  * @property int $id
  * @property string|null $tahun_ajaran
@@ -15,29 +18,39 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $absen_s
  * @property int|null $absen_i
  * @property int|null $absen_a
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Santri|null $santri
- * @method static \Illuminate\Database\Eloquent\Builder|Absen newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Absen newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Absen query()
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereAbsenA($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereAbsenI($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereAbsenS($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereSantriId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereSemester($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereTahunAjaran($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Santri|null $santri
+ * @method static Builder|Absen newModelQuery()
+ * @method static Builder|Absen newQuery()
+ * @method static Builder|Absen query()
+ * @method static Builder|Absen whereAbsenA($value)
+ * @method static Builder|Absen whereAbsenI($value)
+ * @method static Builder|Absen whereAbsenS($value)
+ * @method static Builder|Absen whereCreatedAt($value)
+ * @method static Builder|Absen whereId($value)
+ * @method static Builder|Absen whereKelasId($value)
+ * @method static Builder|Absen whereSantriId($value)
+ * @method static Builder|Absen whereSemester($value)
+ * @method static Builder|Absen whereTahunAjaran($value)
+ * @method static Builder|Absen whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Absen extends Model
 {
+    use HasFactory;
+
     protected $table = 'absensi';
 
-    protected $fillable = ['tahun_ajaran', 'semester', 'kelas_id', 'santri_id', 'absen_s', 'absen_i', 'absen_a'];
+    protected $fillable = [
+        'tahun_ajaran',
+        'semester',
+        'kelas_id',
+        'santri_id',
+        'absen_s',
+        'absen_i',
+        'absen_a',
+    ];
 
     public function santri()
     {

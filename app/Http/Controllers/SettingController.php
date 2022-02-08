@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Village;
 use App\Models\Setting;
 use App\Services\CityService;
 use App\Services\DistrictService;
@@ -9,7 +12,6 @@ use App\Services\ProvinceService;
 use App\Services\VillageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class SettingController extends Controller
 {
@@ -17,9 +19,9 @@ class SettingController extends Controller
     {
         $setting = Setting::find(1);
         $provinces = $provinceService->getProvinceOrderByName();
-        $city = \Laravolt\Indonesia\Models\City::where('code', '=', $setting->kabupaten_kota)->firstOrFail();
-        $district = \Laravolt\Indonesia\Models\District::where('code', '=', $setting->kecamatan)->firstOrFail();
-        $village = \Laravolt\Indonesia\Models\Village::where('code', '=', $setting->kelurahan)->firstOrFail();
+        $city = City::where('code', '=', $setting->kabupaten_kota)->firstOrFail();
+        $district = District::where('code', '=', $setting->kecamatan)->firstOrFail();
+        $village = Village::where('code', '=', $setting->kelurahan)->firstOrFail();
 
         return view('admin.setting.index', [
             'setting' => $setting,
@@ -57,7 +59,7 @@ class SettingController extends Controller
 
         if ($request->has('logo')) {
             if (File::exists(public_path('uploads/setting/'.$input['logo']))) {
-                dd("ADA");
+                dd('ADA');
                 File::delete(public_path('uploads/setting/'.$input['logo']));
             } else {
                 $image = $request->file('logo');

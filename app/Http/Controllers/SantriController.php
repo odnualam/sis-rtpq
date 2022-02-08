@@ -32,7 +32,7 @@ class SantriController extends Controller
             'jk' => 'required',
             'tmp_lahir' => 'required',
             'tgl_lahir' => 'required',
-            'agama' => 'required'
+            'agama' => 'required',
         ]);
 
         if ($request->foto) {
@@ -129,7 +129,7 @@ class SantriController extends Controller
             'nama_wali' => $request->nama_wali,
             'alamat_wali' => $request->alamat_wali,
             'pekerjaan_wali' => $request->pekerjaan_wali,
-            'tahun_ajaran' => $request->tahun_ajaran
+            'tahun_ajaran' => $request->tahun_ajaran,
         ];
         $santri->update($santri_data);
 
@@ -265,29 +265,38 @@ class SantriController extends Controller
     public function spp()
     {
         return view('santri.spp.index', [
-            'spp' => Pembayaran::where('nisn', Auth::user()->nisn)->get()
+            'pembayaran' => Pembayaran::where('santri_id', Auth::user()->id)->get(),
+            'kelas' => Kelas::OrderBy('nama_kelas', 'asc')->get(),
+            'spp' => SPP::OrderBy('tahun', 'asc')->get(),
         ]);
     }
 
     public function store_spp(Request $request)
     {
         $this->validate($request, [
+            'santri_id' => 'required',
             'id_spp' => 'required',
             'bulan_dibayar' => 'required',
             'jenis_pembayaran' => 'required',
             'tgl_bayar' => 'required',
         ]);
 
-        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
+        $santri = Santri::where('id', Auth::user()->id)->first();
         $spp = SPP::where('id', $request->id_spp)->first();
         $pembayaran = Pembayaran::orderBy('id', 'DESC')->pluck('id')->first();
-        if ($pembayaran == null OR $pembayaran == "") {
+        if ($pembayaran == null or $pembayaran == '') {
             $pembayaran = 1;
         } else {
             $pembayaran = $pembayaran + 1;
         }
 
-        $inv = "INV/".$spp->tahun.$request->bulan_dibayar."/00".$pembayaran;
+        $inv = 'INV/'.$spp->tahun.$request->bulan_dibayar.'/00'.$pembayaran;
+
+        if ($request->has('bukti_non_tunai')) {
+            $bukti_non_tunai = save_image($request->bukti_non_tunai, 1000, 'uploads/bukti-non-tunai/');
+        } else {
+            $bukti_non_tunai = $request->bukti_non_tunai;
+        }
 
         Pembayaran::create([
             'kode' => $inv,
@@ -296,7 +305,7 @@ class SantriController extends Controller
             'id_spp' => $request->id_spp,
             'bulan_dibayar' => $request->bulan_dibayar,
             'jenis_pembayaran' => $request->jenis_pembayaran,
-            'bukti_non_tunai' => $request->bukti_non_tunai,
+            'bukti_non_tunai' => $bukti_non_tunai,
             'jumlah_bayar' => $request->jumlah_bayar,
             'tgl_bayar' => $request->tgl_bayar,
         ]);

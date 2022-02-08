@@ -10,10 +10,8 @@ use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
 use App\Models\Nilai;
-use App\Models\Santri;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -185,13 +183,12 @@ class GuruController extends Controller
         $kelas = Kelas::findorfail($id);
 
         $santri = DB::table('santri')
-            ->leftJoin('absensi', function($join) use ($id)
-                {
-                    $join->on('santri.id', '=', 'absensi.santri_id')
+            ->leftJoin('absensi', function ($join) use ($id) {
+                $join->on('santri.id', '=', 'absensi.santri_id')
                         ->where('absensi.tahun_ajaran', __tahun_ajaran__())
                         ->where('absensi.semester', __semester__(date('n')))
                         ->where('absensi.kelas_id', $id);
-                })
+            })
             ->select('santri.id', 'santri.kelas_id', 'santri.nisn', 'santri.nama_santri', 'santri.jk', 'absensi.absen_s', 'absensi.absen_i', 'absensi.absen_a')
             ->where('santri.kelas_id', $id)
             ->groupBy('santri.id')
@@ -209,15 +206,15 @@ class GuruController extends Controller
             ->first();
 
         if ($now != null) {
-            foreach($request->input('santri_id') as $key => $value) {
-                if(!empty($request->input('santri_id.' . $key))) {
+            foreach ($request->input('santri_id') as $key => $value) {
+                if (! empty($request->input('santri_id.'.$key))) {
                     $data = [
-                        'absen_s' => $request->input('absen_s.' . $key),
-                        'absen_i' => $request->input('absen_i.' . $key),
-                        'absen_a' => $request->input('absen_a.' . $key)
+                        'absen_s' => $request->input('absen_s.'.$key),
+                        'absen_i' => $request->input('absen_i.'.$key),
+                        'absen_a' => $request->input('absen_a.'.$key),
                     ];
 
-                    Absen::where('santri_id', $request->input('santri_id.' . $key))
+                    Absen::where('santri_id', $request->input('santri_id.'.$key))
                     ->where('tahun_ajaran', $request->tahun_ajaran)
                     ->where('semester', $request->semester)
                     ->where('kelas_id', $request->kelas_id)
@@ -225,18 +222,19 @@ class GuruController extends Controller
                 }
             }
         } else {
-            foreach($request->input('santri_id') as $key => $value) {
+            foreach ($request->input('santri_id') as $key => $value) {
                 Absen::create([
                     'tahun_ajaran' => $request->tahun_ajaran,
                     'semester' => $request->semester,
                     'kelas_id' => $request->kelas_id,
-                    'santri_id' => $request->input('santri_id.' . $key),
-                    'absen_s' => $request->input('absen_s.' . $key),
-                    'absen_i' => $request->input('absen_i.' . $key),
-                    'absen_a' => $request->input('absen_a.' . $key),
+                    'santri_id' => $request->input('santri_id.'.$key),
+                    'absen_s' => $request->input('absen_s.'.$key),
+                    'absen_i' => $request->input('absen_i.'.$key),
+                    'absen_a' => $request->input('absen_a.'.$key),
                 ]);
             }
         }
+
         return redirect()->back()->with('success', 'Data Absensi Santri Berhasil Diperbaharui.');
     }
 

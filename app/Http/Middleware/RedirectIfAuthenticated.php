@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
@@ -9,7 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
-    public function handle(Request $request, Closure $next, ...$guards)
+    /**
+     * Handle an incoming request.
+     *
+     * @param Closure(Request):((Response | RedirectResponse)) $next
+     * @param  string|null  ...$guards
+     */
+    public function handle(Request $request, Closure $next, ...$guards): RedirectResponse|Response
     {
         $guards = empty($guards) ? [null] : $guards;
 

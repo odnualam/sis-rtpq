@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * App\Models\Santri
+ * App\Models\Santri.
  *
  * @property int $id
  * @property string $nisn
@@ -29,48 +33,71 @@ use Illuminate\Support\Facades\Auth;
  * @property string|null $pekerjaan_wali
  * @property string $foto
  * @property int $kelas_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property string|null $tahun_ajaran
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Absen[] $absensi
+ * @property-read Collection|Absen[] $absensi
  * @property-read int|null $absensi_count
- * @property-read \App\Models\Kelas|null $kelas
- * @method static \Illuminate\Database\Eloquent\Builder|Santri newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Santri newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Santri query()
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAgama($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatAyah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatIbu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatSantri($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatWali($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAnakKe($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereFoto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereJk($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaAyah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaIbu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaSantri($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaWali($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNisn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanAyah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanIbu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanWali($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereStatusKeluarga($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTahunAjaran($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTglLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTmpLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereUpdatedAt($value)
+ * @property-read Kelas|null $kelas
+ * @method static Builder|Santri newModelQuery()
+ * @method static Builder|Santri newQuery()
+ * @method static Builder|Santri query()
+ * @method static Builder|Santri whereAgama($value)
+ * @method static Builder|Santri whereAlamatAyah($value)
+ * @method static Builder|Santri whereAlamatIbu($value)
+ * @method static Builder|Santri whereAlamatSantri($value)
+ * @method static Builder|Santri whereAlamatWali($value)
+ * @method static Builder|Santri whereAnakKe($value)
+ * @method static Builder|Santri whereCreatedAt($value)
+ * @method static Builder|Santri whereDeletedAt($value)
+ * @method static Builder|Santri whereFoto($value)
+ * @method static Builder|Santri whereId($value)
+ * @method static Builder|Santri whereJk($value)
+ * @method static Builder|Santri whereKelasId($value)
+ * @method static Builder|Santri whereNamaAyah($value)
+ * @method static Builder|Santri whereNamaIbu($value)
+ * @method static Builder|Santri whereNamaSantri($value)
+ * @method static Builder|Santri whereNamaWali($value)
+ * @method static Builder|Santri whereNisn($value)
+ * @method static Builder|Santri wherePekerjaanAyah($value)
+ * @method static Builder|Santri wherePekerjaanIbu($value)
+ * @method static Builder|Santri wherePekerjaanWali($value)
+ * @method static Builder|Santri whereStatusKeluarga($value)
+ * @method static Builder|Santri whereTahunAjaran($value)
+ * @method static Builder|Santri whereTglLahir($value)
+ * @method static Builder|Santri whereTmpLahir($value)
+ * @method static Builder|Santri whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Santri extends Model
 {
+    use HasFactory;
+
     protected $table = 'santri';
 
-    protected $fillable = ['nisn', 'nama_santri', 'kelas_id', 'jk', 'tmp_lahir', 'tgl_lahir', 'foto', 'agama', 'anak_ke', 'status_keluarga', 'alamat_santri', 'nama_ayah', 'nama_ibu', 'pekerjaan_ayah', 'pekerjaan_ibu', 'alamat_ayah', 'alamat_ibu', 'nama_wali', 'alamat_wali', 'pekerjaan_wali', 'tahun_ajaran'];
+    protected $fillable = [
+        'nisn', 'nama_santri',
+        'kelas_id',
+        'jk',
+        'tmp_lahir',
+        'tgl_lahir',
+        'foto',
+        'agama',
+        'anak_ke',
+        'status_keluarga',
+        'alamat_santri',
+        'nama_ayah',
+        'nama_ibu',
+        'pekerjaan_ayah',
+        'pekerjaan_ibu',
+        'alamat_ayah',
+        'alamat_ibu',
+        'nama_wali',
+        'alamat_wali',
+        'pekerjaan_wali',
+        'tahun_ajaran',
+    ];
 
     public function kelas()
     {

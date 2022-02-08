@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Guru;
 use App\Models\Jadwal;
-use App\Models\Mapel;
 use App\Models\Kelompok;
+use App\Models\Mapel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 
@@ -50,7 +50,8 @@ class MapelController extends Controller
         return view('admin.mapel.edit', compact('mapel', 'kelompok'));
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $mapel = Mapel::findOrFail($id);
         $countJadwal = Jadwal::where('mapel_id', $mapel->id)->count();
         if ($countJadwal >= 1) {

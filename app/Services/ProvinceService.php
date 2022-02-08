@@ -13,7 +13,8 @@ class ProvinceService
         $this->provinceRepository = new ProvinceRepository();
     }
 
-    public function getProvinceOrderByName() {
+    public function getProvinceOrderByName()
+    {
         return $this->provinceRepository->getProvinceOrderByName();
     }
 }

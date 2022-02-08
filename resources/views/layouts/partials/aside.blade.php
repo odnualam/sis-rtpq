@@ -306,7 +306,7 @@
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                     </li>
 
-                    <li class="menu-item" aria-haspopup="true" id="AbsensiGuru">
+                    <li class="menu-item" aria-haspopup="true" id="SantriSPP">
                         <a href="{{ route('spp.santri.index') }}" class="menu-link">
                             <i class="menu-icon flaticon-coins"></i>
                             <span class="menu-text">SPP</span>

@@ -11,7 +11,7 @@
                 <div class="card-toolbar">
                     <div class="dropdown dropdown-inline mr-2">
                         <button type="button" class="btn btn-icon btn-outline-primary btn-sm" data-toggle="modal"
-                            data-target=".bayar-spp">
+                            data-target=".tambah-data-pembayaran">
                             <i class="flaticon-plus"></i>
                         </button>
                     </div>
@@ -22,30 +22,24 @@
                     style="margin-top: 13px !important">
                     <thead class="text-uppercase">
                         <tr>
-                            <th>No.</th>
-                            <th>Kode Pembayaran</th>
-                            <th>NISN</th>
-                            <th>Nama Santri</th>
-                            <th>Kelas</th>
-                            <th>tgl dibayar</th>
-                            <th>bulan dibayar</th>
-                            <th>tahun dibayar</th>
-                            <th>Jumlah bayar</th>
+                            <th>Kode</th>
+                            <th>Untuk Bulan</th>
+                            <th>Jenis</th>
+                            <th>Status</th>
+                            <th>Tanggal Bayar</th>
+                            <th>Nominal</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($spp as $data)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $data->kode }}</td>
-                            <td>{{ $data->nisn }}</td>
-                            <td>{{ $data->nama }}</td>
-                            <td>{{ $data->kelas->nama_kelas }}</td>
-                            <td>{{ $data->tgl_dibayar }}</td>
-                            <td>{{ $data->bulan_dibayar }}</td>
-                            <td>{{ $data->tahun_dibayar }}</td>
-                            <td>{{ $data->jumlah_bayar }}</td>
-                        </tr>
+                        @foreach ($pembayaran as $data)
+                            <tr>
+                                <td>{{ $data->kode }}</td>
+                                <td>{!! '<span class="label label-primary label-inline font-weight-lighter mr-2">'.date('F', mktime(0, 0, 0, $data->bulan_dibayar, 10)).'</span>' !!}</td>
+                                <td>{!! $data->jenis_pembayaran == 0 ? 'TUNAI' : '<a href="'.asset('uploads/bukti-non-tunai/'.$data->bukti_non_tunai).'" target="_blank">NON TUNAI</a>' !!}</td>
+                                <td>{{ ($data->status == 0) ? 'PENDING' : (($data->status == 1) ? 'SUCCESS' : 'GAGAL')  }}</td>
+                                <td>{{ $data->tgl_bayar }}</td>
+                                <td>{{ $data->jumlah_bayar }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
@@ -54,57 +48,66 @@
     </div>
 </div>
 
-<div class="modal fade bayar-spp" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
-    aria-hidden="true">
+<div class="modal fade bd-example-modal-lg tambah-data-pembayaran" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="judul-jadwal">Bayar SPP</h4>
+                <h4 class="modal-title">Tambah Data Pembayaran</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('spp.santri.store') }}" method="post">
+                <form action="{{ route('data-pembayaran.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="tgl_dibayar">Tanggal Bayar</label>
-                                <input type="date" id="tgl_dibayar" name="tgl_dibayar" class="form-control @error('tgl_dibayar') is-invalid @enderror" placeholder="{{ __('Tangga Bayar') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="bulan_dibayar">Bulan</label>
-                                <select id="bulan_dibayar" name="bulan_dibayar" class="form-control @error('bulan_dibayar') is-invalid @enderror  ">
-                                    <option value="">-- Pilih Bulan --</option>
-                                    <option value="januari" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'januari')? 'selected' : '')}}>Januari</option>
-                                    <option value="febuari" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'febuari')? 'selected' : '')}}>febuari</option>
-                                    <option value="maret" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'maret')? 'selected' : '')}}>maret</option>
-                                    <option value="april" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'april')? 'selected' : '')}}>april</option>
-                                    <option value="mei" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'mei')? 'selected' : '')}}>mei</option>
-                                    <option value="juni" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'juni')? 'selected' : '')}}>juni</option>
-                                    <option value="juli" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'juli')? 'selected' : '')}}>juli</option>
-                                    <option value="agustus" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'agustus')? 'selected' : '')}}>agustus</option>
-                                    <option value="september" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'september')? 'selected' : '')}}>september</option>
-                                    <option value="oktober" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'oktober')? 'selected' : '')}}>oktober</option>
-                                    <option value="november" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'november')? 'selected' : '')}}>november</option>
-                                    <option value="desember" {{old('bulan_dibayar',(@$pembayaran->bulan_dibayar == 'desember')? 'selected' : '')}}>desember</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="tahun_dibayar">Tahun Bayar</label>
-                                <input type="number" id="tahun_dibayar" name="tahun_dibayar" class="form-control @error('tahun_dibayar') is-invalid @enderror" placeholder="{{ __('Tahun Bayar') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="jumlah_bayar">Jumlah Bayar</label>
-                                <input type="text" id="dengan-rupiah" name="jumlah_bayar" class="form-control @error('jumlah_bayar') is-invalid @enderror" placeholder="{{ __('Jumlah Bayar') }}">
-                            </div>
-                        </div>
+
+                    <div class="form-group">
+                        <label for="id_spp">Tahun SPP</label>
+                        <select id="id_spp" name="id_spp" class="form-control @error('id_spp') is-invalid @enderror">
+                            <option value="">-- Pilih Tahun SPP --</option>
+                            @foreach($spp as $data)
+                                <option value="{{ $data->id }}">{{ $data->tahun }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="bulan_dibayar">Bulan</label>
+                        <select id="bulan_dibayar" name="bulan_dibayar" class="form-control @error('bulan_dibayar') is-invalid @enderror">
+                            <option value="">-- Pilih Bulan --</option>
+                            @for ($i = 1; $i <= 12; $i++)
+                                <option value="<?= $i ?>"><?= date('F', strtotime('2020-'.$i.'-01')) ?></option>
+                            @endfor
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jenis_pembayaran">Jenis Pembayaran</label>
+                        <select id="jenis_pembayaran" name="jenis_pembayaran" class="form-control @error('jenis_pembayaran') is-invalid @enderror">
+                            <option value="">-- Pilih Jenis Pembayaran --</option>
+                            <option value="0">Tunai</option>
+                            <option value="1">Non Tunai</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="bukti_non_tunai">
+                        <label for="bukti_non_tunai">Upload Bukti Pembayaran</label>
+                        <input type="file" name="bukti_non_tunai" class="form-control" id="bukti_non_tunai">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jumlah_bayar">Jumlah Pembayaran</label>
+                        <input type="text" id="dengan-rupiah" name="jumlah_bayar" class="form-control @error('jumlah_bayar') is-invalid @enderror" placeholder="{{ __('Jumlah Pembayaran') }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tgl_bayar">Tanggal Pembayaran</label>
+                        <input type="date" id="tgl_bayar" name="tgl_bayar" class="form-control @error('tgl_bayar') is-invalid @enderror" placeholder="{{ __('Tanggal Melakukan Pembayaran') }}">
+                    </div>
+
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal"><span><i class="flaticon2-left-arrow-1"></i></span>Kembali</button>
-                        <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-save"></i> &nbsp; Tambah</button>
-                        </form>
+                        <button type="submit" class="btn btn-primary"><i class="nav-icon fas fa-save"></i> &nbsp; Tambahkan</button>
                     </div>
                 </form>
             </div>
@@ -113,6 +116,12 @@
 </div>
 @endsection
 @section('script')
+    <script>
+        $("#MasterData").addClass("menu-item-open");
+        $("#liMasterData").addClass("menu-item-open");
+        $("#SantriSPP").addClass("menu-item-open");
+    </script>
+
     <script>
         var dengan_rupiah = document.getElementById("dengan-rupiah");
         dengan_rupiah.addEventListener("keyup", function (e) {
@@ -135,5 +144,16 @@
             return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
         }
 
+    </script>
+
+    <script>
+        $('#jenis_pembayaran').change(function() {
+            if ($(this).val() == "1") {
+                $('#bukti_non_tunai').show();
+            } else {
+                $('#bukti_non_tunai').hide();
+            }
+        });
+        $('#jenis_pembayaran').trigger('change');
     </script>
 @endsection

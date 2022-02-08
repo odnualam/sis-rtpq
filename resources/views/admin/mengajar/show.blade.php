@@ -43,7 +43,7 @@
                                         </a>
                                         <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon2-trash"></i></button>
                                     </form>
-                                    </td>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

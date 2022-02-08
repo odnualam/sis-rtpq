@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Spatie\Activitylog\Models\Activity;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * App\Models\ActivityLog
+ * App\Models\ActivityLog.
  *
  * @property int $id
  * @property string|null $log_name
@@ -19,31 +24,31 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property int|null $causer_id
  * @property mixed|null $properties
  * @property string|null $batch_uuid
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog query()
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereBatchUuid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCauserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCauserType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereEvent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereLogName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereProperties($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereSubjectId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereSubjectType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereUpdatedAt($value)
+ * @property-read User|null $user
+ * @method static Builder|ActivityLog newModelQuery()
+ * @method static Builder|ActivityLog newQuery()
+ * @method static Builder|ActivityLog query()
+ * @method static Builder|ActivityLog whereBatchUuid($value)
+ * @method static Builder|ActivityLog whereCauserId($value)
+ * @method static Builder|ActivityLog whereCauserType($value)
+ * @method static Builder|ActivityLog whereCreatedAt($value)
+ * @method static Builder|ActivityLog whereDescription($value)
+ * @method static Builder|ActivityLog whereEvent($value)
+ * @method static Builder|ActivityLog whereId($value)
+ * @method static Builder|ActivityLog whereLogName($value)
+ * @method static Builder|ActivityLog whereProperties($value)
+ * @method static Builder|ActivityLog whereSubjectId($value)
+ * @method static Builder|ActivityLog whereSubjectType($value)
+ * @method static Builder|ActivityLog whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class ActivityLog extends Model
 {
-    use LogsActivity;
+    use LogsActivity, HasFactory;
 
     protected $table = 'activity_log';
 

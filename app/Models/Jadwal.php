@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * App\Models\Jadwal
+ * App\Models\Jadwal.
  *
  * @property int $id
  * @property int $hari_id
@@ -17,32 +19,41 @@ use Illuminate\Support\Facades\Auth;
  * @property string $jam_mulai
  * @property string $jam_selesai
  * @property string|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property-read \App\Models\Guru|null $guru
- * @property-read \App\Models\Hari|null $hari
- * @property-read \App\Models\Kelas|null $kelas
- * @property-read \App\Models\Mapel|null $mapel
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal query()
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereHariId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamMulai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamSelesai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereUpdatedAt($value)
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property-read Guru|null $guru
+ * @property-read Hari|null $hari
+ * @property-read Kelas|null $kelas
+ * @property-read Mapel|null $mapel
+ * @method static Builder|Jadwal newModelQuery()
+ * @method static Builder|Jadwal newQuery()
+ * @method static Builder|Jadwal query()
+ * @method static Builder|Jadwal whereCreatedAt($value)
+ * @method static Builder|Jadwal whereDeletedAt($value)
+ * @method static Builder|Jadwal whereGuruId($value)
+ * @method static Builder|Jadwal whereHariId($value)
+ * @method static Builder|Jadwal whereId($value)
+ * @method static Builder|Jadwal whereJamMulai($value)
+ * @method static Builder|Jadwal whereJamSelesai($value)
+ * @method static Builder|Jadwal whereKelasId($value)
+ * @method static Builder|Jadwal whereMapelId($value)
+ * @method static Builder|Jadwal whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Jadwal extends Model
 {
+    use HasFactory;
+
     protected $table = 'jadwal';
 
-    protected $fillable = ['hari_id', 'kelas_id', 'mapel_id', 'guru_id', 'jam_mulai', 'jam_selesai'];
+    protected $fillable = [
+        'hari_id',
+        'kelas_id',
+        'mapel_id',
+        'guru_id',
+        'jam_mulai',
+        'jam_selesai',
+    ];
 
     public function hari()
     {
@@ -99,14 +110,6 @@ class Jadwal extends Model
         $kkm = Nilai::where('guru_id', $id)->first();
 
         return $kkm['kkm'];
-    }
-
-    public function absen($id)
-    {
-        $absen = Absen::where('tanggal', date('Y-m-d'))->where('guru_id', $id)->first();
-        $ket = Kehadiran::where('id', $absen['kehadiran_id'])->first();
-
-        return $ket['color'];
     }
 
     public function cekUlangan($id)

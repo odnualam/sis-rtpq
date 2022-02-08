@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Traits\FileHelper;
+use App\Traits\FileHelper;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 if (! function_exists('getInitials')) {
-    function getInitials($string = null) {
+    function getInitials($string = null)
+    {
         return array_reduce(
             explode(' ', $string),
             function ($initials, $word) {
@@ -16,13 +17,15 @@ if (! function_exists('getInitials')) {
 }
 
 if (! function_exists('__tahun_ajaran__')) {
-    function __tahun_ajaran__() {
+    function __tahun_ajaran__()
+    {
         return (date('Y') - 1).'-'.date('Y');
     }
 }
 
 if (! function_exists('__semester__')) {
-    function __semester__($date) {
+    function __semester__($date)
+    {
         if ($date >= 7 && $date <= 12) {
             $semester = 'Ganjil';
         } else {
@@ -33,7 +36,7 @@ if (! function_exists('__semester__')) {
     }
 }
 
-if (!function_exists('save_image')) {
+if (! function_exists('save_image')) {
     /**
      * Save the uploaded image.
      *

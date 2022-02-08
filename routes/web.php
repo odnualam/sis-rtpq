@@ -31,8 +31,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/sikap/santri', 'SikapController@santri')->name('sikap.santri');
         Route::get('/rapot/santri', 'RapotController@santri')->name('rapot.santri');
 
-        Route::get('santri/spp','SantriController@spp')->name('spp.santri.index');
-        Route::post('santri/spp/store','SantriController@store_spp')->name('spp.santri.store');
+        Route::get('santri/spp', 'SantriController@spp')->name('spp.santri.index');
+        Route::post('santri/spp/store', 'SantriController@store_spp')->name('spp.santri.store');
     });
 
     Route::middleware(['guru'])->group(function () {
@@ -98,5 +98,8 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('/spp', 'SPPController');
         Route::resource('/user', 'UserController');
         Route::resource('/data-pembayaran', 'PembayaranController');
+
+        Route::post('/data-pembayaran/gagal/{id}', 'PembayaranController@gagalPembayaran')->name('pembayaran.gagal');
+        Route::post('/data-pembayaran/berhasil/{id}', 'PembayaranController@berhasilPembayaran')->name('pembayaran.berhasil');
     });
 });

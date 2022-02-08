@@ -2,31 +2,39 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\Kelompok
+ * App\Models\Kelompok.
  *
  * @property int $id
  * @property string $ket
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string $nama
  * @property string $jenis
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok query()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereJenis($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereKet($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereNama($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereUpdatedAt($value)
+ * @method static Builder|Kelompok newModelQuery()
+ * @method static Builder|Kelompok newQuery()
+ * @method static Builder|Kelompok query()
+ * @method static Builder|Kelompok whereCreatedAt($value)
+ * @method static Builder|Kelompok whereId($value)
+ * @method static Builder|Kelompok whereJenis($value)
+ * @method static Builder|Kelompok whereKet($value)
+ * @method static Builder|Kelompok whereNama($value)
+ * @method static Builder|Kelompok whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class Kelompok extends Model
 {
+    use HasFactory;
+
     protected $table = 'kelompok';
 
-    protected $fillable = ['jenis', 'nama'];
+    protected $fillable = [
+        'jenis',
+        'nama',
+    ];
 }

@@ -43,7 +43,8 @@ class KelompokController extends Controller
         return view('admin.kelompok.edit', compact('kelompok'));
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $kelompok = Kelompok::findOrFail($id);
 
         $kelompok->delete();

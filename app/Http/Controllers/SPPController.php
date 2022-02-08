@@ -43,7 +43,8 @@ class SPPController extends Controller
         return view('admin.spp.edit', compact('spp'));
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $spp = SPP::findOrFail($id);
         $spp->delete();
 
