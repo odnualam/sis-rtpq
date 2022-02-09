@@ -22,22 +22,22 @@ namespace App\Models{
  * @property int|null $absen_s
  * @property int|null $absen_i
  * @property int|null $absen_a
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Santri|null $santri
- * @method static \Illuminate\Database\Eloquent\Builder|Absen newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Absen newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Absen query()
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereAbsenA($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereAbsenI($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereAbsenS($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereSantriId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereSemester($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereTahunAjaran($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Absen whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Santri|null $santri
+ * @method static Builder|Absen newModelQuery()
+ * @method static Builder|Absen newQuery()
+ * @method static Builder|Absen query()
+ * @method static Builder|Absen whereAbsenA($value)
+ * @method static Builder|Absen whereAbsenI($value)
+ * @method static Builder|Absen whereAbsenS($value)
+ * @method static Builder|Absen whereCreatedAt($value)
+ * @method static Builder|Absen whereId($value)
+ * @method static Builder|Absen whereKelasId($value)
+ * @method static Builder|Absen whereSantriId($value)
+ * @method static Builder|Absen whereSemester($value)
+ * @method static Builder|Absen whereTahunAjaran($value)
+ * @method static Builder|Absen whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Absen extends \Eloquent {}
@@ -57,26 +57,26 @@ namespace App\Models{
  * @property int|null $causer_id
  * @property mixed|null $properties
  * @property string|null $batch_uuid
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Activitylog\Models\Activity[] $activities
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|Activity[] $activities
  * @property-read int|null $activities_count
- * @property-read \App\Models\User|null $user
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog query()
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereBatchUuid($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCauserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCauserType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereEvent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereLogName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereProperties($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereSubjectId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereSubjectType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereUpdatedAt($value)
+ * @property-read User|null $user
+ * @method static Builder|ActivityLog newModelQuery()
+ * @method static Builder|ActivityLog newQuery()
+ * @method static Builder|ActivityLog query()
+ * @method static Builder|ActivityLog whereBatchUuid($value)
+ * @method static Builder|ActivityLog whereCauserId($value)
+ * @method static Builder|ActivityLog whereCauserType($value)
+ * @method static Builder|ActivityLog whereCreatedAt($value)
+ * @method static Builder|ActivityLog whereDescription($value)
+ * @method static Builder|ActivityLog whereEvent($value)
+ * @method static Builder|ActivityLog whereId($value)
+ * @method static Builder|ActivityLog whereLogName($value)
+ * @method static Builder|ActivityLog whereProperties($value)
+ * @method static Builder|ActivityLog whereSubjectId($value)
+ * @method static Builder|ActivityLog whereSubjectType($value)
+ * @method static Builder|ActivityLog whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class ActivityLog extends \Eloquent {}
@@ -97,28 +97,28 @@ namespace App\Models{
  * @property string|null $tmp_lahir
  * @property string|null $tgl_lahir
  * @property string $foto
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Mapel|null $mapel
- * @method static \Illuminate\Database\Eloquent\Builder|Guru newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Guru newQuery()
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Mapel|null $mapel
+ * @method static Builder|Guru newModelQuery()
+ * @method static Builder|Guru newQuery()
  * @method static \Illuminate\Database\Query\Builder|Guru onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Guru query()
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereFoto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereIdCard($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereJk($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereKode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereNamaGuru($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru wherePendidikan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereTelp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereTglLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereTmpLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Guru whereUpdatedAt($value)
+ * @method static Builder|Guru query()
+ * @method static Builder|Guru whereCreatedAt($value)
+ * @method static Builder|Guru whereDeletedAt($value)
+ * @method static Builder|Guru whereFoto($value)
+ * @method static Builder|Guru whereId($value)
+ * @method static Builder|Guru whereIdCard($value)
+ * @method static Builder|Guru whereJk($value)
+ * @method static Builder|Guru whereKode($value)
+ * @method static Builder|Guru whereMapelId($value)
+ * @method static Builder|Guru whereNamaGuru($value)
+ * @method static Builder|Guru wherePendidikan($value)
+ * @method static Builder|Guru whereTelp($value)
+ * @method static Builder|Guru whereTglLahir($value)
+ * @method static Builder|Guru whereTmpLahir($value)
+ * @method static Builder|Guru whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Guru withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Guru withoutTrashed()
  * @mixin \Eloquent
@@ -132,15 +132,15 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $nama_hari
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Hari newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Hari newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Hari query()
- * @method static \Illuminate\Database\Eloquent\Builder|Hari whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Hari whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Hari whereNamaHari($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Hari whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Hari newModelQuery()
+ * @method static Builder|Hari newQuery()
+ * @method static Builder|Hari query()
+ * @method static Builder|Hari whereCreatedAt($value)
+ * @method static Builder|Hari whereId($value)
+ * @method static Builder|Hari whereNamaHari($value)
+ * @method static Builder|Hari whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Hari extends \Eloquent {}
@@ -158,25 +158,25 @@ namespace App\Models{
  * @property string $jam_mulai
  * @property string $jam_selesai
  * @property string|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property-read \App\Models\Guru|null $guru
- * @property-read \App\Models\Hari|null $hari
- * @property-read \App\Models\Kelas|null $kelas
- * @property-read \App\Models\Mapel|null $mapel
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal query()
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereHariId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamMulai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereJamSelesai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Jadwal whereUpdatedAt($value)
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property-read Guru|null $guru
+ * @property-read Hari|null $hari
+ * @property-read Kelas|null $kelas
+ * @property-read Mapel|null $mapel
+ * @method static Builder|Jadwal newModelQuery()
+ * @method static Builder|Jadwal newQuery()
+ * @method static Builder|Jadwal query()
+ * @method static Builder|Jadwal whereCreatedAt($value)
+ * @method static Builder|Jadwal whereDeletedAt($value)
+ * @method static Builder|Jadwal whereGuruId($value)
+ * @method static Builder|Jadwal whereHariId($value)
+ * @method static Builder|Jadwal whereId($value)
+ * @method static Builder|Jadwal whereJamMulai($value)
+ * @method static Builder|Jadwal whereJamSelesai($value)
+ * @method static Builder|Jadwal whereKelasId($value)
+ * @method static Builder|Jadwal whereMapelId($value)
+ * @method static Builder|Jadwal whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Jadwal extends \Eloquent {}
@@ -189,18 +189,18 @@ namespace App\Models{
  * @property int $id
  * @property string $nama_kelas
  * @property int $guru_id
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property-read \App\Models\Guru|null $guru
- * @property-read \App\Models\Kelompok|null $kelompok
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas query()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas whereNamaKelas($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelas whereUpdatedAt($value)
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property-read Guru|null $guru
+ * @property-read Kelompok|null $kelompok
+ * @method static Builder|Kelas newModelQuery()
+ * @method static Builder|Kelas newQuery()
+ * @method static Builder|Kelas query()
+ * @method static Builder|Kelas whereCreatedAt($value)
+ * @method static Builder|Kelas whereGuruId($value)
+ * @method static Builder|Kelas whereId($value)
+ * @method static Builder|Kelas whereNamaKelas($value)
+ * @method static Builder|Kelas whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Kelas extends \Eloquent {}
@@ -212,19 +212,19 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $ket
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string $nama
  * @property string $jenis
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok query()
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereJenis($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereKet($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereNama($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kelompok whereUpdatedAt($value)
+ * @method static Builder|Kelompok newModelQuery()
+ * @method static Builder|Kelompok newQuery()
+ * @method static Builder|Kelompok query()
+ * @method static Builder|Kelompok whereCreatedAt($value)
+ * @method static Builder|Kelompok whereId($value)
+ * @method static Builder|Kelompok whereJenis($value)
+ * @method static Builder|Kelompok whereKet($value)
+ * @method static Builder|Kelompok whereNama($value)
+ * @method static Builder|Kelompok whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Kelompok extends \Eloquent {}
@@ -238,21 +238,21 @@ namespace App\Models{
  * @property string $nama_mapel
  * @property int $kelompok_id
  * @property int $urutan
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Kelompok|null $kelompok
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel newQuery()
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $deleted_at
+ * @property-read Kelompok|null $kelompok
+ * @method static Builder|Mapel newModelQuery()
+ * @method static Builder|Mapel newQuery()
  * @method static \Illuminate\Database\Query\Builder|Mapel onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel query()
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereKelompokId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereNamaMapel($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mapel whereUrutan($value)
+ * @method static Builder|Mapel query()
+ * @method static Builder|Mapel whereCreatedAt($value)
+ * @method static Builder|Mapel whereDeletedAt($value)
+ * @method static Builder|Mapel whereId($value)
+ * @method static Builder|Mapel whereKelompokId($value)
+ * @method static Builder|Mapel whereNamaMapel($value)
+ * @method static Builder|Mapel whereUpdatedAt($value)
+ * @method static Builder|Mapel whereUrutan($value)
  * @method static \Illuminate\Database\Query\Builder|Mapel withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Mapel withoutTrashed()
  * @mixin \Eloquent
@@ -269,21 +269,21 @@ namespace App\Models{
  * @property int $mapel_id
  * @property int $guru_id
  * @property string|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property-read \App\Models\Guru|null $guru
- * @property-read \App\Models\Kelas|null $kelas
- * @property-read \App\Models\Mapel|null $mapel
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar query()
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Mengajar whereUpdatedAt($value)
+ * @property Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property-read Guru|null $guru
+ * @property-read Kelas|null $kelas
+ * @property-read Mapel|null $mapel
+ * @method static Builder|Mengajar newModelQuery()
+ * @method static Builder|Mengajar newQuery()
+ * @method static Builder|Mengajar query()
+ * @method static Builder|Mengajar whereCreatedAt($value)
+ * @method static Builder|Mengajar whereDeletedAt($value)
+ * @method static Builder|Mengajar whereGuruId($value)
+ * @method static Builder|Mengajar whereId($value)
+ * @method static Builder|Mengajar whereKelasId($value)
+ * @method static Builder|Mengajar whereMapelId($value)
+ * @method static Builder|Mengajar whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Mengajar extends \Eloquent {}
@@ -300,21 +300,21 @@ namespace App\Models{
  * @property string|null $deskripsi_b
  * @property string|null $deskripsi_c
  * @property string|null $deskripsi_d
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Guru|null $guru
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai query()
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereDeskripsiA($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereDeskripsiB($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereDeskripsiC($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereDeskripsiD($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereKkm($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Nilai whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Guru|null $guru
+ * @method static Builder|Nilai newModelQuery()
+ * @method static Builder|Nilai newQuery()
+ * @method static Builder|Nilai query()
+ * @method static Builder|Nilai whereCreatedAt($value)
+ * @method static Builder|Nilai whereDeskripsiA($value)
+ * @method static Builder|Nilai whereDeskripsiB($value)
+ * @method static Builder|Nilai whereDeskripsiC($value)
+ * @method static Builder|Nilai whereDeskripsiD($value)
+ * @method static Builder|Nilai whereGuruId($value)
+ * @method static Builder|Nilai whereId($value)
+ * @method static Builder|Nilai whereKkm($value)
+ * @method static Builder|Nilai whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Nilai extends \Eloquent {}
@@ -329,33 +329,33 @@ namespace App\Models{
  * @property string $bulan_dibayar
  * @property int $id_spp
  * @property string $jumlah_bayar
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string|null $kode
  * @property int $kelas_id
  * @property int|null $jenis_pembayaran
  * @property string|null $bukti_non_tunai
  * @property int|null $santri_id
  * @property int|null $status
- * @property-read \App\Models\Kelas|null $kelas
- * @property-read \App\Models\Santri|null $santri
- * @property-read \App\Models\SPP|null $spp
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran query()
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereBuktiNonTunai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereBulanDibayar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereIdSpp($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereJenisPembayaran($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereJumlahBayar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereKode($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereSantriId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereTglBayar($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran whereUpdatedAt($value)
+ * @property-read Kelas|null $kelas
+ * @property-read Santri|null $santri
+ * @property-read SPP|null $spp
+ * @method static Builder|Pembayaran newModelQuery()
+ * @method static Builder|Pembayaran newQuery()
+ * @method static Builder|Pembayaran query()
+ * @method static Builder|Pembayaran whereBuktiNonTunai($value)
+ * @method static Builder|Pembayaran whereBulanDibayar($value)
+ * @method static Builder|Pembayaran whereCreatedAt($value)
+ * @method static Builder|Pembayaran whereId($value)
+ * @method static Builder|Pembayaran whereIdSpp($value)
+ * @method static Builder|Pembayaran whereJenisPembayaran($value)
+ * @method static Builder|Pembayaran whereJumlahBayar($value)
+ * @method static Builder|Pembayaran whereKelasId($value)
+ * @method static Builder|Pembayaran whereKode($value)
+ * @method static Builder|Pembayaran whereSantriId($value)
+ * @method static Builder|Pembayaran whereStatus($value)
+ * @method static Builder|Pembayaran whereTglBayar($value)
+ * @method static Builder|Pembayaran whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Pembayaran extends \Eloquent {}
@@ -368,16 +368,16 @@ namespace App\Models{
  * @property int $id
  * @property string $opsi
  * @property string $isi
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman query()
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman whereIsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman whereOpsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Pengumuman whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Pengumuman newModelQuery()
+ * @method static Builder|Pengumuman newQuery()
+ * @method static Builder|Pengumuman query()
+ * @method static Builder|Pengumuman whereCreatedAt($value)
+ * @method static Builder|Pengumuman whereId($value)
+ * @method static Builder|Pengumuman whereIsi($value)
+ * @method static Builder|Pengumuman whereOpsi($value)
+ * @method static Builder|Pengumuman whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Pengumuman extends \Eloquent {}
@@ -398,24 +398,24 @@ namespace App\Models{
  * @property string|null $k_nilai
  * @property string|null $k_predikat
  * @property string|null $k_deskripsi
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot query()
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereKDeskripsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereKNilai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereKPredikat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot wherePDeskripsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot wherePNilai($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot wherePPredikat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereSantriId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Rapot whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Rapot newModelQuery()
+ * @method static Builder|Rapot newQuery()
+ * @method static Builder|Rapot query()
+ * @method static Builder|Rapot whereCreatedAt($value)
+ * @method static Builder|Rapot whereGuruId($value)
+ * @method static Builder|Rapot whereId($value)
+ * @method static Builder|Rapot whereKDeskripsi($value)
+ * @method static Builder|Rapot whereKNilai($value)
+ * @method static Builder|Rapot whereKPredikat($value)
+ * @method static Builder|Rapot whereKelasId($value)
+ * @method static Builder|Rapot whereMapelId($value)
+ * @method static Builder|Rapot wherePDeskripsi($value)
+ * @method static Builder|Rapot wherePNilai($value)
+ * @method static Builder|Rapot wherePPredikat($value)
+ * @method static Builder|Rapot whereSantriId($value)
+ * @method static Builder|Rapot whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Rapot extends \Eloquent {}
@@ -431,25 +431,25 @@ namespace App\Models{
  * @property int|null $type
  * @property string|null $nominal
  * @property string|null $bukti
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string|null $kode_pembayaran
- * @property-read \App\Models\Santri|null $santri
- * @method static \Illuminate\Database\Eloquent\Builder|SPP newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|SPP newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|SPP query()
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereBukti($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereKodePembayaran($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereNominal($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereSantriId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereUpdatedAt($value)
+ * @property-read Santri|null $santri
+ * @method static Builder|SPP newModelQuery()
+ * @method static Builder|SPP newQuery()
+ * @method static Builder|SPP query()
+ * @method static Builder|SPP whereBukti($value)
+ * @method static Builder|SPP whereCreatedAt($value)
+ * @method static Builder|SPP whereId($value)
+ * @method static Builder|SPP whereKodePembayaran($value)
+ * @method static Builder|SPP whereNominal($value)
+ * @method static Builder|SPP whereSantriId($value)
+ * @method static Builder|SPP whereStatus($value)
+ * @method static Builder|SPP whereType($value)
+ * @method static Builder|SPP whereUpdatedAt($value)
  * @mixin \Eloquent
  * @property int $tahun
- * @method static \Illuminate\Database\Eloquent\Builder|SPP whereTahun($value)
+ * @method static Builder|SPP whereTahun($value)
  */
 	class SPP extends \Eloquent {}
 }
@@ -479,41 +479,41 @@ namespace App\Models{
  * @property string|null $pekerjaan_wali
  * @property string $foto
  * @property int $kelas_id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property string|null $tahun_ajaran
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Absen[] $absensi
+ * @property-read Collection|Absen[] $absensi
  * @property-read int|null $absensi_count
- * @property-read \App\Models\Kelas|null $kelas
- * @method static \Illuminate\Database\Eloquent\Builder|Santri newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Santri newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Santri query()
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAgama($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatAyah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatIbu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatSantri($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAlamatWali($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereAnakKe($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereFoto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereJk($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaAyah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaIbu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaSantri($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNamaWali($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereNisn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanAyah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanIbu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri wherePekerjaanWali($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereStatusKeluarga($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTahunAjaran($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTglLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereTmpLahir($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Santri whereUpdatedAt($value)
+ * @property-read Kelas|null $kelas
+ * @method static Builder|Santri newModelQuery()
+ * @method static Builder|Santri newQuery()
+ * @method static Builder|Santri query()
+ * @method static Builder|Santri whereAgama($value)
+ * @method static Builder|Santri whereAlamatAyah($value)
+ * @method static Builder|Santri whereAlamatIbu($value)
+ * @method static Builder|Santri whereAlamatSantri($value)
+ * @method static Builder|Santri whereAlamatWali($value)
+ * @method static Builder|Santri whereAnakKe($value)
+ * @method static Builder|Santri whereCreatedAt($value)
+ * @method static Builder|Santri whereDeletedAt($value)
+ * @method static Builder|Santri whereFoto($value)
+ * @method static Builder|Santri whereId($value)
+ * @method static Builder|Santri whereJk($value)
+ * @method static Builder|Santri whereKelasId($value)
+ * @method static Builder|Santri whereNamaAyah($value)
+ * @method static Builder|Santri whereNamaIbu($value)
+ * @method static Builder|Santri whereNamaSantri($value)
+ * @method static Builder|Santri whereNamaWali($value)
+ * @method static Builder|Santri whereNisn($value)
+ * @method static Builder|Santri wherePekerjaanAyah($value)
+ * @method static Builder|Santri wherePekerjaanIbu($value)
+ * @method static Builder|Santri wherePekerjaanWali($value)
+ * @method static Builder|Santri whereStatusKeluarga($value)
+ * @method static Builder|Santri whereTahunAjaran($value)
+ * @method static Builder|Santri whereTglLahir($value)
+ * @method static Builder|Santri whereTmpLahir($value)
+ * @method static Builder|Santri whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Santri extends \Eloquent {}
@@ -545,35 +545,35 @@ namespace App\Models{
  * @property string|null $jumlah_guru
  * @property int|null $id
  * @property string|null $logo
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Setting newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Setting newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Setting query()
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAksesInternet($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereAlamat($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereJenjangPendidikan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereJumlahGuru($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereJumlahSantri($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereKabupatenKota($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereKecamatan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereKelurahan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereKodePos($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLogo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereLuasTanah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereNamaKepalaSekolah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereNamaSekolah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereNoTelpon($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereNpsn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereProvinsi($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereStatusSekolah($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereSumberListrik($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWaktuPenyelenggaraan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Setting whereWebsite($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Setting newModelQuery()
+ * @method static Builder|Setting newQuery()
+ * @method static Builder|Setting query()
+ * @method static Builder|Setting whereAksesInternet($value)
+ * @method static Builder|Setting whereAlamat($value)
+ * @method static Builder|Setting whereCreatedAt($value)
+ * @method static Builder|Setting whereEmail($value)
+ * @method static Builder|Setting whereId($value)
+ * @method static Builder|Setting whereJenjangPendidikan($value)
+ * @method static Builder|Setting whereJumlahGuru($value)
+ * @method static Builder|Setting whereJumlahSantri($value)
+ * @method static Builder|Setting whereKabupatenKota($value)
+ * @method static Builder|Setting whereKecamatan($value)
+ * @method static Builder|Setting whereKelurahan($value)
+ * @method static Builder|Setting whereKodePos($value)
+ * @method static Builder|Setting whereLogo($value)
+ * @method static Builder|Setting whereLuasTanah($value)
+ * @method static Builder|Setting whereNamaKepalaSekolah($value)
+ * @method static Builder|Setting whereNamaSekolah($value)
+ * @method static Builder|Setting whereNoTelpon($value)
+ * @method static Builder|Setting whereNpsn($value)
+ * @method static Builder|Setting whereProvinsi($value)
+ * @method static Builder|Setting whereStatusSekolah($value)
+ * @method static Builder|Setting whereSumberListrik($value)
+ * @method static Builder|Setting whereUpdatedAt($value)
+ * @method static Builder|Setting whereWaktuPenyelenggaraan($value)
+ * @method static Builder|Setting whereWebsite($value)
  * @mixin \Eloquent
  */
 	class Setting extends \Eloquent {}
@@ -591,21 +591,21 @@ namespace App\Models{
  * @property string|null $sikap_1
  * @property string|null $sikap_2
  * @property string|null $sikap_3
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap query()
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSantriId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSikap1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSikap2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereSikap3($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Sikap whereUpdatedAt($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Sikap newModelQuery()
+ * @method static Builder|Sikap newQuery()
+ * @method static Builder|Sikap query()
+ * @method static Builder|Sikap whereCreatedAt($value)
+ * @method static Builder|Sikap whereGuruId($value)
+ * @method static Builder|Sikap whereId($value)
+ * @method static Builder|Sikap whereKelasId($value)
+ * @method static Builder|Sikap whereMapelId($value)
+ * @method static Builder|Sikap whereSantriId($value)
+ * @method static Builder|Sikap whereSikap1($value)
+ * @method static Builder|Sikap whereSikap2($value)
+ * @method static Builder|Sikap whereSikap3($value)
+ * @method static Builder|Sikap whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class Sikap extends \Eloquent {}
@@ -625,23 +625,23 @@ namespace App\Models{
  * @property string|null $uts
  * @property string|null $ulha_3
  * @property string|null $uas
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan query()
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereGuruId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereKelasId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereMapelId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereSantriId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUas($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUlha1($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUlha2($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUlha3($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Ulangan whereUts($value)
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @method static Builder|Ulangan newModelQuery()
+ * @method static Builder|Ulangan newQuery()
+ * @method static Builder|Ulangan query()
+ * @method static Builder|Ulangan whereCreatedAt($value)
+ * @method static Builder|Ulangan whereGuruId($value)
+ * @method static Builder|Ulangan whereId($value)
+ * @method static Builder|Ulangan whereKelasId($value)
+ * @method static Builder|Ulangan whereMapelId($value)
+ * @method static Builder|Ulangan whereSantriId($value)
+ * @method static Builder|Ulangan whereUas($value)
+ * @method static Builder|Ulangan whereUlha1($value)
+ * @method static Builder|Ulangan whereUlha2($value)
+ * @method static Builder|Ulangan whereUlha3($value)
+ * @method static Builder|Ulangan whereUpdatedAt($value)
+ * @method static Builder|Ulangan whereUts($value)
  * @mixin \Eloquent
  */
 	class Ulangan extends \Eloquent {}
@@ -654,35 +654,35 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property Carbon|null $email_verified_at
  * @property string $password
  * @property string $role
  * @property string|null $nisn
  * @property string|null $id_card
  * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
  * @property string|null $deleted_at
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read DatabaseNotificationCollection|DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
+ * @property-read Collection|PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
- * @method static \Database\Factories\UserFactory factory(...$parameters)
- * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|User query()
- * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereIdCard($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereNisn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static UserFactory factory(...$parameters)
+ * @method static Builder|User newModelQuery()
+ * @method static Builder|User newQuery()
+ * @method static Builder|User query()
+ * @method static Builder|User whereCreatedAt($value)
+ * @method static Builder|User whereDeletedAt($value)
+ * @method static Builder|User whereEmail($value)
+ * @method static Builder|User whereEmailVerifiedAt($value)
+ * @method static Builder|User whereId($value)
+ * @method static Builder|User whereIdCard($value)
+ * @method static Builder|User whereName($value)
+ * @method static Builder|User whereNisn($value)
+ * @method static Builder|User wherePassword($value)
+ * @method static Builder|User whereRememberToken($value)
+ * @method static Builder|User whereRole($value)
+ * @method static Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 	class User extends \Eloquent {}

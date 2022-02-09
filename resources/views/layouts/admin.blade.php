@@ -73,7 +73,7 @@
     </style>
 </head>
 
-<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
+<body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable">
     @include('layouts.partials.header-mobile')
     <div class="d-flex flex-column flex-root">
         <div class="d-flex flex-row flex-column-fluid page">
@@ -87,6 +87,7 @@
                         </div>
                     </div>
                 </div>
+                @include('layouts.partials.footer')
             </div>
         </div>
     </div>

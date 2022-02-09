@@ -125,58 +125,6 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        $(document).ready(function () {
-            'use strict'
-
-            var pieChartCanvasGuru = $('#pieChartGuru').get(0).getContext('2d')
-            var pieDataGuru        = {
-                labels: [
-                    'Laki-laki',
-                    'Perempuan',
-                ],
-                datasets: [
-                    {
-                    data: [{{ $gurulk }}, {{ $gurupr }}],
-                    backgroundColor : ['#007BFF', '#DC3545'],
-                    }
-                ]
-            }
-            var pieOptions     = {
-                legend: {
-                    display: false
-                }
-            }
-            var pieChart = new Chart(pieChartCanvasGuru, {
-                type: 'doughnut',
-                data: pieDataGuru,
-                options: pieOptions
-            })
-
-            var pieChartCanvassantri = $('#pieChartsantri').get(0).getContext('2d')
-            var pieDatasantri        = {
-                labels: [
-                    'Laki-laki',
-                    'Perempuan',
-                ],
-                datasets: [
-                    {
-                    data: [{{ $santrilk }}, {{ $santripr }}],
-                    backgroundColor : ['#007BFF', '#DC3545'],
-                    }
-                ]
-            }
-            var pieOptions     = {
-                legend: {
-                    display: false
-                }
-            }
-            var pieChart = new Chart(pieChartCanvassantri, {
-                type: 'doughnut',
-                data: pieDatasantri,
-                options: pieOptions
-            })
-        })
-
         $("#Dashboard").addClass("menu-item-open");
         $("#liDashboard").addClass("menu-item-open");
         $("#AdminHome").addClass("menu-item-active");

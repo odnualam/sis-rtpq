@@ -158,8 +158,8 @@
 
                     <li class="menu-item" aria-haspopup="true" id="DataSPP">
                         <a href="{{ route('spp.index') }}" class="menu-link">
-                            <i class="menu-icon flaticon-coins"></i>
-                            <span class="menu-text">SPP</span>
+                            <i class="menu-icon flaticon-piggy-bank"></i>
+                            <span class="menu-text">Data SPP</span>
                         </a>
                     </li>
 
