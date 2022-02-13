@@ -5,13 +5,11 @@
         <div class="login-aside d-flex flex-column flex-row-auto" style="background-color: #F2C98A;">
             <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
                 <a href="#" class="text-center mb-10">
-                    <img src="{{ asset('admin/media/logos/logo-letter-1.png') }}" class="max-h-70px" alt="" />
+                    <img src="{{ asset('uploads/setting/'.$setting->logo) }}" class="max-h-70px" alt="" />
                 </a>
                 <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #986923;">
-                    Discover Amazing Metronic <br />with great build tools
+                    Sistem Informasi Santri <br />{{ $setting->nama_sekolah }}
                 </h3>
-            </div>
-            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{ asset('admin/media/svg/illustrations/login-visual-1.svg') }})">
             </div>
         </div>
         <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
@@ -31,9 +29,9 @@
                         <div class="form-group">
                             <div class="d-flex justify-content-between mt-n5">
                                 <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
-                                <a href="javascript:;" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Forgot Password ?</a>
+                                {{-- <a href="javascript:;" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">Forgot Password ?</a> --}}
                             </div>
-                            <input id="password" type="password" placeholder="{{ __('Password') }}" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('password') is-invalid @enderror" name="password" autocomplete="current-password" disabled>
+                            <input id="password" type="password" placeholder="Password" class="form-control form-control-solid h-auto py-6 px-6 rounded-lg @error('password') is-invalid @enderror" name="password" autocomplete="current-password" disabled>
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -41,7 +39,7 @@
                             @enderror
                         </div>
                         <div class="pb-lg-0 pb-5">
-                            <button type="submit" id="btn-login" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Sign In</button>
+                            <button type="submit" id="btn-login" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-3">Masuk</button>
                         </div>
                     </form>
                 </div>

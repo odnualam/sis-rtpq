@@ -1,6 +1,6 @@
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
     <div class="brand flex-column-auto" id="kt_brand">
-        <img alt="Logo" src="{{ asset('admin/media/logos/logo-light.png') }}" />
+        <img alt="Logo" src="{{ asset('uploads/setting/'.$setting->logo) }}" width="50" />
         <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
             <span class="svg-icon svg-icon svg-icon-xl">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

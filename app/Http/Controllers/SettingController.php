@@ -59,7 +59,6 @@ class SettingController extends Controller
 
         if ($request->has('logo')) {
             if (File::exists(public_path('uploads/setting/'.$input['logo']))) {
-                dd('ADA');
                 File::delete(public_path('uploads/setting/'.$input['logo']));
             } else {
                 $image = $request->file('logo');
