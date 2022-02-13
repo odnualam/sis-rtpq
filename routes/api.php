@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\References\CityController;
+use App\Http\Controllers\References\DistrictController;
+use App\Http\Controllers\References\VillageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/city/province_code/{province_code}', 'References\CityController')->name('city.list.json');
-Route::get('/district/city_code/{city_code}', 'References\DistrictController')->name('districts.list.json');
-Route::get('/village/district_code/{district_code}', 'References\VillageController')->name('villages.list.json');
+Route::get('city/province_code/{province_code}', CityController::class)->name('city.list.json');
+Route::get('district/city_code/{city_code}', DistrictController::class)->name('districts.list.json');
+Route::get('village/district_code/{district_code}', VillageController::class)->name('villages.list.json');

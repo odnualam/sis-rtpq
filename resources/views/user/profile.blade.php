@@ -1,9 +1,5 @@
- @extends('layouts.admin')
+@extends('layouts.admin')
 @section('heading', 'Edit Profile')
-@section('page')
-    <li class="breadcrumb-item active"><a href="{{ route('profile') }}">Pengaturan</a></li>
-    <li class="breadcrumb-item active">Edit Profile</li>
-@endsection
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -21,19 +17,6 @@
                         <div class="form-group">
                             <label for="name">Nama Guru</label>
                             <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" class="form-control @error('name') is-invalid @enderror">
-                        </div>
-                        <div class="form-group">
-                            <label for="mapel_id">Mapel</label>
-                            <select id="mapel_id" name="mapel_id" class="  form-control @error('mapel_id') is-invalid @enderror">
-                                <option value="">-- Pilih Mapel --</option>
-                                @foreach ($mapel as $data)
-                                    <option value="{{ $data->id }}"
-                                        @if (Auth::user()->guru(Auth::user()->id_card)->mapel_id == $data->id)
-                                            selected
-                                        @endif
-                                    >{{ $data->nama_mapel }}</option>
-                                @endforeach
-                            </select>
                         </div>
                         <div class="form-group">
                             <label for="tmp_lahir">Tempat Lahir</label>
@@ -69,10 +52,6 @@
                             <label for="tgl_lahir">Tanggal Lahir</label>
                             <input type="date" id="tgl_lahir" name="tgl_lahir" value="{{ Auth::user()->guru(Auth::user()->id_card)->tgl_lahir }}" class="form-control @error('tgl_lahir') is-invalid @enderror">
                         </div>
-                        <div class="form-group">
-                            <label for="kode">Kode Jadwal</label>
-                            <input type="text" id="kode" name="kode" class="form-control" value="{{ Auth::user()->guru(Auth::user()->id_card)->kode }}" disabled>
-                        </div>
                     </div>
                     </div>
                 @elseif (Auth::user()->role == "Santri")
@@ -85,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Nama Santri</label>
-                            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" class="form-control @error('name') is-invalid @enderror">
+                            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" class="form-control @error('name') is-invalid @enderror" disabled>
                         </div>
                         <div class="form-group">
                             <label for="jk">Jenis Kelamin</label>
@@ -111,7 +90,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="kelas_id">Kelas</label>
-                            <select id="kelas_id" name="kelas_id" class="  form-control @error('kelas_id') is-invalid @enderror">
+                            <select id="kelas_id" name="kelas_id" class="  form-control @error('kelas_id') is-invalid @enderror" disabled>
                                 <option value="">-- Pilih Kelas --</option>
                                 @foreach ($kelas as $data)
                                     <option value="{{ $data->id }}"

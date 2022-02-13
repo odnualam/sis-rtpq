@@ -29,11 +29,12 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
+            'nik' => 'required',
             'id_card' => 'required',
+            'pendidikan' => 'required',
             'nama_guru' => 'required',
-            'mapel_id' => 'required',
-            'kode' => 'required|string|unique:guru|min:2|max:3',
             'jk' => 'required',
         ]);
 
@@ -43,19 +44,14 @@ class GuruController extends Controller
             $foto->move('uploads/guru/', $new_foto);
             $nameFoto = 'uploads/guru/'.$new_foto;
         } else {
-            if ($request->jk == 'L') {
-                $nameFoto = 'uploads/guru/35251431012020_male.jpg';
-            } else {
-                $nameFoto = 'uploads/guru/23171022042020_female.jpg';
-            }
+            $nameFoto = 'uploads/guru/default.png';
         }
 
         $guru = Guru::create([
+            'nik' => $request->id_card,
             'id_card' => $request->id_card,
             'pendidikan' => $request->pendidikan,
             'nama_guru' => $request->nama_guru,
-            'mapel_id' => $request->mapel_id,
-            'kode' => $request->kode,
             'jk' => $request->jk,
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
@@ -91,7 +87,6 @@ class GuruController extends Controller
     {
         $this->validate($request, [
             'nama_guru' => 'required',
-            'mapel_id' => 'required',
             'jk' => 'required',
         ]);
 
@@ -106,7 +101,6 @@ class GuruController extends Controller
         }
         $guru_data = [
             'nama_guru' => $request->nama_guru,
-            'mapel_id' => $request->mapel_id,
             'jk' => $request->jk,
             'telp' => $request->telp,
             'tmp_lahir' => $request->tmp_lahir,
@@ -159,15 +153,6 @@ class GuruController extends Controller
         $guru->update($guru_data);
 
         return redirect()->route('guru.index')->with('success', 'Berhasil merubah foto!');
-    }
-
-    public function mapel($id)
-    {
-        $id = Crypt::decrypt($id);
-        $mapel = Mapel::findorfail($id);
-        $guru = Guru::where('mapel_id', $id)->orderBy('kode', 'asc')->get();
-
-        return view('admin.guru.show', compact('mapel', 'guru'));
     }
 
     public function absensi()

@@ -14,9 +14,9 @@
                 <div class="topbar-item" data-toggle="dropdown" data-offset="0px,0px">
                     <div class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2">
                         <span class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                        <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ Auth::user()->name }}</span>
+                        <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3 text-capitalize">{{ Auth::user()->name }}</span>
                         <span class="symbol symbol-35 symbol-light-success">
-                            <span class="symbol-label font-size-h5 font-weight-bold">{{ Str::substr(Auth::user()->name, 0,1) }}</span>
+                            <span class="symbol-label font-size-h5 font-weight-bold text-capitalize">{{ Str::substr(Auth::user()->name, 0,1) }}</span>
                         </span>
                     </div>
                 </div>
@@ -24,9 +24,9 @@
                     <div class="d-flex align-items-center justify-content-between flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top" style="background-image: url({{ asset('admin/media/misc/bg-1.jpg') }})">
                         <div class="d-flex align-items-center mr-2">
                             <div class="symbol bg-white-o-15 mr-3">
-                                <span class="symbol-label text-success font-weight-bold font-size-h4">{{ Str::substr(Auth::user()->name, 0,1) }}</span>
+                                <span class="symbol-label text-success font-weight-bold font-size-h4 text-capitalize">{{ Str::substr(Auth::user()->name, 0,1) }}</span>
                             </div>
-                            <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5">{{ Auth::user()->name }}</div>
+                            <div class="text-white m-0 flex-grow-1 mr-3 font-size-h5 text-capitalize">{{ Auth::user()->name }}</div>
                         </div>
                     </div>
                     <div class="navi navi-spacer-x-0 pt-5">

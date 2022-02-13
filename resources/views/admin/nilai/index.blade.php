@@ -1,8 +1,5 @@
  @extends('layouts.admin')
 @section('heading', 'Data Nilai')
-@section('page')
-    <li class="breadcrumb-item active">Data Nilai</li>
-@endsection
 @section('content')
     @php
         $no = 1;

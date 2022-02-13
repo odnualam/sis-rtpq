@@ -29,7 +29,7 @@
                 <thead class="text-uppercase">
                     <tr>
                         <th>No.</th>
-                        <th>Username</th>
+                        <th>Nama</th>
                         <th>Email</th>
                         @foreach ($role as $d => $data)
                             @if ($d == 'Guru')
@@ -62,7 +62,7 @@
                             <form class="delete_form" action="{{ route('user.destroy', $data->id) }}" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger btn-sm"><i class="nav-icon fas fa-trash-alt"></i> &nbsp; Hapus</button>
+                            <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
                             </form>
                         </td>
                         </tr>

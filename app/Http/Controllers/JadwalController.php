@@ -23,7 +23,7 @@ class JadwalController extends Controller
     {
         $hari = Hari::all();
         $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
-        $guru = Guru::OrderBy('kode', 'asc')->get();
+        $guru = Guru::OrderBy('id_card', 'asc')->get();
         $mapel = Mapel::OrderBy('kelompok_id', 'asc')->OrderBy('urutan', 'asc')->get();
 
         return view('admin.jadwal.index', compact('hari', 'kelas', 'guru', 'mapel'));
@@ -72,7 +72,7 @@ class JadwalController extends Controller
         $jadwal = Jadwal::findorfail($id);
         $hari = Hari::all();
         $kelas = Kelas::all();
-        $guru = Guru::OrderBy('kode', 'asc')->get();
+        $guru = Guru::OrderBy('id_card', 'asc')->get();
 
         return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru'));
     }

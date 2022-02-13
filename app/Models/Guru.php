@@ -57,13 +57,12 @@ class Guru extends Model
         'id_card',
         'pendidikan',
         'nama_guru',
-        'mapel_id',
-        'kode',
         'jk',
         'telp',
         'tmp_lahir',
         'tgl_lahir',
         'foto',
+        'nik',
     ];
 
     public function mapel()

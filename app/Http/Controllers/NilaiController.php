@@ -19,14 +19,14 @@ class NilaiController extends Controller
 
     public function create()
     {
-        $guru = Guru::orderBy('kode')->get();
+        $guru = Guru::orderBy('id_card')->get();
 
         return view('admin.nilai.index', compact('guru'));
     }
 
     public function store(Request $request)
     {
-        $guru = Guru::where('kode', $request->guru_id)->first();
+        $guru = Guru::where('id', $request->guru_id)->first();
 
         Nilai::updateOrCreate(
             [

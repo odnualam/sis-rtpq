@@ -162,19 +162,25 @@
                         </thead>
                         <tbody>
                             @foreach ($mapel as $val => $data)
-                                <tr>
-                                    <?php $data = $data[0]; ?>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data->mapel->nama_mapel }}</td>
-                                    {{-- <td class="ctr">{{ $data->kkm($data->nilai($val)['guru_id']) }}</td> --}}
-                                    <td class="ctr">{{ $data->kkm($data->guru_id) }}</td>
-                                    <td class="ctr">{{ $data->nilai($val)['p_nilai'] }}</td>
-                                    <td class="ctr">{{ $data->nilai($val)['p_predikat'] }}</td>
-                                    <td class="ctr">{{ $data->nilai($val)['p_deskripsi'] }}</td>
-                                    <td class="ctr">{{ $data->nilai($val)['k_nilai'] }}</td>
-                                    <td class="ctr">{{ $data->nilai($val)['k_predikat'] }}</td>
-                                    <td class="ctr">{{ $data->nilai($val)['k_deskripsi'] }}</td>
-                                </tr>
+                                @if ( $mapel->count() > 0 )
+                                    <tr>
+                                        <?php $data = $data[0]; ?>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $data->mapel->nama_mapel }}</td>
+                                        {{-- <td class="ctr">{{ $data->kkm($data->nilai($val)['guru_id']) }}</td> --}}
+                                        <td class="ctr">{{ $data->kkm($data->guru_id) }}</td>
+                                        <td class="ctr">{{ $data->nilai($val)['p_nilai'] }}</td>
+                                        <td class="ctr">{{ $data->nilai($val)['p_predikat'] }}</td>
+                                        <td class="ctr">{{ $data->nilai($val)['p_deskripsi'] }}</td>
+                                        <td class="ctr">{{ $data->nilai($val)['k_nilai'] }}</td>
+                                        <td class="ctr">{{ $data->nilai($val)['k_predikat'] }}</td>
+                                        <td class="ctr">{{ $data->nilai($val)['k_deskripsi'] }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.0.0.
+ * Generated for Laravel 9.0.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -16451,6 +16451,157 @@
      
 }
 
+    namespace Laravolt\Indonesia { 
+            /**
+     * 
+     *
+     */ 
+        class Facade {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function search($location)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->search($location);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->all();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function allProvinces()
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->allProvinces();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function paginateProvinces($numRows = 15)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->paginateProvinces($numRows);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function allCities()
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->allCities();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function paginateCities($numRows = 15)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->paginateCities($numRows);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function allDistricts()
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->allDistricts();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function paginateDistricts($numRows = 15)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->paginateDistricts($numRows);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function allVillages()
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->allVillages();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function paginateVillages($numRows = 15)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->paginateVillages($numRows);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function findProvince($provinceId, $with = null)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->findProvince($provinceId, $with);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function findCity($cityId, $with = null)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->findCity($cityId, $with);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function findDistrict($districtId, $with = null)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->findDistrict($districtId, $with);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function findVillage($villageId, $with = null)
+        {
+                        /** @var \Laravolt\Indonesia\IndonesiaService $instance */
+                        return $instance->findVillage($villageId, $with);
+        }
+         
+    }
+     
+}
+
     namespace Maatwebsite\Excel\Facades { 
             /**
      * 
@@ -18644,6 +18795,19 @@ namespace  {
             }
              
                 /**
+             * 
+             *
+             * @see \Laravolt\Indonesia\ServiceProvider::registerMacro()
+             * @param mixed $attributes
+             * @param string $searchTerm
+             * @static 
+             */ 
+            public static function whereLike($attributes, $searchTerm)
+            {
+                                return \Illuminate\Database\Eloquent\Builder::whereLike($attributes, $searchTerm);
+            }
+             
+                /**
              * Set the columns to be selected.
              *
              * @param array|mixed $columns
@@ -20759,6 +20923,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class PDF extends \Barryvdh\DomPDF\Facade\Pdf {}
             class Image extends \Intervention\Image\Facades\Image {}
+            class Indonesia extends \Laravolt\Indonesia\Facade {}
             class Excel extends \Maatwebsite\Excel\Facades\Excel {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      

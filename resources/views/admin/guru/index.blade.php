@@ -33,24 +33,26 @@
                     <table id="example1" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
                         <thead class="text-uppercase">
                             <tr>
-                                <th>No.</th>
-                                <th>Nama</th>
-                                <th>Id Card</th>
                                 <th>Foto</th>
+                                <th>NUPTK/NIK</th>
+                                <th>Id Card</th>
+                                <th>Nama</th>
+                                <th>Jenis Kelamin</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($guru as $data)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $data->nama_guru }}</td>
-                                <td>{{ $data->id_card }}</td>
                                 <td>
                                     <a href="{{ asset($data->foto) }}" data-toggle="lightbox" data-title="Foto {{ $data->nama_guru }}" data-gallery="gallery" data-footer='<a href="{{ route('guru.ubah-foto', Crypt::encrypt($data->id)) }}" id="linkFotoGuru" class="btn btn-link btn-block btn-light"><i class="nav-icon fas fa-file-upload"></i> &nbsp; Ubah Foto</a>'>
-                                        <img src="{{ asset($data->foto) }}" width="130px" class="img-fluid mb-2">
+                                        <img src="{{ asset($data->foto) }}" width="50px" class="img-fluid mb-2">
                                     </a>
                                 </td>
+                                <td>{{ $data->nik }}</td>
+                                <td>{{ $data->id_card }}</td>
+                                <td>{{ $data->nama_guru }}</td>
+                                <td>{{ $data->jk == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                 <td>
                                     <form class="delete_form" action="{{ route('guru.destroy', $data->id) }}" method="post">
                                         @csrf
@@ -84,46 +86,33 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="nik">NUPTK/NIK</label>
+                                    <input type="text" id="nik" name="nik" onkeypress="return inputAngka(event)" class="form-control @error('nik') is-invalid @enderror">
+                                </div>
+                                <div class="form-group">
                                     <label for="nama_guru">Nama Guru</label>
-                                    <input type="text" id="nama_guru" name="nama_guru"
-                                        class="form-control @error('nama_guru') is-invalid @enderror">
+                                    <input type="text" id="nama_guru" name="nama_guru" class="form-control @error('nama_guru') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
                                     <label for="tmp_lahir">Tempat Lahir</label>
-                                    <input type="text" id="tmp_lahir" name="tmp_lahir"
-                                        class="form-control @error('tmp_lahir') is-invalid @enderror">
+                                    <input type="text" id="tmp_lahir" name="tmp_lahir" class="form-control @error('tmp_lahir') is-invalid @enderror">
                                 </div>
                                 <div class="form-group">
                                     <label for="tgl_lahir">Tanggal Lahir</label>
-                                    <input type="date" id="tgl_lahir" name="tgl_lahir"
-                                        class="form-control @error('tgl_lahir') is-invalid @enderror">
+                                    <input type="date" id="tgl_lahir" name="tgl_lahir" class="form-control @error('tgl_lahir') is-invalid @enderror">
                                 </div>
+
                                 <div class="form-group">
                                     <label for="jk">Jenis Kelamin</label>
-                                    <select id="jk" name="jk"
-                                        class="  form-control @error('jk') is-invalid @enderror">
+                                    <select id="jk" name="jk"class="  form-control @error('jk') is-invalid @enderror">
                                         <option value="">-- Pilih Jenis Kelamin --</option>
                                         <option value="L">Laki-Laki</option>
                                         <option value="P">Perempuan</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label for="telp">Nomor Telpon/HP</label>
-                                    <input type="text" id="telp" name="telp" onkeypress="return inputAngka(event)"
-                                        class="form-control @error('telp') is-invalid @enderror">
-                                </div>
+
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="mapel_id">Mapel</label>
-                                    <select id="mapel_id" name="mapel_id"
-                                        class="  form-control @error('mapel_id') is-invalid @enderror">
-                                        <option value="">-- Pilih Mapel --</option>
-                                        @foreach ($mapel as $data)
-                                        <option value="{{ $data->id }}">{{ $data->nama_mapel }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 @php
                                 $kode = $max+1;
                                 if (strlen($kode) == 1) {
@@ -139,23 +128,35 @@
                                 }
                                 @endphp
                                 <div class="form-group">
-                                    <label for="id_card">Nomor ID Card</label>
-                                    <input type="text" id="id_card" name="id_card" maxlength="5"
-                                        onkeypress="return inputAngka(event)" value="{{ $id_card }}"
-                                        class="form-control @error('id_card') is-invalid @enderror" readonly>
+                                    <label for="pendidikan">Pendidikan Terakhir</label>
+                                    <select id="pendidikan" name="pendidikan"class="  form-control @error('pendidikan') is-invalid @enderror">
+                                        <option value="">-- Pilih Pendidikan Terakhir --</option>
+                                        <option value="Tidak/Belum Sekolah">Tidak/Belum Sekolah</option>
+                                        <option value="Tidak Tamat SD/Sederajat">Tidak Tamat SD/Sederajat</option>
+                                        <option value="Tamat SD/Sederajat">Tamat SD/Sederajat</option>
+                                        <option value="SLTP/Sederajat">SLTP/Sederajat</option>
+                                        <option value="SLTA/Sederajat">SLTA/Sederajat</option>
+                                        <option value="Diploma I/II">Diploma I/II</option>
+                                        <option value="Akademi/Diploma III/Sarjana Muda">Akademi/Diploma III/Sarjana Muda</option>
+                                        <option value="Diploma IV/Stara I">Diploma IV/Stara I</option>
+                                        <option value="Stara II">Stara II</option>
+                                        <option value="Stara III">Stara III</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="kode">Kode Jadwal</label>
-                                    <input type="text" id="kode" name="kode" maxlength="3"
-                                        onkeyup="this.value = this.value.toUpperCase()"
-                                        class="form-control @error('kode') is-invalid @enderror">
+                                    <label for="telp">Nomor Telpon/HP</label>
+                                    <input type="text" id="telp" name="telp" onkeypress="return inputAngka(event)" class="form-control @error('telp') is-invalid @enderror">
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_card">Nomor ID Card</label>
+                                    <input type="text" id="id_card" name="id_card" maxlength="5"
+                                        onkeypress="return inputAngka(event)" value="{{ $id_card }}" class="form-control @error('id_card') is-invalid @enderror" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label for="foto">File input</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" name="foto"
-                                                class="custom-file-input @error('foto') is-invalid @enderror" id="foto">
+                                            <input type="file" name="foto" class="custom-file-input @error('foto') is-invalid @enderror" id="foto">
                                             <label class="custom-file-label" for="foto">Choose file</label>
                                         </div>
                                     </div>
@@ -225,6 +226,8 @@
     </div>
 @endsection
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js" integrity="sha512-Y2IiVZeaBwXG1wSV7f13plqlmFOx8MdjuHyYFVoYzhyRr3nH/NMDjTBSswijzADdNzMyWNetbLMfOpIPl6Cv9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
         $("#MasterData").addClass("menu-item-open");
         $("#liMasterData").addClass("menu-item-open");

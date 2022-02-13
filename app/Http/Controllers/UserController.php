@@ -57,7 +57,7 @@ class UserController extends Controller
             }
             if ($countsantri >= 1) {
                 User::create([
-                    'name' => strtolower($santri->nama_santri),
+                    'name' => $santri->nama_santri,
                     'email' => $request->email,
                     'password' => Hash::make($request->password),
                     'role' => $request->role,

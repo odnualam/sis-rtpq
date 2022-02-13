@@ -12,9 +12,9 @@
                         <div class="pb-5">
                             <div class="d-flex flex-column flex-center">
                                 <div class="symbol symbol-120 symbol-circle symbol-success overflow-hidden">
-                                    <span class="font-size-h1 symbol-label font-weight-boldest">@php $inisial = getInitials(Auth::user()->name) @endphp {{ $inisial }}</span>
+                                    <span class="font-size-h1 symbol-label font-weight-boldest text-capitalize">@php $inisial = getInitials(Auth::user()->name) @endphp {{ $inisial }}</span>
                                 </div>
-                                <a class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1">{{ Auth::user()->name }}</a>
+                                <a class="card-title font-weight-bolder text-dark-75 text-hover-primary font-size-h4 m-0 pt-7 pb-1 text-capitalize">{{ Auth::user()->name }}</a>
                                 <div class="font-weight-bold text-dark-50 font-size-sm pb-6">{{ Auth::user()->nisn }}</div>
                             </div>
                             <div class="pt-1">

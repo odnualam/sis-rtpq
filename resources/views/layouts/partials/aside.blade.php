@@ -309,7 +309,7 @@
                     <li class="menu-item" aria-haspopup="true" id="SantriSPP">
                         <a href="{{ route('spp.santri.index') }}" class="menu-link">
                             <i class="menu-icon flaticon-coins"></i>
-                            <span class="menu-text">SPP</span>
+                            <span class="menu-text">Pembayaran SPP</span>
                         </a>
                     </li>
                 @else

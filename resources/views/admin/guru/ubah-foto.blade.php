@@ -9,17 +9,10 @@
         <div class="col-md-12">
             <div class="card card-custom gutter-b">
             <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                    <h3 class="card-title">Form ubah foto</h3>
-                    </div>
-                    <div class="col-md-6">
-                        <h3 class="card-title">Foto Saat ini</h3>
-                    </div>
+                <div class="card-title">
+                    <h3 class="card-label">@yield('heading')</h3>
                 </div>
             </div>
-            <!-- /.card-header -->
-            <!-- form start -->
             <form action="{{ route('guru.update-foto', $guru->id) }}"  enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="card-body">

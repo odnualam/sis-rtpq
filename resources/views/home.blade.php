@@ -124,11 +124,15 @@
                                 @endforeach
                             @elseif ($hari == '0' || $hari == '6')
                                 <tr>
-                                    <td colspan='5' style='background:#fff;text-align:center;font-weight:bold;font-size:18px;'> Sekalah Libur!</td>
+                                    <td></td>
+                                    <td style='text-align:center;font-weight:bold;font-size:15px;'> Sekalah Libur!</td>
+                                    <td></td>
                                 </tr>
                             @else
                                 <tr>
-                                    <td colspan='5' style='background:#fff;text-align:center;font-weight:bold;font-size:18px;'> Tidak Ada Data Jadwal!</td>
+                                    <td></td>
+                                    <td style='text-align:center;font-weight:bold;font-size:15px;'> Tidak Ada Data Jadwal!</td>
+                                    <td></td>
                                 </tr>
                             @endif
                         </tbody>
