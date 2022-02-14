@@ -29,7 +29,7 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $this->validate($request, [
             'nik' => 'required',
             'id_card' => 'required',
@@ -44,7 +44,7 @@ class GuruController extends Controller
             $foto->move('uploads/guru/', $new_foto);
             $nameFoto = 'uploads/guru/'.$new_foto;
         } else {
-            $nameFoto = 'uploads/guru/default.png';
+            $nameFoto = 'uploads/guru/32421817012022_default-avatar.png';
         }
 
         $guru = Guru::create([

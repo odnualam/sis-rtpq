@@ -78,6 +78,7 @@
                                         class="form-control @error('role') is-invalid @enderror  " name="role"
                                         value="{{ old('role') }}" autocomplete="role">
                                         <option value="">-- Select {{ __('Level User') }} --</option>
+                                        <option value="Kepala Sekolah">Kepala Sekolah</option>
                                         <option value="Admin">Admin</option>
                                         <option value="Guru">Guru</option>
                                         <option value="Santri">Santri</option>
@@ -134,8 +135,8 @@
               $("#noId").html('<label for="nomer">Nomer Id Card</label><input id="nomer" type="text" maxlength="5" onkeypress="return inputAngka(event)" placeholder="No Id Card" class="form-control" name="nomer" autocomplete="off">');
             } else if(kel == "Santri") {
               $("#noId").html(`<label for="nomer">NISN</label><input id="nomer" type="text" placeholder="NISN" class="form-control" name="nomer" autocomplete="off">`);
-            } else if(kel == "Admin") {
-              $("#noId").html(`<label for="name">Username</label><input id="name" type="text" placeholder="Username" class="form-control" name="name" autocomplete="off">`);
+            } else if(kel == "Admin" || kel == "Kepala Sekolah") {
+              $("#noId").html(`<label for="name">Nama Lengkap</label><input id="name" type="text" placeholder="Nama Lengkap" class="form-control" name="name" autocomplete="off">`);
             } else {
               $("#noId").html("")
             }

@@ -52,6 +52,7 @@
                                         class="form-control @error('role') is-invalid @enderror  " name="role"
                                         value="{{ old('role') }}" autocomplete="role">
                                         <option value="">-- Select {{ __('Level User') }} --</option>
+                                        <option value="Kepala Sekolah" {{ 'Kepala Sekolah' == $user->role ? 'selected' : '' }}>Kepala Sekolah</option>
                                         <option value="Admin" {{ 'Admin' == $user->role ? 'selected' : '' }}>Admin</option>
                                         <option value="Guru" {{ 'Guru' == $user->role ? 'selected' : '' }}>Guru</option>
                                         <option value="Santri" {{ 'Santri' == $user->role ? 'selected' : '' }}>Santri</option>

@@ -51,10 +51,12 @@
                                             <a href="{{ route('santri.edit', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-edit"></i></a>
                                             <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
                                         </form>
-                                        <form action="{{ route('santri.naik-kelas', Crypt::encrypt($data->id)) }}" method="post">
-                                            @csrf
-                                            <button title="Naik Kelas" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon2-zig-zag-line-sign"></i></button>
-                                        </form>
+                                        @if ($data->kelas_id != 3)
+                                            <form action="{{ route('santri.naik-kelas', Crypt::encrypt($data->id)) }}" method="post">
+                                                @csrf
+                                                <button title="Naik Kelas" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon2-zig-zag-line-sign"></i></button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
