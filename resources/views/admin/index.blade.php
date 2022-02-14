@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('stylesheet')
+    <link href="//www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css" />
+@endsection
 @section('heading', 'Dashboard')
 @section('content')
     <div class="row">
@@ -77,15 +80,28 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-4">
-            <div class="card card-custom gutter-b" style="min-height: 395px;">
+        <div class="col-lg-8">
+            <div class="card card-custom gutter-b">
                 <div class="card-header">
-                    <h3 class="card-title">Pengumuman</h3>
+                    <div class="card-title">
+                        <h3 class="card-label">Date Based Data</h3>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="tab-content p-0">
-                        {!! $pengumuman->isi !!}
+                    <div id="kt_amcharts_6" style="height: 500px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-custom gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">Jenis Kelamin</h3>
                     </div>
+                </div>
+                <div class="card-body">
+                    <div id="kt_amcharts_12" style="height: 500px;"></div>
                 </div>
             </div>
         </div>
@@ -121,12 +137,127 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-lg-4">
+            <div class="card card-custom gutter-b" style="min-height: 395px;">
+                <div class="card-header">
+                    <h3 class="card-title">Pengumuman</h3>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content p-0">
+                        {!! $pengumuman->isi !!}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('script')
+    <script src="//www.amcharts.com/lib/3/amcharts.js"></script>
+    <script src="//www.amcharts.com/lib/3/serial.js"></script>
+    <script src="//www.amcharts.com/lib/3/radar.js"></script>
+    <script src="//www.amcharts.com/lib/3/pie.js"></script>
+    <script src="//www.amcharts.com/lib/3/plugins/tools/polarScatter/polarScatter.min.js"></script>
+    <script src="//www.amcharts.com/lib/3/plugins/animate/animate.min.js"></script>
+    <script src="//www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+    <script src="//www.amcharts.com/lib/3/themes/light.js"></script>
     <script type="text/javascript">
         $("#Dashboard").addClass("menu-item-open");
         $("#liDashboard").addClass("menu-item-open");
         $("#AdminHome").addClass("menu-item-active");
+    </script>
+    <script>
+        function getJenisKelaminSantri() {
+            $.ajax({
+				url : '{{ route("api.santri.jenis-kelamin") }}',
+                success: function(result) {
+					pieJenisKelaminSantri(result);
+				}
+			});
+        }
+
+        function pieJenisKelaminSantri(result)
+        {
+            AmCharts.makeChart("kt_amcharts_12", {
+                "type": "pie",
+                "theme": "light",
+                "hideCredits":true,
+                "dataProvider": [{
+                    "country": "Laki-laki",
+                    "litres": result.data['Laki-laki']
+                }, {
+                    "country": "Perempuan",
+                    "litres": result.data['Perempuan']
+                },],
+                "valueField": "litres",
+                "titleField": "country",
+                "export": {
+                    "enabled": true
+                }
+            });
+        }
+
+        getJenisKelaminSantri();
+    </script>
+    <script>
+        var data = {!! json_encode($chart->labels) !!};
+        var dataProvider = [];// this variable you have to pass in dataProvider inside chart
+
+        for(var key in data) {
+            dataProvider.push({
+                date: data[key],
+                value: key,
+            });
+        }
+
+        console.log(dataProvider);
+        var chart = AmCharts.makeChart("kt_amcharts_6", {
+            "type": "serial",
+            "theme": "light",
+            "hideCredits":true,
+            "marginRight": 40,
+            "marginLeft": 40,
+            "autoMarginOffset": 20,
+            "mouseWheelZoomEnabled": true,
+            "dataDateFormat": "YYYY",
+            "valueAxes": [{
+                "id": "v1",
+                "axisAlpha": 0,
+                "position": "left",
+                "ignoreAxisWidth": true
+            }],
+            "balloon": {
+                "borderThickness": 1,
+                "shadowAlpha": 0
+            },
+            "graphs": [{
+                "id": "g1",
+                "balloon": {
+                    "drop": true,
+                    "adjustBorderColor": false,
+                    "color": "#ffffff"
+                },
+                "bullet": "round",
+                "bulletBorderAlpha": 1,
+                "bulletColor": "#FFFFFF",
+                "bulletSize": 5,
+                "hideBulletsCount": 50,
+                "lineThickness": 2,
+                "title": "red line",
+                "useLineColorForBulletBorder": true,
+                "valueField": "value",
+                "balloonText": "<span style='font-size:18px;'>[[value]]</span>"
+            }],
+            "categoryField": "date",
+            "categoryAxis": {
+                "parseDates": true,
+                "dashLength": 1,
+                "minorGridEnabled": true
+            },
+            "export": {
+                "enabled": true
+            },
+            "dataProvider": dataProvider,
+        });
     </script>
 @endsection

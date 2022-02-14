@@ -12,6 +12,7 @@ use App\Models\Pengumuman;
 use App\Models\Santri;
 use App\Models\User;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -41,6 +42,15 @@ class HomeController extends Controller
 
     public function admin()
     {
+        $count_tahun_ajaran_santri = DB::table('santri')
+                    ->select(DB::raw('SUBSTRING(tahun_ajaran, 1, 4) as tahun_ajaran'), DB::raw('count(*) as total'))
+                    ->groupBy('tahun_ajaran')
+                    ->pluck('total', 'tahun_ajaran')->all();
+
+        $chart = new Santri;
+        $chart->labels = (array_keys($count_tahun_ajaran_santri));
+        $chart->dataset = (array_values($count_tahun_ajaran_santri));
+
         $jadwal = Jadwal::count();
         $guru = Guru::count();
         $gurulk = Guru::where('jk', 'L')->count();
@@ -56,6 +66,7 @@ class HomeController extends Controller
         $pengumuman = Pengumuman::first();
 
         return view('admin.index', compact(
+            'chart',
             'jadwal',
             'guru',
             'gurulk',
@@ -70,5 +81,24 @@ class HomeController extends Controller
             'activity_log',
             'pengumuman'
         ));
+    }
+
+    public function asas()
+    {
+        // Get users grouped by age
+        $groups = DB::table('users')
+                        ->select('age', DB::raw('count(*) as total'))
+                        ->groupBy('age')
+                        ->pluck('total', 'age')->all();
+        // Generate random colours for the groups
+        for ($i=0; $i<=count($groups); $i++) {
+                    $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+                }
+        // Prepare the data for returning with the view
+        $chart = new Chart;
+                $chart->labels = (array_keys($groups));
+                $chart->dataset = (array_values($groups));
+                $chart->colours = $colours;
+        return view('charts.index', compact('chart'));
     }
 }

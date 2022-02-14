@@ -42,9 +42,9 @@ class SantriController extends Controller
             $nameFoto = 'uploads/santri/'.$new_foto;
         } else {
             if ($request->jk == 'L') {
-                $nameFoto = 'uploads/santri/52471919042020_male.jpg';
+                $nameFoto = 'uploads/santri/32421817012022_default-avatar.png';
             } else {
-                $nameFoto = 'uploads/santri/50271431012020_female.jpg';
+                $nameFoto = 'uploads/santri/32421817012022_default-avatar.png';
             }
         }
 
@@ -311,5 +311,19 @@ class SantriController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Berhasil menambahkan data spp baru!');
+    }
+
+    public function GetSantriJenisKelamin()
+    {
+        $santri = Santri::selectRaw('
+            COUNT(CASE WHEN jk = "L" THEN "L" ELSE NULL END) as "Laki-laki",
+            COUNT(CASE WHEN jk <> "L" THEN "L" ELSE NULL END) as "Perempuan",
+            COUNT(*) as "Total Santri"
+        ')->first();
+
+        return response()->json([
+            'success' => true,
+            'data' => $santri,
+        ]);
     }
 }
