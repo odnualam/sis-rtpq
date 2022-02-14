@@ -93,6 +93,39 @@ class UserController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $id = Crypt::decrypt($id);
+        $user = User::findOrFail($id);
+
+        return view('admin.user.edit', [
+            'user' => $user
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'role' => 'required',
+        ]);
+
+        $user = User::where('id', $id)->first();
+
+        $user_data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+            'role' => $request->role,
+            'tgl_lahir' => $request->tgl_lahir,
+        ];
+
+        $user->update($user_data);
+
+        return redirect()->back()->with('success', 'Data user berhasil diperbaharui!');
+    }
+
     public function destroy($id)
     {
         $user = User::findorfail($id);

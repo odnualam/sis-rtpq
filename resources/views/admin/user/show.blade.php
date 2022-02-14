@@ -60,9 +60,10 @@
                         {{-- <td>{{ $data->created_at->format('l, d F Y') }}</td> --}}
                         <td>
                             <form class="delete_form" action="{{ route('user.destroy', $data->id) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
+                                <a href="{{ route('user.edit', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-edit"></i></a>
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-icon btn-outline-danger btn-sm"><i class="flaticon-delete"></i></button>
                             </form>
                         </td>
                         </tr>
