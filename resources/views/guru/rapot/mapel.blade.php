@@ -1,11 +1,20 @@
- @extends('layouts.admin')
-@section('heading', 'Pilih Kelas')
+@extends('layouts.admin')
+@section('heading', 'Pilih Mata Pelajaran')
 @section('content')
 <div class="d-flex flex-row">
     <div class="flex-row-fluid ml-lg-12">
         <div class="card card-custom gutter-bs">
-            <div class="card-header">
-                <h3 class="card-title">Pilih Kelas</h3>
+            <div class="card-header py-3">
+                <div class="card-title">
+                    <h3 class="card-label">@yield('heading')</h3>
+                </div>
+                <div class="card-toolbar">
+                    <div class="dropdown dropdown-inline mr-2">
+                        <a href="{{ route('rapot.index') }}" class="btn btn-default btn-sm">
+                            <span><i class="flaticon2-left-arrow-1"></i></span>Pilih Kelas
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -16,16 +25,16 @@
                             <thead class="text-uppercase">
                                 <tr>
                                     <th>No.</th>
-                                    <th>Nama Kelas</th>
+                                    <th>Nama Mapel</th>
                                     <th>Aksi</th>
                             </thead>
                             <tbody>
-                                @foreach ($kelas as $val => $data)
+                                @foreach ($mengajar as $val => $data)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $data[0]->rapot($val)->nama_kelas }}</td>
+                                    <td>{{ $data[0]->rapot($val)->nama_mapel }}</td>
                                     <td>
-                                        <a href="{{ route('show.mapel', Crypt::encrypt($val)) }}" class="btn btn-icon btn-outline-primary btn-sm">
+                                        <a href="{{ route('rapot.show', Crypt::encrypt($data[0]->id)) }}" class="btn btn-icon btn-outline-primary btn-sm">
                                             <i class="flaticon-medical"></i>
                                         </a>
                                     </td>

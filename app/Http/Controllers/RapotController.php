@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
+use App\Models\Mengajar;
 use App\Models\Nilai;
 use App\Models\Rapot;
 use App\Models\Santri;
@@ -23,6 +24,18 @@ class RapotController extends Controller
         $kelas = $jadwal->groupBy('kelas_id');
 
         return view('guru.rapot.kelas', compact('kelas', 'guru'));
+    }
+
+    public function showMapel($id)
+    {
+        $id = Crypt::decrypt($id);
+        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+        $mengajar = Mengajar::where('kelas_id', $id)->where('guru_id', $guru->id)->get();
+        $mengajar = $mengajar->groupBy('mapel_id');
+
+        return view('guru.rapot.mapel', [
+            'mengajar' => $mengajar
+        ]);
     }
 
     public function create()
@@ -45,7 +58,7 @@ class RapotController extends Controller
                     'santri_id' => $request->santri_id,
                     'kelas_id' => $request->kelas_id,
                     'guru_id' => $request->guru_id,
-                    'mapel_id' => $guru->mapel_id,
+                    'mapel_id' => $request->mapel_id,
                     'k_nilai' => $request->nilai,
                     'k_predikat' => $request->predikat,
                     'k_deskripsi' => $request->deskripsi,
@@ -61,11 +74,12 @@ class RapotController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
+        $mengajar = Mengajar::where('id', $id)->firstOrFail();
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $kelas = Kelas::findorfail($id);
-        $santri = Santri::where('kelas_id', $id)->get();
+        $kelas = Kelas::findorfail($mengajar->kelas_id);
+        $santri = Santri::where('kelas_id', $mengajar->kelas_id)->get();
 
-        return view('guru.rapot.rapot', compact('guru', 'kelas', 'santri'));
+        return view('guru.rapot.rapot', compact('guru', 'kelas', 'santri', 'mengajar'));
     }
 
     public function edit($id)

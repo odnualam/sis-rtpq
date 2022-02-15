@@ -1,8 +1,5 @@
  @extends('layouts.admin')
 @section('heading', 'Entry Nilai Rapot')
-@section('page')
-    <li class="breadcrumb-item active">Entry Nilai Rapot</li>
-@endsection
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -32,7 +29,7 @@
                             <tr>
                                 <td>Mata Pelajaran</td>
                                 <td>:</td>
-                                <td>{{ $guru->mapel->nama_mapel }}</td>
+                                <td>{{ $mengajar->mapel->nama_mapel }}</td>
                             </tr>
                             <tr>
                                 <td>Guru Mata Pelajaran</td>
@@ -91,6 +88,7 @@
                                 <form action="" method="post" id="formRapot">
                                     @csrf
                                     <input type="hidden" name="guru_id" value="{{$guru->id}}">
+                                    <input type="hidden" name="mapel_id" value="{{ $mengajar->mapel_id }}">
                                     <input type="hidden" name="kelas_id" value="{{$kelas->id}}">
                                     @foreach ($santri as $data)
                                         <input type="hidden" name="santri_id" value="{{$data->id}}">
@@ -209,6 +207,7 @@
             var predikat = $(".predikat_"+id).val();
             var deskripsi = $(".deskripsi_"+id).val();
             var guru_id = $("input[name=guru_id]").val();
+            var mapel_id = $("input[name=mapel_id]").val();
             var kelas_id = $("input[name=kelas_id]").val();
             var ok = ('<i class="fas fa-check" style="font-weight:bold;"></i>')
 
@@ -225,6 +224,7 @@
                         santri_id : id,
                         kelas_id : kelas_id,
                         guru_id : guru_id,
+                        mapel_id : mapel_id,
                         nilai : nilai,
                         predikat : predikat,
                         deskripsi : deskripsi,
