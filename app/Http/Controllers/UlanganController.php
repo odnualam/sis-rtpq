@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
+use App\Models\Mengajar;
 use App\Models\Nilai;
 use App\Models\Rapot;
 use App\Models\Santri;
@@ -22,6 +23,18 @@ class UlanganController extends Controller
         $kelas = $jadwal->groupBy('kelas_id');
 
         return view('guru.ulangan.kelas', compact('kelas', 'guru'));
+    }
+
+    public function showMapel($id)
+    {
+        $id = Crypt::decrypt($id);
+        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+        $mengajar = Mengajar::where('kelas_id', $id)->where('guru_id', $guru->id)->get();
+        $mengajar = $mengajar->groupBy('mapel_id');
+
+        return view('guru.ulangan.mapel', [
+            'mengajar' => $mengajar
+        ]);
     }
 
     public function create()
@@ -48,7 +61,7 @@ class UlanganController extends Controller
                             'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
-                            'mapel_id' => $guru->mapel_id,
+                            'mapel_id' => $request->mapel_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'A',
                             'p_deskripsi' => $deskripsi->deskripsi_a,
@@ -58,7 +71,7 @@ class UlanganController extends Controller
                             'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
-                            'mapel_id' => $guru->mapel_id,
+                            'mapel_id' => $request->mapel_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'B',
                             'p_deskripsi' => $deskripsi->deskripsi_b,
@@ -68,7 +81,7 @@ class UlanganController extends Controller
                             'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
-                            'mapel_id' => $guru->mapel_id,
+                            'mapel_id' => $request->mapel_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'C',
                             'p_deskripsi' => $deskripsi->deskripsi_c,
@@ -78,7 +91,7 @@ class UlanganController extends Controller
                             'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
                             'guru_id' => $request->guru_id,
-                            'mapel_id' => $guru->mapel_id,
+                            'mapel_id' => $request->mapel_id,
                             'p_nilai' => $nilai,
                             'p_predikat' => 'D',
                             'p_deskripsi' => $deskripsi->deskripsi_d,
@@ -97,7 +110,7 @@ class UlanganController extends Controller
                     'santri_id' => $request->santri_id,
                     'kelas_id' => $request->kelas_id,
                     'guru_id' => $request->guru_id,
-                    'mapel_id' => $guru->mapel_id,
+                    'mapel_id' => $request->mapel_id,
                     'ulha_1' => $request->ulha_1,
                     'ulha_2' => $request->ulha_2,
                     'uts' => $request->uts,
@@ -115,11 +128,12 @@ class UlanganController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
+        $mengajar = Mengajar::where('id', $id)->firstOrFail();
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $kelas = Kelas::findorfail($id);
-        $santri = Santri::where('kelas_id', $id)->get();
+        $kelas = Kelas::findorfail($mengajar->kelas_id);
+        $santri = Santri::where('kelas_id', $mengajar->kelas_id)->get();
 
-        return view('guru.ulangan.nilai', compact('guru', 'kelas', 'santri'));
+        return view('guru.ulangan.nilai', compact('guru', 'kelas', 'santri', 'mengajar'));
     }
 
     public function edit($id)
