@@ -6,6 +6,7 @@ use App\Models\Guru;
 use App\Models\Jadwal;
 use App\Models\Kelas;
 use App\Models\Mapel;
+use App\Models\Mengajar;
 use App\Models\Santri;
 use App\Models\Sikap;
 use Illuminate\Http\Request;
@@ -17,17 +18,22 @@ class SikapController extends Controller
     public function index()
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        if (
-            $guru->mapel->nama_mapel == 'Pendidikan Agama dan Budi Pekerti' ||
-            $guru->mapel->nama_mapel == 'Pendidikan Pancasila dan Kewarganegaraan'
-        ) {
-            $jadwal = Jadwal::where('guru_id', $guru->id)->orderBy('kelas_id')->get();
-            $kelas = $jadwal->groupBy('kelas_id');
+        $jadwal = Jadwal::where('guru_id', $guru->id)->orderBy('kelas_id')->get();
+        $kelas = $jadwal->groupBy('kelas_id');
 
-            return view('guru.sikap.index', compact('kelas', 'guru'));
-        } else {
-            return redirect()->back()->with('error', 'Maaf guru ini tidak dapat menambahkan nilai sikap!');
-        }
+        return view('guru.sikap.index', compact('kelas', 'guru'));
+    }
+
+    public function showMapel($id)
+    {
+        $id = Crypt::decrypt($id);
+        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
+        $mengajar = Mengajar::where('kelas_id', $id)->where('guru_id', $guru->id)->get();
+        $mengajar = $mengajar->groupBy('mapel_id');
+
+        return view('guru.sikap.mapel', [
+            'mengajar' => $mengajar
+        ]);
     }
 
     public function create()
@@ -42,29 +48,22 @@ class SikapController extends Controller
         $guru = Guru::findorfail($request->guru_id);
         $cekJadwal = Jadwal::where('guru_id', $guru->id)->where('kelas_id', $request->kelas_id)->count();
         if ($cekJadwal >= 1) {
-            if (
-                $guru->mapel->nama_mapel == 'Pendidikan Agama dan Budi Pekerti' ||
-                $guru->mapel->nama_mapel == 'Pendidikan Pancasila dan Kewarganegaraan'
-            ) {
-                Sikap::updateOrCreate(
-                    [
-                        'id' => $request->id,
-                    ],
-                    [
-                        'santri_id' => $request->santri_id,
-                        'kelas_id' => $request->kelas_id,
-                        'guru_id' => $request->guru_id,
-                        'mapel_id' => $guru->mapel_id,
-                        'sikap_1' => $request->sikap_1,
-                        'sikap_2' => $request->sikap_2,
-                        'sikap_3' => $request->sikap_3,
-                    ]
-                );
+            Sikap::updateOrCreate(
+                [
+                    'id' => $request->id,
+                ],
+                [
+                    'santri_id' => $request->santri_id,
+                    'kelas_id' => $request->kelas_id,
+                    'guru_id' => $request->guru_id,
+                    'mapel_id' => $request->mapel_id,
+                    'sikap_1' => $request->sikap_1,
+                    'sikap_2' => $request->sikap_2,
+                    'sikap_3' => $request->sikap_3,
+                ]
+            );
 
-                return response()->json(['success' => 'Nilai sikap santri berhasil ditambahkan!']);
-            } else {
-                return redirect()->json(['error' => 'Maaf guru ini tidak dapat menambahkan nilai sikap!']);
-            }
+            return response()->json(['success' => 'Nilai sikap santri berhasil ditambahkan!']);
         } else {
             return response()->json(['error' => 'Maaf guru ini tidak mengajar kelas ini!']);
         }
@@ -73,11 +72,12 @@ class SikapController extends Controller
     public function show($id)
     {
         $id = Crypt::decrypt($id);
+        $mengajar = Mengajar::where('id', $id)->firstOrFail();
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $kelas = Kelas::findorfail($id);
-        $santri = Santri::where('kelas_id', $id)->get();
+        $kelas = Kelas::findorfail($mengajar->kelas_id);
+        $santri = Santri::where('kelas_id', $mengajar->kelas_id)->get();
 
-        return view('guru.sikap.show', compact('guru', 'kelas', 'santri'));
+        return view('guru.sikap.show', compact('guru', 'kelas', 'santri', 'mengajar'));
     }
 
     public function edit($id)
@@ -94,7 +94,7 @@ class SikapController extends Controller
         $id = Crypt::decrypt($id);
         $santri = Santri::findorfail($id);
         $kelas = Kelas::findorfail($santri->kelas_id);
-        $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
+        $mapel = Mapel::all();
 
         return view('admin.sikap.show', compact('mapel', 'santri', 'kelas'));
     }
@@ -103,7 +103,7 @@ class SikapController extends Controller
     {
         $santri = Santri::where('nisn', Auth::user()->nisn)->first();
         $kelas = Kelas::findorfail($santri->kelas_id);
-        $mapel = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->orWhere('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->get();
+        $mapel = Mapel::all();
 
         return view('santri.sikap', compact('santri', 'kelas', 'mapel'));
     }

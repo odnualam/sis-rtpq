@@ -1,7 +1,7 @@
  @extends('layouts.admin')
-@section('heading', 'Entry Nilai sikap')
+@section('heading', 'Pilih Kelas')
 @section('page')
-    <li class="breadcrumb-item active">Entry Nilai sikap</li>
+    <li class="breadcrumb-item active">Pilih Kelas</li>
 @endsection
 @section('content')
     <div class="row">
@@ -14,39 +14,24 @@
                 </div>
                 <div class="card-body">
                 <div class="row">
-                    <div class="col-md-12" style="margin-top: -21px;">
-                        <table class="table">
-                            <tr>
-                                <td>Nama Guru</td>
-                                <td>:</td>
-                                <td>{{ $guru->nama_guru }}</td>
-                            </tr>
-                            <tr>
-                                <td>Mata Pelajaran</td>
-                                <td>:</td>
-                                <td>{{ $guru->mapel->nama_mapel }}</td>
-                            </tr>
-                        </table>
-                        <hr>
-                    </div>
                     <div class="col-md-12">
-                    <table id="example2" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
-                        <thead class="text-uppercase">
-                        <tr>
-                            <th>No.</th>
-                            <th>Nama Kelas</th>
-                            <th>Aksi</th>
-                        </thead>
-                        <tbody>
-                        @foreach ($kelas as $val => $data)
+                        <table class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
+                            <thead class="text-uppercase">
                             <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $data[0]->rapot($val)->nama_kelas }}</td>
-                            <td><a href="{{ route('sikap.show', Crypt::encrypt($val)) }}" class="btn btn-primary btn-sm"><i class="nav-icon fas fa-pen"></i> &nbsp; Entry Nilai</a></td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                                <th>No.</th>
+                                <th>Nama Kelas</th>
+                                <th>Aksi</th>
+                            </thead>
+                            <tbody>
+                            @foreach ($kelas as $val => $data)
+                                <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $data[0]->rapot($val)->nama_kelas }}</td>
+                                <td><a href="{{ route('show.sikap.mapel', Crypt::encrypt($val)) }}" class="btn btn-icon btn-outline-primary btn-sm"><i class="flaticon-medical"></i></a></td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 </div>
