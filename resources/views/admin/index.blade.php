@@ -84,7 +84,7 @@
             <div class="card card-custom gutter-b">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">Date Based Data</h3>
+                        <h3 class="card-label">Data Santri Per Angkatan</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -97,7 +97,7 @@
             <div class="card card-custom gutter-b">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">Jenis Kelamin</h3>
+                        <h3 class="card-label">Jenis Kelamin Santri</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -201,16 +201,16 @@
     </script>
     <script>
         var data = {!! json_encode($chart->labels) !!};
-        var dataProvider = [];// this variable you have to pass in dataProvider inside chart
+        var dataset =  {!! json_encode($chart->dataset) !!};
+        var dataProvider = [];
 
         for(var key in data) {
             dataProvider.push({
                 date: data[key],
-                value: key,
+                value: dataset[key],
             });
         }
 
-        console.log(dataProvider);
         var chart = AmCharts.makeChart("kt_amcharts_6", {
             "type": "serial",
             "theme": "light",

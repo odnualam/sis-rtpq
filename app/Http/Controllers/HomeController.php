@@ -51,6 +51,8 @@ class HomeController extends Controller
         $chart->labels = (array_keys($count_tahun_ajaran_santri));
         $chart->dataset = (array_values($count_tahun_ajaran_santri));
 
+        $chart->labels = str_replace('"', "", $chart->labels);
+
         $jadwal = Jadwal::count();
         $guru = Guru::count();
         $gurulk = Guru::where('jk', 'L')->count();
