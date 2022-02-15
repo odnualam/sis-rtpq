@@ -44,17 +44,17 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="guru_id">Pengajar</label>
-                                    <select id="guru_id" name="guru_id"
-                                        class="form-control @error('guru_id') is-invalid @enderror  ">
-                                        <option value="" @if ($jadwal->guru_id)
+                                    <label for="mapel_id">Pengajar</label>
+                                    <select id="mapel_id" name="mapel_id"
+                                        class="form-control @error('mapel_id') is-invalid @enderror  ">
+                                        <option value="" @if ($jadwal->mapel_id)
                                             selected
                                             @endif>-- Pilih Guru --</option>
-                                        @foreach ($guru as $data)
-                                        <option value="{{ $data->id }}" @if ($jadwal->guru_id == $data->id)
+                                        @foreach ($mapel as $data)
+                                        <option value="{{ $data->id }}" @if ($jadwal->mapel_id == $data->id)
                                             selected
                                             @endif
-                                            >{{ $data->nama_guru }}</option>
+                                            >{{ $data->nama_mapel }}</option>
                                         @endforeach
                                     </select>
                                 </div>

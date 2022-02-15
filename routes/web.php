@@ -66,6 +66,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('jadwal/guru', [JadwalController::class, 'guru'])->name('jadwal.guru');
         Route::get('rapot/predikat', [RapotController::class, 'predikat']);
+        Route::get('rapot/mapel/{id}', [RapotController::class, 'showMapel'])->name('show.mapel');
+        Route::get('ulangan/mapel/{id}', [UlanganController::class, 'showMapel'])->name('show.ulangan.mapel');
+        Route::get('sikap/mapel/{id}', [SikapController::class, 'showMapel'])->name('show.sikap.mapel');
 
         Route::resources([
             'nilai' => NilaiController::class,

@@ -39,7 +39,7 @@ class JadwalController extends Controller
             'jam_selesai' => 'required',
         ]);
 
-        $mengajar = Mengajar::where('kelas_id', $request->kelas_id)->first();
+        $mengajar = Mengajar::where('kelas_id', $request->kelas_id)->where('mapel_id', $request->mapel_id)->firstOrFail();
         Jadwal::updateOrCreate(
             [
                 'id' => $request->jadwal_id,
@@ -70,11 +70,12 @@ class JadwalController extends Controller
     {
         $id = Crypt::decrypt($id);
         $jadwal = Jadwal::findorfail($id);
+        $mapel = Mapel::OrderBy('kelompok_id', 'asc')->OrderBy('urutan', 'asc')->get();
         $hari = Hari::all();
         $kelas = Kelas::all();
         $guru = Guru::OrderBy('id_card', 'asc')->get();
 
-        return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru'));
+        return view('admin.jadwal.edit', compact('jadwal', 'hari', 'kelas', 'guru', 'mapel'));
     }
 
     public function destroy($id)
