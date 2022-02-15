@@ -196,51 +196,37 @@
                         </a>
                     </li>
 
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" id="liNilaiGuru">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <i class="menu-icon flaticon2-list-3"></i>
-                            <span class="menu-text">Penilaian</span>
-                            <i class="menu-arrow"></i>
+                    <li class="menu-item" aria-haspopup="true" id="UlanganGuru">
+                        <a href="{{ route('ulangan.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon-clipboard">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Entry Nilai Ulangan</span>
                         </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item" aria-haspopup="true" id="UlanganGuru">
-                                    <a href="{{ route('ulangan.index') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Entry Nilai Ulangan</span>
-                                    </a>
-                                </li>
-                                @if ( Auth::user()->guru(Auth::user()->id_card)->mapel->nama_mapel == "Pendidikan Agama dan Budi Pekerti" || Auth::user()->guru(Auth::user()->id_card)->mapel->nama_mapel == "Pendidikan Pancasila dan Kewarganegaraan" )
-                                    <li class="menu-item" aria-haspopup="true" id="SikapGuru">
-                                        <a href="{{ route('sikap.index') }}" class="menu-link">
-                                            <i class="menu-bullet menu-bullet-dot">
-                                                <span></span>
-                                            </i>
-                                            <span class="menu-text">Entry Nilai Sikap</span>
-                                        </a>
-                                    </li>
-                                @endif
-                                <li class="menu-item" aria-haspopup="true" id="RapotGuru">
-                                    <a href="{{ route('rapot.index') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Entry Nilai Rapot</span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true" id="DesGuru">
-                                    <a href="{{ route('nilai.index') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Deskripsi Predikat</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                    </li>
+                    <li class="menu-item" aria-haspopup="true" id="SikapGuru">
+                        <a href="{{ route('sikap.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon-like">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Entry Nilai Sikap</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" aria-haspopup="true" id="RapotGuru">
+                        <a href="{{ route('rapot.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon-edit-1">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Entry Nilai Rapot</span>
+                        </a>
+                    </li>
+                    <li class="menu-item" aria-haspopup="true" id="DesGuru">
+                        <a href="{{ route('nilai.index') }}" class="menu-link">
+                            <i class="menu-icon flaticon-information">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Deskripsi Predikat</span>
+                        </a>
                     </li>
                 @elseif (Auth::user()->role == 'Santri' && Auth::user()->santri(Auth::user()->nisn))
                     <li class="menu-item" aria-haspopup="true" id="Home">

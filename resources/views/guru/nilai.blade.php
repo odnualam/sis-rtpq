@@ -11,6 +11,7 @@
                     <h3 class="card-title">Deskripsi Nilai</h3>
                 </div>
                 <form action="{{ route('nilai.store') }}" method="post">
+                    <input type="hidden" name="guru_id" value="{{ $guru->id }}">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -31,10 +32,6 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="mapel">Mata Pelajaran</label>
-                                        <input type="text" id="mapel" name="mapel" value="{{ $guru->mapel->nama_mapel }}" class="form-control" readonly>
-                                    </div>
                                     <div class="form-group">
                                         <label for="kkm">KKM</label>
                                         <input type="text" onkeypress="return inputAngka(event)" maxlength="2" value="{{ $nilai->kkm }}" id="kkm" name="kkm" class="form-control" required>

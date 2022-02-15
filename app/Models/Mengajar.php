@@ -58,4 +58,11 @@ class Mengajar extends Model
     {
         return $this->belongsTo(Guru::class);
     }
+
+    public function rapot($id)
+    {
+        $mapel = Mapel::where('id', $id)->first();
+
+        return $mapel;
+    }
 }
