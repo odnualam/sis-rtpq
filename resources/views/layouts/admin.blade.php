@@ -106,6 +106,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
     <script src="{{ asset('admin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha512-2cbsQGdowNDPcKuoBd2bCcsJky87Mv0LEtD/nunJUgk6MOYTgVMGihS/xCEghNf04DPhNiJ4DZw5BxDd1uyOdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('admin/js/engage_code.js') }}"></script>
 
     <script>
         $.widget.bridge('uibutton', $.ui.button)
