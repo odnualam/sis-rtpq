@@ -189,12 +189,14 @@
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                     </li>
 
-                    <li class="menu-item" aria-haspopup="true" id="AbsenGuru">
-                        <a href="{{ route('absensi.index') }}" class="menu-link">
-                            <i class="menu-icon flaticon2-accept"></i>
-                            <span class="menu-text">Absensi Santri</span>
-                        </a>
-                    </li>
+                    @walikelas
+                        <li class="menu-item" aria-haspopup="true" id="AbsenGuru">
+                            <a href="{{ route('absensi.index') }}" class="menu-link">
+                                <i class="menu-icon flaticon2-accept"></i>
+                                <span class="menu-text">Absensi Santri</span>
+                            </a>
+                        </li>
+                    @endwalikelas
 
                     <li class="menu-item" aria-haspopup="true" id="UlanganGuru">
                         <a href="{{ route('ulangan.index') }}" class="menu-link">

@@ -157,14 +157,11 @@ class GuruController extends Controller
 
     public function absensi()
     {
-        $kelas = Kelas::OrderBy('nama_kelas', 'asc')->get();
+        $guru = Guru::where('id_card', auth()->user()->id_card)->firstOrFail();
+        $wali_kelas = Kelas::where('guru_id', $guru->id)->firstOrFail();
 
-        return view('guru.absensi.index', compact('kelas'));
-    }
+        $id = $wali_kelas->id;
 
-    public function absensiShow($id)
-    {
-        $id = Crypt::decrypt($id);
         $kelas = Kelas::findorfail($id);
 
         $santri = DB::table('santri')
@@ -179,7 +176,7 @@ class GuruController extends Controller
             ->groupBy('santri.id')
             ->get();
 
-        return view('guru.absensi.show', compact('santri', 'kelas'));
+        return view('guru.absensi.index', compact('santri', 'kelas'));
     }
 
     public function simpan(Request $request)

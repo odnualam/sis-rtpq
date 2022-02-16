@@ -60,7 +60,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['guru'])->group(function () {
         Route::controller(GuruController::class)->group(function () {
             Route::get('absen', 'absensi')->name('absensi.index');
-            Route::get('absen/{id}', 'absensiShow')->name('absensi.show');
             Route::post('absen/simpan', 'simpan')->name('absen.simpan');
         });
 
