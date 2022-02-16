@@ -175,7 +175,54 @@
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                     </li>
 
+                @elseif (Auth::user()->role == 'Kepala Sekolah')
+                    <li class="menu-item" aria-haspopup="true" id="AdminHome">
+                        <a href="{{ route('admin.home') }}" class="menu-link">
+                            <i class="menu-icon flaticon2-layers"></i>
+                            <span class="menu-text">Beranda</span>
+                        </a>
+                    </li>
 
+                    <li class="menu-section">
+                        <h4 class="menu-text">Akademik</h4>
+                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                    </li>
+
+                    <li class="menu-item" aria-haspopup="true" id="Ulangan">
+                        <a href="{{ route('ulangan-kelas') }}" class="menu-link">
+                            <i class="menu-icon flaticon-clipboard">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Nilai Ulangan</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item" aria-haspopup="true" id="Sikap">
+                        <a href="{{ route('sikap-kelas') }}" class="menu-link">
+                            <i class="menu-icon flaticon-like">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Nilai Sikap</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item" aria-haspopup="true" id="Rapot">
+                        <a href="{{ route('rapot-kelas') }}" class="menu-link">
+                            <i class="menu-icon flaticon-edit-1">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Nilai Rapot</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item" aria-haspopup="true" id="Deskripsi">
+                        <a href="{{ route('predikat') }}" class="menu-link">
+                            <i class="menu-icon flaticon-information">
+                                <span></span>
+                            </i>
+                            <span class="menu-text">Deskripsi Predikat</span>
+                        </a>
+                    </li>
                 @elseif (Auth::user()->role == 'Guru' && Auth::user()->guru(Auth::user()->id_card))
                     <li class="menu-item" aria-haspopup="true" id="Home">
                         <a href="{{ url('/') }}" class="menu-link">
