@@ -46,6 +46,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Query\Builder|Guru withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Guru withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $nik
+ * @method static Builder|Guru whereNik($value)
  */
 class Guru extends Model
 {

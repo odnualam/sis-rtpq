@@ -105,43 +105,7 @@
                     <h3 class="card-title">Nilai Rapot Santri</h3>
                 </div>
                 <div class="card-body">
-                    <h4 class="mb-3">A. Sikap</h4>
-                    @if ($Spai && $Sppkn)
-                            @php
-                                $sikap = ((($Spai->sikap_1 + $Spai->sikap_2 + $Spai->sikap_3) / 3) + (($Sppkn->sikap_1 + $Sppkn->sikap_2 + $Sppkn->sikap_3) / 3)) / 2;
-                                $sikap = (int) $sikap;
-                            @endphp
-                        @if ($sikap == 4)
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h5><i class="icon fas fa-check"></i> Sangat Baik!</h5>
-                                Students show very good attitude.
-                            </div>
-                        @elseif ($sikap == 3)
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h5><i class="icon fas fa-check"></i> Baik!</h5>
-                                Students show good manners.
-                            </div>
-                        @elseif ($sikap == 2)
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h5><i class="icon fas fa-check"></i> Cukup!</h5>
-                                Students show sufficient attitude.
-                            </div>
-                        @else
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h5><i class="icon fas fa-check"></i> Kurang!</h5>
-                                Students show lack of attitude.
-                            </div>
-                        @endif
-                    @else
-                        <div class="alert alert-warning" role="alert">
-                            <div class="alert-text">Nilai Sikap kamu saat ini belum ada.</div>
-                        </div>
-                    @endif
-                    <h4 class="mb-3">B. Pengetahuan dan Keterampilan</h4>
+                    <h4 class="mb-3">A. Pengetahuan dan Keterampilan</h4>
                     <table id="example2" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
                         <thead class="text-uppercase">
                             <tr>

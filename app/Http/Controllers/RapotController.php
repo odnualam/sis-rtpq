@@ -10,7 +10,6 @@ use App\Models\Mengajar;
 use App\Models\Nilai;
 use App\Models\Rapot;
 use App\Models\Santri;
-use App\Models\Sikap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -136,16 +135,9 @@ class RapotController extends Controller
         $kelas = Kelas::findorfail($santri->kelas_id);
         $pai = Mapel::where('nama_mapel', 'Pendidikan Agama dan Budi Pekerti')->first();
         $ppkn = Mapel::where('nama_mapel', 'Pendidikan Pancasila dan Kewarganegaraan')->first();
-        if ($pai != null && $ppkn != null) {
-            $Spai = Sikap::where('santri_id', $santri->id)->where('mapel_id', $pai->id)->first();
-            $Sppkn = Sikap::where('santri_id', $santri->id)->where('mapel_id', $ppkn->id)->first();
-        } else {
-            $Spai = '';
-            $Sppkn = '';
-        }
         $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
         $mapel = $jadwal->groupBy('mapel_id');
 
-        return view('santri.rapot', compact('santri', 'kelas', 'mapel', 'Spai', 'Sppkn'));
+        return view('santri.rapot', compact('santri', 'kelas', 'mapel'));
     }
 }

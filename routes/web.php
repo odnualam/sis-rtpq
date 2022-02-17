@@ -13,7 +13,6 @@ use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\RapotController;
 use App\Http\Controllers\SantriController;
 use App\Http\Controllers\SettingController;
-use App\Http\Controllers\SikapController;
 use App\Http\Controllers\SPPController;
 use App\Http\Controllers\UlanganController;
 use App\Http\Controllers\UserController;
@@ -50,7 +49,6 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['santri'])->group(function () {
         Route::get('jadwal/santri', [JadwalController::class, 'santri'])->name('jadwal.santri');
         Route::get('ulangan/santri', [UlanganController::class, 'santri'])->name('ulangan.santri');
-        Route::get('sikap/santri', [SikapController::class, 'santri'])->name('sikap.santri');
         Route::get('rapot/santri', [RapotController::class, 'santri'])->name('rapot.santri');
 
         Route::get('santri/spp', [SantriController::class, 'spp'])->name('spp.santri.index');
@@ -67,12 +65,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('rapot/predikat', [RapotController::class, 'predikat']);
         Route::get('rapot/mapel/{id}', [RapotController::class, 'showMapel'])->name('show.mapel');
         Route::get('ulangan/mapel/{id}', [UlanganController::class, 'showMapel'])->name('show.ulangan.mapel');
-        Route::get('sikap/mapel/{id}', [SikapController::class, 'showMapel'])->name('show.sikap.mapel');
 
         Route::resources([
             'nilai' => NilaiController::class,
             'ulangan' => UlanganController::class,
-            'sikap' => SikapController::class,
             'rapot' => RapotController::class
         ]);
     });
@@ -135,12 +131,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('ulangan-kelas', 'create')->name('ulangan-kelas');
             Route::get('ulangan-santri/{id}', 'edit')->name('ulangan-santri');
             Route::get('ulangan-show/{id}', 'ulangan')->name('ulangan-show');
-        });
-
-        Route::controller(SikapController::class)->group(function () {
-            Route::get('sikap-kelas', 'create')->name('sikap-kelas');
-            Route::get('sikap-santri/{id}', 'edit')->name('sikap-santri');
-            Route::get('sikap-show/{id}', 'sikap')->name('sikap-show');
         });
 
         Route::controller(RapotController::class)->group(function (){

@@ -114,15 +114,6 @@
                                     </a>
                                 </li>
 
-                                <li class="menu-item" aria-haspopup="true" id="Sikap">
-                                    <a href="{{ route('sikap-kelas') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Nilai Sikap</span>
-                                    </a>
-                                </li>
-
                                 <li class="menu-item" aria-haspopup="true" id="Rapot">
                                     <a href="{{ route('rapot-kelas') }}" class="menu-link">
                                         <i class="menu-bullet menu-bullet-dot">
@@ -197,15 +188,6 @@
                         </a>
                     </li>
 
-                    <li class="menu-item" aria-haspopup="true" id="Sikap">
-                        <a href="{{ route('sikap-kelas') }}" class="menu-link">
-                            <i class="menu-icon flaticon-like">
-                                <span></span>
-                            </i>
-                            <span class="menu-text">Nilai Sikap</span>
-                        </a>
-                    </li>
-
                     <li class="menu-item" aria-haspopup="true" id="Rapot">
                         <a href="{{ route('rapot-kelas') }}" class="menu-link">
                             <i class="menu-icon flaticon-edit-1">
@@ -251,14 +233,6 @@
                                 <span></span>
                             </i>
                             <span class="menu-text">Entry Nilai Ulangan</span>
-                        </a>
-                    </li>
-                    <li class="menu-item" aria-haspopup="true" id="SikapGuru">
-                        <a href="{{ route('sikap.index') }}" class="menu-link">
-                            <i class="menu-icon flaticon-like">
-                                <span></span>
-                            </i>
-                            <span class="menu-text">Entry Nilai Sikap</span>
                         </a>
                     </li>
                     <li class="menu-item" aria-haspopup="true" id="RapotGuru">
@@ -312,15 +286,6 @@
                                             <span></span>
                                         </i>
                                         <span class="menu-text">Nilai Ulangan</span>
-                                    </a>
-                                </li>
-
-                                <li class="menu-item" aria-haspopup="true" id="Sikapsantri">
-                                    <a href="{{ route('sikap.santri') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Nilai Sikap</span>
                                     </a>
                                 </li>
 

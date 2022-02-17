@@ -51,20 +51,4 @@ class Mapel extends Model
     {
         return $this->belongsTo('App\Models\Kelompok')->withDefault();
     }
-
-    public function sikap($id)
-    {
-        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
-        $nilai = Sikap::where('santri_id', $santri->id)->where('mapel_id', $id)->first();
-
-        return $nilai;
-    }
-
-    public function cekSikap($id)
-    {
-        $data = json_decode($id, true);
-        $sikap = Sikap::where('santri_id', $data['santri'])->where('mapel_id', $data['mapel'])->first();
-
-        return $sikap;
-    }
 }

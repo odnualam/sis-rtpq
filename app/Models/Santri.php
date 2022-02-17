@@ -112,14 +112,6 @@ class Santri extends Model
         return $nilai;
     }
 
-    public function sikap($id)
-    {
-        $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $nilai = Sikap::where('santri_id', $id)->where('guru_id', $guru->id)->first();
-
-        return $nilai;
-    }
-
     public function nilai($id, $mapel = null)
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();

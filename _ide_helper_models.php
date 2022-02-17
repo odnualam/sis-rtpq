@@ -122,6 +122,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Query\Builder|Guru withTrashed()
  * @method static \Illuminate\Database\Query\Builder|Guru withoutTrashed()
  * @mixin \Eloquent
+ * @property string|null $nik
+ * @method static Builder|Guru whereNik($value)
  */
 	class Guru extends \Eloquent {}
 }
@@ -577,38 +579,6 @@ namespace App\Models{
  * @mixin \Eloquent
  */
 	class Setting extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\Sikap.
- *
- * @property int $id
- * @property int $santri_id
- * @property int $kelas_id
- * @property int $guru_id
- * @property int $mapel_id
- * @property string|null $sikap_1
- * @property string|null $sikap_2
- * @property string|null $sikap_3
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @method static Builder|Sikap newModelQuery()
- * @method static Builder|Sikap newQuery()
- * @method static Builder|Sikap query()
- * @method static Builder|Sikap whereCreatedAt($value)
- * @method static Builder|Sikap whereGuruId($value)
- * @method static Builder|Sikap whereId($value)
- * @method static Builder|Sikap whereKelasId($value)
- * @method static Builder|Sikap whereMapelId($value)
- * @method static Builder|Sikap whereSantriId($value)
- * @method static Builder|Sikap whereSikap1($value)
- * @method static Builder|Sikap whereSikap2($value)
- * @method static Builder|Sikap whereSikap3($value)
- * @method static Builder|Sikap whereUpdatedAt($value)
- * @mixin \Eloquent
- */
-	class Sikap extends \Eloquent {}
 }
 
 namespace App\Models{

@@ -120,14 +120,6 @@
             return true;
         }
 
-        function sikap(e) {
-            var charCode = (e.which) ? e.which : event.keyCode
-            if (charCode > 31 && (charCode < 49 || charCode > 52)) {
-                return false;
-            }
-            return true;
-        }
-
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox({
