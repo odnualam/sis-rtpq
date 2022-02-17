@@ -1,4 +1,4 @@
- @extends('layouts.admin')
+@extends('layouts.admin')
 @section('heading', 'Pilih Kelas')
 @section('content')
     <div class="row">
@@ -22,7 +22,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nama_kelas }}</td>
-                            <td><a href="{{ route('ulangan-santri', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-eye"></i></a></td>
+                            <td><a href="{{ route('absensi.rekap.show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-success btn-sm"><i class="flaticon-eye"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -38,6 +38,6 @@
     <script>
       $("#Nilai").addClass("menu-item-open");
       $("#liNilai").addClass("menu-item-open");
-      $("#Ulangan").addClass("menu-item-open");
+      $("#AbsenGuru").addClass("menu-item-open");
     </script>
 @endsection

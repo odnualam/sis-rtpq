@@ -91,12 +91,12 @@
                                             $array = array('mapel' => $val, 'santri' => $santri->id);
                                             $jsonData = json_encode($array);
                                             @endphp
-                                            <td class="ctr">{{ $data->cekRapot($jsonData)['p_nilai'] }}</td>
-                                            <td class="ctr">{{ $data->cekRapot($jsonData)['p_predikat'] }}</td>
-                                            <td class="ctr">{{ $data->cekRapot($jsonData)['p_deskripsi'] }}</td>
-                                            <td class="ctr">{{ $data->cekRapot($jsonData)['k_nilai'] }}</td>
-                                            <td class="ctr">{{ $data->cekRapot($jsonData)['k_predikat'] }}</td>
-                                            <td class="ctr">{{ $data->cekRapot($jsonData)['k_deskripsi'] }}</td>
+                                            <td class="ctr">{{ isset($data->cekRapot($jsonData)['p_nilai']) ? $data->cekRapot($jsonData)['p_nilai'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekRapot($jsonData)['p_predikat']) ? $data->cekRapot($jsonData)['p_predikat'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekRapot($jsonData)['p_deskripsi']) ? $data->cekRapot($jsonData)['p_deskripsi'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekRapot($jsonData)['k_nilai']) ? $data->cekRapot($jsonData)['k_nilai'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekRapot($jsonData)['k_predikat']) ? $data->cekRapot($jsonData)['k_predikat'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekRapot($jsonData)['k_deskripsi']) ? $data->cekRapot($jsonData)['k_deskripsi'] : '-' }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

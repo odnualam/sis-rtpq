@@ -1,5 +1,5 @@
  @extends('layouts.admin')
-@section('heading', 'Data Nilai')
+@section('heading', 'Data Deskripsi Predikat')
 @section('content')
     @php
         $no = 1;
@@ -29,19 +29,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ($guru as $data)
+                        @foreach ($mengajar as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>
                                     <h5 class="card-title">{{ $data->mapel->nama_mapel }}</h5>
-                                    <p class="card-text"><small class="text-muted">{{ $data->nama_guru }}</small></p>
+                                    <p class="card-text"><small class="text-muted">{{ $data->guru->nama_guru }}</small></p>
                                 </td>
-                                @if ($data->dsk($data->id))
-                                    <td>{{ $data->dsk($data->id)->kkm }}</td>
-                                    <td>{{ $data->dsk($data->id)->deskripsi_a }}</td>
-                                    <td>{{ $data->dsk($data->id)->deskripsi_b }}</td>
-                                    <td>{{ $data->dsk($data->id)->deskripsi_c }}</td>
-                                    <td>{{ $data->dsk($data->id)->deskripsi_d }}</td>
+                                @if ($data->dsk($data->guru_id))
+                                    <td>{{ $data->dsk($data->guru_id)->kkm }}</td>
+                                    <td>{{ $data->dsk($data->guru_id)->deskripsi_a ? $data->dsk($data->guru_id)->deskripsi_a : '-' }}</td>
+                                    <td>{{ $data->dsk($data->guru_id)->deskripsi_b ? $data->dsk($data->guru_id)->deskripsi_b : '-' }}</td>
+                                    <td>{{ $data->dsk($data->guru_id)->deskripsi_c ? $data->dsk($data->guru_id)->deskripsi_c : '-' }}</td>
+                                    <td>{{ $data->dsk($data->guru_id)->deskripsi_d ? $data->dsk($data->guru_id)->deskripsi_d : '-' }}</td>
                                 @else
                                     <td></td>
                                     <td></td>

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guru;
+use App\Models\Jadwal;
+use App\Models\Mengajar;
 use App\Models\Nilai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class NilaiController extends Controller
 {
@@ -17,11 +20,22 @@ class NilaiController extends Controller
         return view('guru.nilai', compact('nilai', 'guru'));
     }
 
-    public function create()
+    public function DeskripsiPredikat()
     {
-        $guru = Guru::orderBy('id_card')->get();
+        $jadwal = Jadwal::orderBy('kelas_id')->get();
+        $kelas = $jadwal->groupBy('kelas_id');
 
-        return view('admin.nilai.index', compact('guru'));
+        return view('admin.nilai.deskripsi-predikat', [
+            'kelas' => $kelas,
+        ]);
+    }
+
+    public function create($id)
+    {
+        $id = Crypt::decrypt($id);
+        $mengajar = Mengajar::where('kelas_id', $id)->orderBy('mapel_id')->get();
+
+        return view('admin.nilai.index', compact('mengajar'));
     }
 
     public function store(Request $request)

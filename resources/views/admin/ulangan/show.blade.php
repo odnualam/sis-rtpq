@@ -86,11 +86,11 @@
                                                 $array = array('mapel' => $val, 'santri' => $santri->id);
                                                 $jsonData = json_encode($array);
                                             @endphp
-                                            <td class="ctr">{{ $data->cekUlangan($jsonData)['ulha_1'] }}</td>
-                                            <td class="ctr">{{ $data->cekUlangan($jsonData)['ulha_2'] }}</td>
-                                            <td class="ctr">{{ $data->cekUlangan($jsonData)['uts'] }}</td>
-                                            <td class="ctr">{{ $data->cekUlangan($jsonData)['ulha_3'] }}</td>
-                                            <td class="ctr">{{ $data->cekUlangan($jsonData)['uas'] }}</td>
+                                            <td class="ctr">{{ isset($data->cekUlangan($jsonData)['ulha_1']) ? $data->cekUlangan($jsonData)['ulha_1'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekUlangan($jsonData)['ulha_2']) ? $data->cekUlangan($jsonData)['ulha_2'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekUlangan($jsonData)['uts']) ? $data->cekUlangan($jsonData)['uts'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekUlangan($jsonData)['ulha_3']) ? $data->cekUlangan($jsonData)['ulha_3'] : '-' }}</td>
+                                            <td class="ctr">{{ isset($data->cekUlangan($jsonData)['uas']) ? $data->cekUlangan($jsonData)['uas'] : '-' }}</td>
                                         </tr>
                                     @endforeach
                             </tbody>

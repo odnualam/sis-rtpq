@@ -96,45 +96,6 @@
                         </a>
                     </li>
 
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover" id="liNilai">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <i class="menu-icon flaticon2-list-3"></i>
-                            <span class="menu-text">Penilaian</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item" aria-haspopup="true" id="Ulangan">
-                                    <a href="{{ route('ulangan-kelas') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Nilai Ulangan</span>
-                                    </a>
-                                </li>
-
-                                <li class="menu-item" aria-haspopup="true" id="Rapot">
-                                    <a href="{{ route('rapot-kelas') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Nilai Rapot</span>
-                                    </a>
-                                </li>
-
-                                <li class="menu-item" aria-haspopup="true" id="Deskripsi">
-                                    <a href="{{ route('predikat') }}" class="menu-link">
-                                        <i class="menu-bullet menu-bullet-dot">
-                                            <span></span>
-                                        </i>
-                                        <span class="menu-text">Deskripsi Predikat</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
                     <li class="menu-item" aria-haspopup="true" id="Pengumuman">
                         <a href="{{ route('admin.pengumuman') }}" class="menu-link">
                             <i class="menu-icon flaticon2-speaker"></i>
@@ -161,11 +122,6 @@
                         </a>
                     </li>
 
-                    <li class="menu-section">
-                        <h4 class="menu-text">Laporan / Lain-lain</h4>
-                        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-                    </li>
-
                 @elseif (Auth::user()->role == 'Kepala Sekolah')
                     <li class="menu-item" aria-haspopup="true" id="AdminHome">
                         <a href="{{ route('admin.home') }}" class="menu-link">
@@ -179,12 +135,19 @@
                         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                     </li>
 
+                    <li class="menu-item" aria-haspopup="true" id="AbsenGuru">
+                        <a href="{{ route('absensi.rekap') }}" class="menu-link">
+                            <i class="menu-icon flaticon2-accept"></i>
+                            <span class="menu-text">Data Absensi Santri</span>
+                        </a>
+                    </li>
+
                     <li class="menu-item" aria-haspopup="true" id="Ulangan">
                         <a href="{{ route('ulangan-kelas') }}" class="menu-link">
                             <i class="menu-icon flaticon-clipboard">
                                 <span></span>
                             </i>
-                            <span class="menu-text">Nilai Ulangan</span>
+                            <span class="menu-text">Data Nilai Ulangan</span>
                         </a>
                     </li>
 
@@ -193,16 +156,16 @@
                             <i class="menu-icon flaticon-edit-1">
                                 <span></span>
                             </i>
-                            <span class="menu-text">Nilai Rapot</span>
+                            <span class="menu-text">Data Nilai Rapot</span>
                         </a>
                     </li>
 
                     <li class="menu-item" aria-haspopup="true" id="Deskripsi">
-                        <a href="{{ route('predikat') }}" class="menu-link">
+                        <a href="{{ route('deskripsi-predikat') }}" class="menu-link">
                             <i class="menu-icon flaticon-information">
                                 <span></span>
                             </i>
-                            <span class="menu-text">Deskripsi Predikat</span>
+                            <span class="menu-text">Data Deskripsi Predikat</span>
                         </a>
                     </li>
                 @elseif (Auth::user()->role == 'Guru' && Auth::user()->guru(Auth::user()->id_card))

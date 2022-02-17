@@ -89,6 +89,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::controller(GuruController::class)->group(function () {
             Route::get('guru/kehadiran/{id}', 'kehadiran')->name('guru.kehadiran');
+            Route::get('rekap-absensi', 'RekapAbsensi')->name('absensi.rekap');
+            Route::get('data-rekap-absensi/{id}', 'RekapAbsensiShow')->name('absensi.rekap.show');
             Route::get('absen/json', 'json');
             Route::get('guru/mapel/{id}', 'mapel')->name('guru.mapel');
             Route::get('guru/ubah-foto/{id}', 'ubah_foto')->name('guru.ubah-foto');
@@ -140,7 +142,8 @@ Route::middleware(['auth'])->group(function () {
             Route::get('rapot-show/{id}', 'rapot')->name('rapot-show');
         });
 
-        Route::get('predikat', [NilaiController::class, 'create'])->name('predikat');
+        Route::get('predikat/{id}', [NilaiController::class, 'create'])->name('predikat');
+        Route::get('deskripsi-predikat', [NilaiController::class, 'DeskripsiPredikat'])->name('deskripsi-predikat');
 
         Route::resources([
             'guru' => GuruController::class,

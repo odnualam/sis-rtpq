@@ -259,4 +259,32 @@ class GuruController extends Controller
             return redirect()->back()->with('warning', 'Data table guru kosong!');
         }
     }
+
+    public function RekapAbsensi()
+    {
+        $kelas = Kelas::orderBy('id')->get();
+
+        return view('admin.absensi.index', compact('kelas'));
+
+    }
+
+    public function RekapAbsensiShow($id)
+    {
+        $id = Crypt::decrypt($id);
+        $kelas = Kelas::findorfail($id);
+
+        $santri = DB::table('santri')
+            ->leftJoin('absensi', function ($join) use ($id) {
+                $join->on('santri.id', '=', 'absensi.santri_id')
+                        ->where('absensi.tahun_ajaran', __tahun_ajaran__())
+                        ->where('absensi.semester', __semester__(date('n')))
+                        ->where('absensi.kelas_id', $id);
+            })
+            ->select('santri.id', 'santri.kelas_id', 'santri.nisn', 'santri.nama_santri', 'santri.jk', 'absensi.absen_s', 'absensi.absen_i', 'absensi.absen_a')
+            ->where('santri.kelas_id', $id)
+            ->groupBy('santri.id')
+            ->get();
+
+        return view('admin.absensi.show', compact('santri', 'kelas'));
+    }
 }

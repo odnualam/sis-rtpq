@@ -65,4 +65,11 @@ class Mengajar extends Model
 
         return $mapel;
     }
+
+    public function dsk($id)
+    {
+        $dsk = Nilai::where('guru_id', $id)->first();
+
+        return $dsk;
+    }
 }

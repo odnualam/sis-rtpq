@@ -1,9 +1,5 @@
  @extends('layouts.admin')
-@section('heading', 'Nilai Rapot')
-@section('page')
-    <li class="breadcrumb-item active"><a href="{{ route('rapot-kelas') }}">Nilai Rapot</a></li>
-    <li class="breadcrumb-item active">{{ $kelas->nama_kelas }}</li>
-@endsection
+@section('heading', 'Pilih Santri')
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -37,7 +33,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->nama_santri }}</td>
                             <td>{{ $data->nisn }}</td>
-                            <td><a href="{{ route('rapot-show', Crypt::encrypt($data->id)) }}" class="btn btn-info btn-sm"><i class="nav-icon fas fa-search-plus"></i> &nbsp; Show Rapot</a></td>
+                            <td><a href="{{ route('rapot-show', Crypt::encrypt($data->id)) }}" class="btn btn-icon btn-outline-info btn-sm"><i class="flaticon-eye"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
