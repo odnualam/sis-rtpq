@@ -104,10 +104,10 @@ class Santri extends Model
         return $this->belongsTo('App\Models\Kelas')->withDefault();
     }
 
-    public function ulangan($id)
+    public function ulangan($id, $mapel = null)
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $nilai = Ulangan::where('santri_id', $id)->where('guru_id', $guru->id)->first();
+        $nilai = Ulangan::where('santri_id', $id)->where('guru_id', $guru->id)->where('mapel_id', $mapel)->first();
 
         return $nilai;
     }
@@ -120,10 +120,10 @@ class Santri extends Model
         return $nilai;
     }
 
-    public function nilai($id)
+    public function nilai($id, $mapel = null)
     {
         $guru = Guru::where('id_card', Auth::user()->id_card)->first();
-        $nilai = Rapot::where('santri_id', $id)->where('guru_id', $guru->id)->first();
+        $nilai = Rapot::where('santri_id', $id)->where('guru_id', $guru->id)->where('mapel_id', $mapel)->first();
 
         return $nilai;
     }
