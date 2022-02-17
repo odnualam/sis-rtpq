@@ -105,7 +105,7 @@
                     <h3 class="card-title">Nilai Ulangan Santri</h3>
                 </div>
                 <div class="card-body">
-                    <table id="example2" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
+                    <table class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
                         <thead class="text-uppercase">
                             <tr>
                                 <th class="ctr">No.</th>

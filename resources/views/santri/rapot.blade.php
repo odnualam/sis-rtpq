@@ -105,49 +105,68 @@
                     <h3 class="card-title">Nilai Rapot Santri</h3>
                 </div>
                 <div class="card-body">
-                    <h4 class="mb-3">A. Pengetahuan dan Keterampilan</h4>
-                    <table id="example2" class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
-                        <thead class="text-uppercase">
-                            <tr>
-                                <th rowspan="2">No.</th>
-                                <th rowspan="2">Mata Pelajaran</th>
-                                <th rowspan="2">KKM</th>
-                                <th class="ctr" colspan="3">Pengetahuan</th>
-                                <th class="ctr" colspan="3">Keterampilan</th>
-                            </tr>
-                            <tr>
-                                <th class="ctr">Nilai</th>
-                                <th class="ctr">Predikat</th>
-                                <th class="ctr">Deskripsi</th>
-                                <th class="ctr">Nilai</th>
-                                <th class="ctr">Predikat</th>
-                                <th class="ctr">Deskripsi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($mapel as $val => $data)
-                                @if ( $mapel->count() > 0 )
-                                    <tr>
-                                        <?php $data = $data[0]; ?>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->mapel->nama_mapel }}</td>
-                                        {{-- <td class="ctr">{{ $data->kkm($data->nilai($val)['guru_id']) }}</td> --}}
-                                        <td class="ctr">{{ $data->kkm($data->guru_id) }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['p_nilai'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['p_predikat'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['p_deskripsi'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['k_nilai'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['k_predikat'] }}</td>
-                                        <td class="ctr">{{ $data->nilai($val)['k_deskripsi'] }}</td>
-                                    </tr>
-                                @else
-                                    <tr>
+                    <div class="col-12 mb-3">
+                        <h4 class="mb-3">A. Pengetahuan dan Keterampilan</h4>
+                        <table class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
+                            <thead class="text-uppercase">
+                                <tr>
+                                    <th rowspan="2">No.</th>
+                                    <th rowspan="2">Mata Pelajaran</th>
+                                    <th rowspan="2">KKM</th>
+                                    <th class="ctr" colspan="3">Pengetahuan</th>
+                                    <th class="ctr" colspan="3">Keterampilan</th>
+                                </tr>
+                                <tr>
+                                    <th class="ctr">Nilai</th>
+                                    <th class="ctr">Predikat</th>
+                                    <th class="ctr">Deskripsi</th>
+                                    <th class="ctr">Nilai</th>
+                                    <th class="ctr">Predikat</th>
+                                    <th class="ctr">Deskripsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($mapel as $val => $data)
+                                    @if ( $mapel->count() > 0 )
+                                        <tr>
+                                            <?php $data = $data[0]; ?>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $data->mapel->nama_mapel }}</td>
+                                            <td class="ctr">{{ $data->kkm($data->guru_id) }}</td>
+                                            <td class="ctr">{{ isset($data->nilai($val)['p_nilai']) ? $data->nilai($val)['p_nilai'] : '-'  }}</td>
+                                            <td class="ctr">{{ isset($data->nilai($val)['p_predikat']) ? $data->nilai($val)['p_predikat'] : '-'  }}</td>
+                                            <td class="ctr">{{ isset($data->nilai($val)['p_deskripsi']) ? $data->nilai($val)['p_deskripsi'] : '-'  }}</td>
+                                            <td class="ctr">{{ isset($data->nilai($val)['k_nilai']) ? $data->nilai($val)['k_nilai'] : '-'  }}</td>
+                                            <td class="ctr">{{ isset($data->nilai($val)['k_predikat']) ? $data->nilai($val)['k_predikat'] : '-'  }}</td>
+                                            <td class="ctr">{{ isset($data->nilai($val)['k_deskripsi']) ? $data->nilai($val)['k_deskripsi'] : '-'  }}</td>
+                                        </tr>
+                                    @else
+                                        <tr>
 
-                                    </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <table class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
+                            <tbody>
+                                <tr>
+                                    <td>Sakit</td>
+                                    <td>{{ $absensi->absen_s }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Ijin</td>
+                                    <td>{{ $absensi->absen_i }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Alpa</td>
+                                    <td>{{ $absensi->absen_a }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
