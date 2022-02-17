@@ -50,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('jadwal/santri', [JadwalController::class, 'santri'])->name('jadwal.santri');
         Route::get('ulangan/santri', [UlanganController::class, 'santri'])->name('ulangan.santri');
         Route::get('rapot/santri', [RapotController::class, 'santri'])->name('rapot.santri');
+        Route::get('rapot/print', [RapotController::class, 'print'])->name('rapot.santri.print');
 
         Route::get('santri/spp', [SantriController::class, 'spp'])->name('spp.santri.index');
         Route::post('santri/spp/store', [SantriController::class, 'store_spp'])->name('spp.santri.store');

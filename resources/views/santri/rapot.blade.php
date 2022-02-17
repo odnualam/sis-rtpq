@@ -1,8 +1,5 @@
  @extends('layouts.admin')
-@section('heading', 'Nilai Rapot')
-@section('page')
-    <li class="breadcrumb-item active">Nilai Rapot</li>
-@endsection
+@section('heading', 'Nilai Rapot Santri')
 @section('content')
     <div class="d-flex flex-row">
         <div class="flex-row-auto offcanvas-mobile w-300px w-xl-325px" id="kt_profile_aside">
@@ -101,12 +98,20 @@
         </div>
         <div class="flex-row-fluid ml-lg-8">
             <div class="card card-custom gutter-bs">
-                <div class="card-header">
-                    <h3 class="card-title">Nilai Rapot Santri</h3>
+                <div class="card-header py-3">
+                    <div class="card-title">
+                        <h3 class="card-label">@yield('heading')</h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <div class="dropdown dropdown-inline mr-2">
+                            <a href="{{ route('rapot.santri.print') }}" class="btn btn-icon btn-outline-success btn-sm" target="_blank">
+                                <i class="flaticon-download"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="col-12 mb-3">
-                        <h4 class="mb-3">A. Pengetahuan dan Keterampilan</h4>
                         <table class="table table-striped table-bordered table-hover table-checkable datatable" style="margin-top: 13px !important">
                             <thead class="text-uppercase">
                                 <tr>

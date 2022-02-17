@@ -37,8 +37,6 @@ class AppServiceProvider extends ServiceProvider
             $this->app->register(IdeHelperServiceProvider::class);
         }
 
-
-
         Blade::if('walikelas', function () {
             $guru = Guru::where('id_card', auth()->user()->id_card)->firstOrFail();
             $wali_kelas = Kelas::where('guru_id', $guru->id)->count();

@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class RapotController extends Controller
 {
@@ -150,5 +151,36 @@ class RapotController extends Controller
             ->first();
 
         return view('santri.rapot', compact('santri', 'kelas', 'mapel', 'absensi'));
+    }
+
+    public function print()
+    {
+        $santri = Santri::where('nisn', Auth::user()->nisn)->first();
+        $kelas = Kelas::findorfail($santri->kelas_id);
+        $jadwal = Jadwal::where('kelas_id', $kelas->id)->orderBy('mapel_id')->get();
+        $mapel = $jadwal->groupBy('mapel_id');
+        $id = $santri->kelas_id;
+        $absensi = DB::table('santri')
+            ->leftJoin('absensi', function ($join) use ($id) {
+                $join->on('santri.id', '=', 'absensi.santri_id')
+                        ->where('absensi.tahun_ajaran', __tahun_ajaran__())
+                        ->where('absensi.semester', __semester__(date('n')))
+                        ->where('absensi.kelas_id', $id);
+            })
+            ->select('santri.id', 'santri.kelas_id', 'santri.nisn', 'santri.nama_santri', 'santri.jk', 'absensi.absen_s', 'absensi.absen_i', 'absensi.absen_a')
+            ->where('santri.kelas_id', $id)
+            ->where('santri.id', $santri->id)
+            ->first();
+
+        $pdf = PDF::loadview('santri.rapot-print', [
+            'santri' => $santri,
+            'kelas' => $kelas,
+            'mapel' => $mapel,
+            'absensi' => $absensi,
+        ]);
+
+        $pdf->setPaper('A4', 'landscape');
+
+        return $pdf->download('rapot-santri');
     }
 }

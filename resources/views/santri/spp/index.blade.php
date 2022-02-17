@@ -58,9 +58,9 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('data-pembayaran.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('spp.santri.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-
+                    <input type="hidden" name="santri_id" value="{{ Auth::user()->id }}">
                     <div class="form-group">
                         <label for="id_spp">Tahun SPP</label>
                         <select id="id_spp" name="id_spp" class="form-control @error('id_spp') is-invalid @enderror">
