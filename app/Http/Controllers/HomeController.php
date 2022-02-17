@@ -51,7 +51,7 @@ class HomeController extends Controller
         $chart->labels = (array_keys($count_tahun_ajaran_santri));
         $chart->dataset = (array_values($count_tahun_ajaran_santri));
 
-        $chart->labels = str_replace('"', "", $chart->labels);
+        $chart->labels = str_replace('"', '', $chart->labels);
 
         $jadwal = Jadwal::count();
         $guru = Guru::count();
@@ -93,14 +93,15 @@ class HomeController extends Controller
                         ->groupBy('age')
                         ->pluck('total', 'age')->all();
         // Generate random colours for the groups
-        for ($i=0; $i<=count($groups); $i++) {
-                    $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-                }
+        for ($i = 0; $i <= count($groups); $i++) {
+            $colours[] = '#'.substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+        }
         // Prepare the data for returning with the view
         $chart = new Chart;
-                $chart->labels = (array_keys($groups));
-                $chart->dataset = (array_values($groups));
-                $chart->colours = $colours;
+        $chart->labels = (array_keys($groups));
+        $chart->dataset = (array_values($groups));
+        $chart->colours = $colours;
+
         return view('charts.index', compact('chart'));
     }
 }

@@ -33,7 +33,7 @@ class UlanganController extends Controller
         $mengajar = $mengajar->groupBy('mapel_id');
 
         return view('guru.ulangan.mapel', [
-            'mengajar' => $mengajar
+            'mengajar' => $mengajar,
         ]);
     }
 

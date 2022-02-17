@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resources([
             'nilai' => NilaiController::class,
             'ulangan' => UlanganController::class,
-            'rapot' => RapotController::class
+            'rapot' => RapotController::class,
         ]);
     });
 
@@ -100,7 +100,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('guru/import_excel', 'import_excel')->name('guru.import_excel');
             Route::delete('guru/deleteAll', 'deleteAll')->name('guru.deleteAll');
         });
-
 
         Route::controller(KelasController::class)->group(function () {
             Route::get('kelas/edit/json', 'getEdit');
@@ -136,7 +135,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('ulangan-show/{id}', 'ulangan')->name('ulangan-show');
         });
 
-        Route::controller(RapotController::class)->group(function (){
+        Route::controller(RapotController::class)->group(function () {
             Route::get('rapot-kelas', 'create')->name('rapot-kelas');
             Route::get('rapot-santri/{id}', 'edit')->name('rapot-santri');
             Route::get('rapot-show/{id}', 'rapot')->name('rapot-show');
@@ -155,7 +154,7 @@ Route::middleware(['auth'])->group(function () {
             'mengajar' => MengajarController::class,
             'kelompok' => KelompokController::class,
             'data-pembayaran' => PembayaranController::class,
-            'user' => UserController::class
+            'user' => UserController::class,
         ]);
 
         Route::controller(PembayaranController::class)->group(function () {

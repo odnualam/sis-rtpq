@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\District;
-use Laravolt\Indonesia\Models\Village;
 use App\Models\Setting;
 use App\Services\CityService;
 use App\Services\DistrictService;
@@ -12,6 +9,9 @@ use App\Services\ProvinceService;
 use App\Services\VillageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Laravolt\Indonesia\Models\City;
+use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Village;
 
 class SettingController extends Controller
 {

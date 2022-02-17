@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\SantriController;
 use App\Http\Controllers\References\CityController;
 use App\Http\Controllers\References\DistrictController;
 use App\Http\Controllers\References\VillageController;
+use App\Http\Controllers\SantriController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 

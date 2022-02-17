@@ -35,7 +35,7 @@ class RapotController extends Controller
         $mengajar = $mengajar->groupBy('mapel_id');
 
         return view('guru.rapot.mapel', [
-            'mengajar' => $mengajar
+            'mengajar' => $mengajar,
         ]);
     }
 

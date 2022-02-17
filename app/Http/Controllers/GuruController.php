@@ -265,7 +265,6 @@ class GuruController extends Controller
         $kelas = Kelas::orderBy('id')->get();
 
         return view('admin.absensi.index', compact('kelas'));
-
     }
 
     public function RekapAbsensiShow($id)
