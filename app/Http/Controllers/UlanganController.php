@@ -44,6 +44,15 @@ class UlanganController extends Controller
         return view('admin.ulangan.home', compact('kelas'));
     }
 
+    /**
+     * Penentuan predikat dengan cara 100 dikurangi nilai KKM kemudian dibagi 3
+     *
+     * KKM = 70
+     * D < 70
+     * 70 ≤ C ≤ 80
+     * 81 ≤ B ≤ 90
+     * 91 ≤ A ≤ 100
+     */
     public function store(Request $request)
     {
         $guru = Guru::findorfail($request->guru_id);
@@ -56,7 +65,7 @@ class UlanganController extends Controller
                 $deskripsi = Nilai::where('guru_id', $request->guru_id)->first();
                 $isi = Nilai::where('guru_id', $request->guru_id)->count();
                 if ($isi >= 1) {
-                    if ($nilai > 90) {
+                    if ($nilai >= 91) {
                         Rapot::create([
                             'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
@@ -66,7 +75,7 @@ class UlanganController extends Controller
                             'p_predikat' => 'A',
                             'p_deskripsi' => $deskripsi->deskripsi_a,
                         ]);
-                    } elseif ($nilai > 80) {
+                    } elseif ($nilai >= 81) {
                         Rapot::create([
                             'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,
@@ -76,7 +85,7 @@ class UlanganController extends Controller
                             'p_predikat' => 'B',
                             'p_deskripsi' => $deskripsi->deskripsi_b,
                         ]);
-                    } elseif ($nilai > 70) {
+                    } elseif ($nilai >= 70) {
                         Rapot::create([
                             'santri_id' => $request->santri_id,
                             'kelas_id' => $request->kelas_id,

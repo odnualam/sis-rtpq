@@ -95,33 +95,33 @@
                                         <tr>
                                             <td class="ctr">{{ $loop->iteration }}</td>
                                             <td>{{ $data->nama_santri }}</td>
-                                            @if ($data->nilai($data->id))
+                                            @if ($data->nilai($data->id, $mengajar->mapel_id))
                                                 <td class="ctr">
-                                                    <input type="hidden" class="rapot_{{$data->id}}" value="{{ $data->nilai($data->id)->id }}">
-                                                    <div class="text-center">{{ $data->nilai($data->id)->p_nilai }}</div>
+                                                    <input type="hidden" class="rapot_{{$data->id}}" value="{{ $data->nilai($data->id, $mengajar->mapel_id)->id }}">
+                                                    <div class="text-center">{{ $data->nilai($data->id, $mengajar->mapel_id)->p_nilai }}</div>
                                                 </td>
                                                 <td class="ctr">
-                                                    <div class="text-center">{{ $data->nilai($data->id)->p_predikat }}</div>
+                                                    <div class="text-center">{{ $data->nilai($data->id, $mengajar->mapel_id)->p_predikat }}</div>
                                                 </td>
                                                 <td class="ctr">
-                                                    <textarea class="form-control swal2-textarea textarea-rapot" cols="50" rows="5" disabled>{{ $data->nilai($data->id)->p_deskripsi }}</textarea>
+                                                    <textarea class="form-control swal2-textarea textarea-rapot" cols="50" rows="5" disabled>{{ $data->nilai($data->id, $mengajar->mapel_id)->p_deskripsi }}</textarea>
                                                 </td>
-                                                @if ($data->nilai($data->id)->p_nilai && $data->nilai($data->id)->k_nilai)
+                                                @if ($data->nilai($data->id, $mengajar->mapel_id)->p_nilai && $data->nilai($data->id, $mengajar->mapel_id)->k_nilai)
                                                     <td class="ctr">
-                                                        <div class="ka_{{$data->id}} text-center">{{ $data->nilai($data->id)->k_nilai }}</div>
+                                                        <div class="ka_{{$data->id}} text-center">{{ $data->nilai($data->id, $mengajar->mapel_id)->k_nilai }}</div>
                                                     </td>
                                                     <td class="ctr">
-                                                        <div class="kp_{{$data->id}} text-center">{{ $data->nilai($data->id)->k_predikat }}</div>
+                                                        <div class="kp_{{$data->id}} text-center">{{ $data->nilai($data->id, $mengajar->mapel_id)->k_predikat }}</div>
                                                     </td>
                                                     <td class="ctr">
-                                                        <textarea class="form-control swal2-textarea textarea-rapot" cols="50" rows="5" disabled>{{ $data->nilai($data->id)->k_deskripsi }}</textarea>
+                                                        <textarea class="form-control swal2-textarea textarea-rapot" cols="50" rows="5" disabled>{{ $data->nilai($data->id, $mengajar->mapel_id)->k_deskripsi }}</textarea>
                                                     </td>
                                                     <td class="ctr">
                                                         <i class="fas fa-check" style="font-weight:bold;"></i>
                                                     </td>
                                                 @else
                                                     <td class="ctr">
-                                                        <input type="text" name="nilai" maxlength="2" onkeypress="return inputAngka(event)" class="form-control text-center nilai_{{$data->id}}" data-ids="{{$data->id}}" autofocus autocomplete="off">
+                                                        <input type="text" name="nilai" maxlength="3" onkeypress="return inputAngka(event)" class="form-control text-center nilai_{{$data->id}}" data-ids="{{$data->id}}" autofocus autocomplete="off">
                                                         <div class="knilai_{{$data->id}} text-center"></div>
                                                     </td>
                                                     <td class="ctr">
@@ -177,7 +177,7 @@
             var id = $(this).attr('data-ids');
 		    var guru_id = $("input[name=guru_id]").val();
             var angka = $(".nilai_"+id).val();
-            if (angka.length == 2){
+            if (angka.length == 3){
                 $.ajax({
                     type:"GET",
                     data: {
