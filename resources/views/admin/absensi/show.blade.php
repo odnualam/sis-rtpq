@@ -30,7 +30,6 @@
                                     <th width="70px">Sakit (S)</th>
                                     <th width="70px">Ijin (I)</th>
                                     <th width="70px">Alpa (A)</th>
-                                    <th width="10px">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,9 +49,6 @@
                                         </td>
                                         <td>
                                             <input value="{{ $data->absen_a ?: '0' }}" type="text" name="absen_a[]" onkeypress="return inputAngka(event)" style="margin: auto;" class="form-control text-center">
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn btn-default"><i class="nav-icon fas fa-save"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
