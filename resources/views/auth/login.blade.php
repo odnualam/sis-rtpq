@@ -11,6 +11,7 @@
                     Sistem Informasi Santri <br />{{ $setting->nama_sekolah }}
                 </h3>
             </div>
+            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{ asset('admin/media/svg/illustrations/login-visual-1.svg') }})"></div>
         </div>
         <div class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto">
             <div class="d-flex flex-column-fluid flex-center">
