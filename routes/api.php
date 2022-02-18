@@ -27,3 +27,4 @@ Route::get('district/city_code/{city_code}', DistrictController::class)->name('d
 Route::get('village/district_code/{district_code}', VillageController::class)->name('villages.list.json');
 
 Route::get('santri/get-santri-jenis-kelamin', [SantriController::class, 'GetSantriJenisKelamin'])->name('api.santri.jenis-kelamin');
+Route::get('santri/get-nilai-uas', [SantriController::class, 'GetSantriNilaiUAS'])->name('api.santri.nilai.uas');

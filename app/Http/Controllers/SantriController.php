@@ -8,6 +8,7 @@ use App\Models\Kelas;
 use App\Models\Pembayaran;
 use App\Models\Santri;
 use App\Models\SPP;
+use App\Models\Ulangan;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -324,6 +325,22 @@ class SantriController extends Controller
         return response()->json([
             'success' => true,
             'data' => $santri,
+        ]);
+    }
+
+    public function GetSantriNilaiUAS()
+    {
+        $nilai = Ulangan::selectRaw('
+            COUNT(CASE WHEN uas < 70 AND uas >= 0 THEN "L" ELSE NULL END) as "< 70",
+            COUNT(CASE WHEN uas >= 70 AND uas <= 80 THEN "L" ELSE NULL END) as "70 - 80",
+            COUNT(CASE WHEN uas >= 81 AND uas <= 90  THEN "L" ELSE NULL END) as "81 - 90",
+            COUNT(CASE WHEN uas >= 91 AND uas <= 100  THEN "L" ELSE NULL END) as "91-100",
+            COUNT(*) as "Total Santri"
+        ')->first();
+
+        return response()->json([
+            'success' => true,
+            'data' => $nilai,
         ]);
     }
 }

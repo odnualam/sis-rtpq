@@ -80,24 +80,11 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <div class="card card-custom gutter-b">
                 <div class="card-header">
                     <div class="card-title">
-                        <h3 class="card-label">Data Santri Per Angkatan</h3>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div id="kt_amcharts_6" style="height: 500px;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card card-custom gutter-b">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3 class="card-label">Jenis Kelamin Santri</h3>
+                        <h3 class="card-label">Grafik Jenis Kelamin Santri</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -106,7 +93,46 @@
             </div>
         </div>
 
+        <div class="col-lg-6">
+            <div class="card card-custom gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">Capaian Nilai UAS Santri</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="nilai-pie" style="height: 500px;"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="col-lg-8">
+            <div class="card card-custom gutter-b">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3 class="card-label">Data Santri Per Tahun</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="kt_amcharts_6" style="height: 500px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card card-custom gutter-b" style="min-height: 395px;">
+                <div class="card-header">
+                    <h3 class="card-title">Pengumuman</h3>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content p-0">
+                        {!! $pengumuman->isi !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
             <div class="card card-custom gutter-b">
                 <div class="card-header py-3">
                     <div class="card-title">
@@ -137,19 +163,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-lg-4">
-            <div class="card card-custom gutter-b" style="min-height: 395px;">
-                <div class="card-header">
-                    <h3 class="card-title">Pengumuman</h3>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content p-0">
-                        {!! $pengumuman->isi !!}
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 @endsection
 @section('script')
@@ -176,6 +189,15 @@
 			});
         }
 
+        function getNilaiUASSantri() {
+            $.ajax({
+				url : '{{ route("api.santri.nilai.uas") }}',
+                success: function(result) {
+					pieNilaiSantri(result);
+				}
+			});
+        }
+
         function pieJenisKelaminSantri(result)
         {
             AmCharts.makeChart("kt_amcharts_12", {
@@ -191,12 +213,38 @@
                 },],
                 "valueField": "litres",
                 "titleField": "country",
-                "export": {
-                    "enabled": true
-                }
             });
         }
 
+        function pieNilaiSantri(result)
+        {
+            AmCharts.makeChart("nilai-pie",{
+                "type"    : "pie",
+                "hideCredits":true,
+                "titleField"  : "category",
+                "valueField"  : "column-1",
+                "dataProvider"  : [
+                    {
+                    "category": "< 70",
+                    "column-1": result.data['< 70']
+                    },
+                    {
+                    "category": "70 - 80",
+                    "column-1": result.data['70 - 80']
+                    },
+                    {
+                    "category": "81 - 90",
+                    "column-1": result.data['81 - 90']
+                    },
+                    {
+                    "category": "91-100",
+                    "column-1": result.data['91-100']
+                    }
+                ]
+                });
+        }
+
+        getNilaiUASSantri();
         getJenisKelaminSantri();
     </script>
     <script>
@@ -253,9 +301,6 @@
                 "parseDates": true,
                 "dashLength": 1,
                 "minorGridEnabled": true
-            },
-            "export": {
-                "enabled": true
             },
             "dataProvider": dataProvider,
         });
