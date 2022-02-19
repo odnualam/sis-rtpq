@@ -40,24 +40,27 @@
                                 <td>{!! '<span class="label label-primary label-inline font-weight-lighter mr-2">'.date('F', mktime(0, 0, 0, $data->bulan_dibayar, 10)).'</span>' !!}</td>
                                 <td>{{ $data->santri->nama_santri }}</td>
                                 <td>{!! $data->jenis_pembayaran == 0 ? 'TUNAI' : '<a href="'.asset('uploads/bukti-non-tunai/'.$data->bukti_non_tunai).'" target="_blank">NON TUNAI</a>' !!}</td>
-                                <td>{{ ($data->status == 0) ? 'PENDING' : (($data->status == 1) ? 'SUCCESS' : 'GAGAL')  }}</td>
+                                <td>{{ ($data->status == 0) ? 'PENDING' : (($data->status == 1) ? 'BERHASIL' : 'GAGAL')  }}</td>
                                 <td>{{ $data->tgl_bayar }}</td>
                                 <td>{{ $data->jumlah_bayar }}</td>
                                 <td>
-                                    <div class="btn-group">
-                                        <form class="mr-1" action="{{ route('pembayaran.gagal', Crypt::encrypt($data->id)) }}" method="post">
-                                            @csrf
-                                            <button class="btn btn-icon btn-outline-danger btn-sm" title="Status Gagal">
-                                                <i class="flaticon2-cancel"></i>
-                                            </button>
-                                        </form>
-                                        <form action="{{ route('pembayaran.berhasil', Crypt::encrypt($data->id)) }}" method="post">
-                                            @csrf
-                                            <button class="btn btn-icon btn-outline-primary btn-sm" title="Status Berhasil">
-                                                <i class="flaticon2-check-mark"></i>
-                                            </button>
-                                        </form>
-                                    </div>
+                                    @if ($data->status == 0)
+                                        <div class="btn-group">
+                                            <form class="mr-1 update-status" action="{{ route('pembayaran.gagal', Crypt::encrypt($data->id)) }}" method="post">
+                                                @csrf
+                                                <button class="btn btn-icon btn-outline-danger btn-sm" title="Status Gagal">
+                                                    <i class="flaticon2-cancel"></i>
+                                                </button>
+                                            </form>
+
+                                            <form class="update-status" action="{{ route('pembayaran.berhasil', Crypt::encrypt($data->id)) }}" method="post">
+                                                @csrf
+                                                <button class="btn btn-icon btn-outline-primary btn-sm" title="Status Berhasil">
+                                                    <i class="flaticon2-check-mark"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -70,26 +73,27 @@
 @endsection
 @section('script')
     <script>
-        var dengan_rupiah = document.getElementById("dengan-rupiah");
-        dengan_rupiah.addEventListener("keyup", function (e) {
-            dengan_rupiah.value = formatRupiah(this.value, "Rp. ");
+        $(function(){
+            $("form.update-status button").click(function(e) {
+                e.preventDefault();
+                var form = $(this).parent();
+                Swal.fire({
+                    title: 'Update?',
+                    text: "Data Tidak Dapat Diupdate Kembali!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya, update!'
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire(
+                            "Diupdate!",
+                            "Data telah diupdate.",
+                            "success"
+                        )
+                        form.submit();
+                    }
+                });
+            });
         });
-
-        function formatRupiah(angka, prefix) {
-            var number_string = angka.replace(/[^,\d]/g, "").toString(),
-                split = number_string.split(","),
-                sisa = split[0].length % 3,
-                rupiah = split[0].substr(0, sisa),
-                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-            if (ribuan) {
-                separator = sisa ? "." : "";
-                rupiah += separator + ribuan.join(".");
-            }
-
-            rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-            return prefix == undefined ? rupiah : rupiah ? "Rp. " + rupiah : "";
-        }
-
     </script>
 @endsection
