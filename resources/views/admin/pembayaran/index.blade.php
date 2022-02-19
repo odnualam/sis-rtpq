@@ -1,8 +1,5 @@
 @extends('layouts.admin')
-@section('heading', 'Data Pembayaran')
-@section('page')
-    <li class="breadcrumb-item active">Data Pembayaran</li>
-@endsection
+@section('heading', 'Pilih Kelas')
 @section('content')
     <div class="row">
         <div class="col-md-12">
