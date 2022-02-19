@@ -29,7 +29,6 @@ class GuruController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $this->validate($request, [
             'nik' => 'required',
             'id_card' => 'required',
